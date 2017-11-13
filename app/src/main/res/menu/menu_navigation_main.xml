@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_city_manage"
+            android:icon="@drawable/ic_menu_city_manage"
+            android:title="@string/action_city_manage"
+            app:actionLayout="@layout/action_view_pure_text"/>
+    </group>
+    <item android:title="@string/nav_group_other">
+        <menu>
+            <item
+                android:id="@+id/nav_skin"
+                android:icon="@drawable/ic_menu_skin"
+                android:title="@string/action_skin"/>
+            <item
+                android:id="@+id/nav_check_update"
+                android:icon="@drawable/ic_menu_check_update"
+                android:title="@string/action_check_update"/>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/action_settings"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_menu_about"
+                android:title="@string/action_about"/>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/menu_frame"
+        android:orderInCategory="100"
+        android:title="设置"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_share"
+        android:icon="@android:drawable/menu_frame"
+        android:orderInCategory="100"
+        android:title="分享天气"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_preview"
+        android:icon="@android:drawable/menu_frame"
+        android:orderInCategory="100"
+        android:title="动态背景预览"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@android:drawable/menu_frame"
+        android:orderInCategory="100"
+        android:title="退出"
+        app:showAsAction="never"/>
+</menu>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="78.0dp"
+                android:background="@drawable/recycler_view_item"
+                android:id="@+id/relative_layout"
+                android:clickable="true">
+
+    <com.chen.xinyueweather.widget.CircleTextView
+        android:id="@+id/circle_text"
+        android:layout_width="45.0dp"
+        android:layout_height="45.0dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30.0dp"
+        android:layout_marginStart="30.0dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25.0dp"
+        android:layout_marginStart="25.0dp"
+        android:layout_toEndOf="@+id/circle_text"
+        android:layout_toRightOf="@+id/circle_text"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#aa000000"
+            android:textSize="15.0sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5.0dip"
+            android:text="N/A"
+            android:textColor="#55000000"
+            android:textSize="13.0sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="40.0dp"
+        android:layout_marginRight="40.0dip"
+        android:text="N/A°"
+        android:textColor="?colorAccent"
+        android:textSize="18.0sp"/>
+</RelativeLayout>

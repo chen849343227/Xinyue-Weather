@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="60.0dp"
+                android:minHeight="65.0dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="35.0dp"
+        android:layout_marginStart="35.0dp"
+        android:gravity="bottom">
+
+        <TextView
+            android:id="@+id/tv_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#bb000000"
+            android:textSize="15.0sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dp"
+            android:layout_marginStart="15.0dp"
+            android:textColor="#55000000"
+            android:textSize="13.0sp"/>
+
+        <TextView
+            android:id="@+id/tv_province"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dp"
+            android:layout_marginStart="15.0dp"
+            android:textColor="#55000000"
+            android:textSize="13.0sp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25.0dp"
+        android:layout_marginRight="25.0dp"
+        android:background="#fff3f3f3"/>
+</RelativeLayout>

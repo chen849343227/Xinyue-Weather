@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+    <string name="abc_action_bar_up_description">Navigate up</string>
+    <string name="abc_action_menu_overflow_description">More options</string>
+    <string name="abc_action_mode_done">Done</string>
+    <string name="abc_activity_chooser_view_see_all">See all</string>
+    <string name="abc_activitychooserview_choose_application">Choose an app</string>
+    <string name="abc_capital_off">OFF</string>
+    <string name="abc_capital_on">ON</string>
+    <string name="abc_search_hint">Search…</string>
+    <string name="abc_searchview_description_clear">Clear query</string>
+    <string name="abc_searchview_description_query">Search query</string>
+    <string name="abc_searchview_description_search">Search</string>
+    <string name="abc_searchview_description_submit">Submit query</string>
+    <string name="abc_searchview_description_voice">Voice search</string>
+    <string name="abc_shareactionprovider_share_with">Share with</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="mdtp_date_v1_monthyear">MMMM yyyy</string>
+    <string name="mdtp_day_picker_description">Month grid of days</string>
+    <string name="mdtp_deleted_key">%1$s deleted</string>
+    <string name="mdtp_done_label">Done</string>
+    <string name="mdtp_hour_picker_description">Hours circular slider</string>
+    <string name="mdtp_item_is_selected">%1$s selected</string>
+    <string name="mdtp_minute_picker_description">Minutes circular slider</string>
+    <string name="mdtp_select_day">Select month and day</string>
+    <string name="mdtp_select_hours">Select hours</string>
+    <string name="mdtp_select_minutes">Select minutes</string>
+    <string name="mdtp_select_year">Select year</string>
+    <string name="mdtp_year_picker_description">Year list</string>
+    <string name="search_menu_title">Search</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="mdtp_cancel">@android:string/cancel</string>
+    <string name="mdtp_day_of_week_label_typeface">sans-serif</string>
+    <string name="abc_font_family_body_1_material">sans-serif</string>
+    <string name="abc_font_family_body_2_material">sans-serif-medium</string>
+    <string name="abc_font_family_button_material">sans-serif-medium</string>
+    <string name="abc_font_family_caption_material">sans-serif</string>
+    <string name="abc_font_family_display_1_material">sans-serif</string>
+    <string name="abc_font_family_display_2_material">sans-serif</string>
+    <string name="abc_font_family_display_3_material">sans-serif</string>
+    <string name="abc_font_family_display_4_material">sans-serif-light</string>
+    <string name="abc_font_family_headline_material">sans-serif</string>
+    <string name="abc_font_family_menu_material">sans-serif</string>
+    <string name="abc_font_family_subhead_material">sans-serif</string>
+    <string name="abc_font_family_title_material">sans-serif-medium</string>
+    <string name="action_about">关于</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_check_update">检查更新</string>
+    <string name="action_city_manage">城市管理</string>
+    <string name="action_default">默认</string>
+    <string name="action_enable_live_wallpaper">启用动态壁纸</string>
+    <string name="action_ok">确定</string>
+    <string name="action_settings">设置</string>
+    <string name="action_skin">主题皮肤</string>
+    <string name="activity_about_info_class_title_changelog">更新日志</string>
+    <string name="activity_about_info_class_title_other">其他</string>
+    <string name="activity_about_info_class_title_thanks">感谢</string>
+    <string name="activity_about_info_current_version">当前版本: %1$s (%2$s)</string>
+    <string name="activity_choose_city_choose_by_province">根据省市选择</string>
+    <string name="activity_choose_city_et_hint_search">搜索城市</string>
+    <string name="activity_choose_city_hot_cities">热门城市</string>
+    <string name="activity_choose_city_search_results">搜索结果</string>
+    <string name="activity_choose_city_tip_locate_success">定位成功：%1$s</string>
+    <string name="activity_city_manage_action_restore">撤销</string>
+    <string name="activity_city_manage_tip_city_delete_fail">删除失败</string>
+    <string name="activity_city_manage_tip_city_delete_success">%1$s 已成功移除</string>
+    <string name="activity_city_manage_tip_list_empty">空空如也~点击右下角按钮添加城市</string>
+    <string name="activity_home_action_locate_now">立即定位</string>
+    <string name="activity_home_class_title_air_quality_index">空气质量指数</string>
+    <string name="activity_home_class_title_data_source">数据来源 中国天气网</string>
+    <string name="activity_home_class_title_hour_forecast">逐时预报</string>
+    <string name="activity_home_class_title_living_index">生活指数</string>
+    <string name="activity_home_class_title_precipitation_probability">降水概率</string>
+    <string name="activity_home_class_title_sun">日出和日落</string>
+    <string name="activity_home_class_title_wind_and_humidity">风和湿度</string>
+    <string name="activity_home_class_title_wind_speed_forecast">风速预报</string>
+    <string name="activity_home_drawer_list_item_city_manage">城市管理</string>
+    <string name="activity_home_menu_action_exit">退出</string>
+    <string name="activity_home_menu_action_settings">设置</string>
+    <string name="activity_home_menu_action_share">分享天气</string>
+    <string name="activity_home_menu_action_weather_preview">动态背景预览</string>
+    <string name="activity_home_refresh_time">%1$s 刷新</string>
+    <string name="activity_home_str_humidity">湿度</string>
+    <string name="activity_home_str_no2">NO2[二氧化氮]</string>
+    <string name="activity_home_str_pm10">PM10[可吸入颗粒物]</string>
+    <string name="activity_home_str_pm25">PM2.5[细颗粒物]</string>
+    <string name="activity_home_str_so2">SO2[二氧化硫]</string>
+    <string name="activity_home_str_wind_direction">风向</string>
+    <string name="activity_home_str_wind_speed">风力</string>
+    <string name="activity_home_tip_locate_success">定位成功：%1$s</string>
+    <string name="activity_home_tip_no_city">请添加一个城市</string>
+    <string name="activity_home_tip_no_city_sprout">一个城市也木有~</string>
+    <string name="activity_home_tip_no_update">当前版本为最新版本</string>
+    <string name="activity_home_tip_old_weather_data">天气数据过旧，刷新天气后重试</string>
+    <string name="activity_home_tip_share_weather_fail">当前未添加城市或无天气数据</string>
+    <string name="activity_home_type_and_real_feel_temp">体感 %1$s°</string>
+    <string name="activity_home_yesterday_weather">昨日天气 %1$s %2$s° ~ %3$s°</string>
+    <string name="activity_live_wallpaper_settings_item_assign_weather_type">指定天气类型</string>
+    <string name="activity_live_wallpaper_settings_item_follow_current_weather_type">跟随当前天气类型</string>
+    <string name="activity_settings_class_background">后台</string>
+    <string name="activity_settings_class_customize">自定义</string>
+    <string name="activity_settings_class_launcher">桌面</string>
+    <string name="activity_settings_class_notification">通知栏</string>
+    <string name="activity_settings_class_other">其他</string>
+    <string name="activity_settings_item_auto_check_for_app_update">启动应用时检查应用更新</string>
+    <string name="activity_settings_item_auto_locate">自动定位</string>
+    <string name="activity_settings_item_auto_refresh_interval">刷新频率</string>
+    <string name="activity_settings_item_auto_refresh_mode">刷新模式</string>
+    <string name="activity_settings_item_auto_refresh_weather">后台自动刷新天气</string>
+    <string name="activity_settings_item_custom_homepage_background">自定义主页背景</string>
+    <string name="activity_settings_item_desc_evening_remind_time">每天 %1$s</string>
+    <string name="activity_settings_item_desc_morning_remind_time">每天 %1$s</string>
+    <string name="activity_settings_item_desc_night_refresh_mode">当日23:00 - 次日05:00</string>
+    <string name="activity_settings_item_desc_widget_click_event">自定义小部件热区点击事件</string>
+    <string name="activity_settings_item_evening_remind_time">晚间提醒时间</string>
+    <string name="activity_settings_item_live_wallpaper">动态壁纸</string>
+    <string name="activity_settings_item_morning_remind_time">早晨提醒时间</string>
+    <string name="activity_settings_item_night_refresh_mode">夜间停止更新天气</string>
+    <string name="activity_settings_item_notification_background_color">背景颜色</string>
+    <string name="activity_settings_item_notification_display">启用通知栏</string>
+    <string name="activity_settings_item_notification_style">通知栏样式</string>
+    <string name="activity_settings_item_notification_text_color">文字颜色</string>
+    <string name="activity_settings_item_permission_description">权限说明</string>
+    <string name="activity_settings_item_real_time_weather_interface">实时天气接口</string>
+    <string name="activity_settings_item_show_living_index_info">显示生活指数信息</string>
+    <string name="activity_settings_item_status_bar_display">状态栏显示</string>
+    <string name="activity_settings_item_switch_evening_remind">晚间天气提醒</string>
+    <string name="activity_settings_item_switch_morning_evening_remind">启用早晚天气提醒</string>
+    <string name="activity_settings_item_switch_morning_remind">早晨天气提醒</string>
+    <string name="activity_settings_item_type_of_forecast_chart">未来天气趋势图类型</string>
+    <string name="activity_settings_item_weather_warning_notify">天气预警通知</string>
+    <string name="activity_settings_item_widget_background_color">插件背景颜色</string>
+    <string name="activity_settings_item_widget_click_event">小部件点击事件</string>
+    <string name="activity_settings_item_widget_clock_font_style">插件时钟字体样式</string>
+    <string name="activity_settings_item_widget_text_color">插件颜色</string>
+    <string name="activity_settings_tip_custom_homepage_background_clear_fail">清除失败，当前未添加自定义背景</string>
+    <string name="activity_settings_tip_custom_homepage_background_clear_success">清除成功</string>
+    <string name="activity_settings_tip_evening_remind_time_set_success">设置成功，每天 %1$s 提醒次日天气</string>
+    <string name="activity_settings_tip_morning_remind_time_set_success">设置成功，每天 %1$s 提醒当日天气</string>
+    <string name="activity_settings_tip_permissions_granted">所有权限已授予</string>
+    <string name="activity_settings_tip_set_success">设置成功</string>
+    <string name="activity_settings_tip_set_success_and_work_at_next_refresh">设置成功，下次刷新起生效</string>
+    <string name="activity_title_about">关于</string>
+    <string name="activity_title_choose_city">搜索城市</string>
+    <string name="activity_title_city_manage">@string/activity_home_drawer_list_item_city_manage</string>
+    <string name="activity_title_feedback">反馈</string>
+    <string name="activity_title_live_wallpaper_settings">动态壁纸设置</string>
+    <string name="activity_title_settings">应用设置</string>
+    <string name="activity_title_widget_click_event">@string/activity_settings_item_widget_click_event</string>
+    <string name="activity_widget_click_event_class_hot_spot">热区</string>
+    <string name="activity_widget_click_event_date_spot">日期</string>
+    <string name="activity_widget_click_event_other_spot">其他</string>
+    <string name="activity_widget_click_event_time_spot">时间</string>
+    <string name="activity_widget_click_event_tips">"1. 点击城市名切换城市
+2. 部分部件可能不存在某些热区
+3. 若插件点击没有反应，检查是否阻止设置的热区应用相互启动唤醒，例如Flyme5手机管家内的应用相互启动开关"</string>
+    <string name="add_city">添加城市</string>
+    <string name="app_name">Pure天气</string>
+    <string name="app_name_launcher">天气</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="auto_refresh_weather_interval_five_hour">5小时</string>
+    <string name="auto_refresh_weather_interval_half_an_hour">30分钟</string>
+    <string name="auto_refresh_weather_interval_one_hour">1小时</string>
+    <string name="auto_refresh_weather_interval_two_hour">2小时</string>
+    <string name="auto_refresh_weather_mode_all_city">刷新所有已添加的城市</string>
+    <string name="auto_refresh_weather_mode_current_city_only">只刷新当前城市</string>
+    <string name="bottom_sheet_behavior">android.support.design.widget.BottomSheetBehavior</string>
+    <string name="character_counter_pattern">%1$d / %2$d</string>
+    <string name="clock_font_style_default">默认</string>
+    <string name="clock_font_style_follow_system">跟随系统</string>
+    <string name="close">关闭</string>
+    <string name="custom_sun_view_str_sunrise">日出 %1$s</string>
+    <string name="custom_sun_view_str_sunset">日落 %1$s</string>
+    <string name="dialog_content_city_manage_tip">左右滑动可快速移除城市</string>
+    <string name="dialog_content_permission_description">"SD卡权限：使用自定义背景需要将图片写到SD卡指定的文件夹内
+
+通话权限：仅仅用来获取IMEI来统计用户数量，并不会拨打电话和获取您的隐私
+
+您的设备低于Android 6.0版本，不需要手动授权"</string>
+    <string name="dialog_content_permission_description_m_plus">"SD卡权限：使用自定义背景需要将图片写到SD卡指定的文件夹内
+
+通话权限：仅仅用来获取IMEI来统计用户数量，并不会拨打电话和获取您的隐私
+
+您的设备为Android 6.0+版本，需要手动授权才能使用对应的服务"</string>
+    <string name="dialog_negative_btn_text_custom_drawer_background">@string/dialog_negative_btn_text_custom_homepage_background</string>
+    <string name="dialog_negative_btn_text_custom_homepage_background">清除背景</string>
+    <string name="dialog_negative_btn_text_update_app">下次再说</string>
+    <string name="dialog_permission_description_action_btn_confirm">我知道了</string>
+    <string name="dialog_positive_btn_text_custom_drawer_background">@string/dialog_positive_btn_text_custom_homepage_background</string>
+    <string name="dialog_positive_btn_text_custom_homepage_background">选取图片</string>
+    <string name="dialog_positive_btn_text_permission_description_m_plus">立即授权</string>
+    <string name="dialog_positive_btn_text_update_app">立即更新</string>
+    <string name="dialog_title_custom_drawer_background">自定义抽屉背景</string>
+    <string name="dialog_title_custom_homepage_background">自定义主页背景</string>
+    <string name="dialog_title_set_evening_remind_time">设置晚间提醒时间</string>
+    <string name="dialog_title_set_morning_remind_time">设置早晨提醒时间</string>
+    <string name="dialog_title_share_weather">分享天气到</string>
+    <string name="dialog_title_tip">提示</string>
+    <string name="label_tile">(´ΘωΘ`)</string>
+    <item name="mdtp_ampm_circle_radius_multiplier" type="string">0.22</item>
+    <item name="mdtp_circle_radius_multiplier" type="string">0.82</item>
+    <item name="mdtp_circle_radius_multiplier_24HourMode" type="string">0.85</item>
+    <item name="mdtp_numbers_radius_multiplier_inner" type="string">0.6</item>
+    <item name="mdtp_numbers_radius_multiplier_normal" type="string">0.81</item>
+    <item name="mdtp_numbers_radius_multiplier_outer" type="string">0.83</item>
+    <string name="mdtp_ok">@android:string/ok</string>
+    <string name="mdtp_radial_numbers_typeface">sans-serif</string>
+    <string name="mdtp_sans_serif">sans-serif</string>
+    <string name="mdtp_second_picker_description">Seconds circular slider</string>
+    <string name="mdtp_select_seconds">Select seconds</string>
+    <item name="mdtp_selection_radius_multiplier" type="string">0.16</item>
+    <item name="mdtp_text_size_multiplier_inner" type="string">0.11</item>
+    <item name="mdtp_text_size_multiplier_normal" type="string">0.12</item>
+    <item name="mdtp_text_size_multiplier_outer" type="string">0.08</item>
+    <string name="mdtp_time_placeholder">--</string>
+    <string name="mdtp_time_separator">:</string>
+    <string name="nav_group_other">其他</string>
+    <string name="none">无</string>
+    <string name="not_add_city">未添加城市</string>
+    <string name="notification_str_refresh_time">%1$s 刷新</string>
+    <string name="notification_style_more">详细</string>
+    <string name="notification_style_normal">普通</string>
+    <string name="open">打开</string>
+    <string name="password_toggle_content_description">Toggle password visibility</string>
+    <string name="path_password_eye">M12,4.5C7,4.5 2.73,7.61 1,12c1.73,4.39 6,7.5 11,7.5s9.27,-3.11 11,-7.5c-1.73,-4.39 -6,-7.5 -11,-7.5zM12,17c-2.76,0 -5,-2.24 -5,-5s2.24,-5 5,-5 5,2.24 5,5 -2.24,5 -5,5zM12,9c-1.66,0 -3,1.34 -3,3s1.34,3 3,3 3,-1.34 3,-3 -1.34,-3 -3,-3z</string>
+    <string name="path_password_eye_mask_strike_through">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
+    <string name="path_password_eye_mask_visible">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
+    <string name="path_password_strike_through">M3.27,4.27 L19.74,20.74</string>
+    <string name="ready_update">待更新</string>
+    <string name="real_time_weather_interface_flyme">Flyme Weather</string>
+    <string name="real_time_weather_interface_miui">MIUI Weather</string>
+    <string name="shortcut_city_manage">城市管理</string>
+    <string name="shortcut_dynamic_wallpaper">动态天气壁纸</string>
+    <string name="shortcut_settings">设置</string>
+    <string name="shortcut_widget_click_event">部件事件管理</string>
+    <string name="status_bar_display_style_hide">隐藏</string>
+    <string name="status_bar_display_style_weather_icon">天气图标</string>
+    <string name="status_bar_display_style_weather_temp">实时温度</string>
+    <string name="thanks_list">"▪ MaterialDateTimePicker - github.com/wdullaer
+
+▪ AndroidViewAnimations - github.com/daimajia
+
+▪ Google Design Support Library
+
+▪ Iconfont - http://iconfont.cn/
+
+▪ Butterknife - github.com/JakeWharton
+
+▪ 高德地图定位支持
+
+▪ 天气数据所有权归数据来源所有"</string>
+    <string name="tip_bad_network">请检查网络设置</string>
+    <string name="tip_copy_success">账号已复制到剪贴板</string>
+    <string name="tip_current_city_no_weather_data">暂无此地区天气数据</string>
+    <string name="tip_data_error">返回数据异常</string>
+    <string name="tip_database_update">为了避免应用发生错误，已自动删除当前所有已添加的城市，请点击确定后手动添加城市 ^_^</string>
+    <string name="tip_database_update_fail">数据库升级失败</string>
+    <string name="tip_database_update_success">数据库已完成升级</string>
+    <string name="tip_database_updating">数据库正在升级...%1$s%%</string>
+    <string name="tip_enable_live_wallpaper">请在列表中选择「Pure天气」来启用动态壁纸</string>
+    <string name="tip_start_qq">正在启动QQ，如未启动，请手动启动手机QQ</string>
+    <string name="tip_start_qq_fail">未安装手Q或安装的版本不支持，请手动加入</string>
+    <string name="tips_checking_update">正在检查更新</string>
+    <string name="type_of_forecast_chart_broken_line">折线</string>
+    <string name="type_of_forecast_chart_curve_line">曲线</string>
+    <string name="version_change_log">"新增：天气多预警提醒
+新增：生活指数
+优化：应用权限申请逻辑
+优化：动态背景配色
+优化：UI 细节、字重
+修复：一些 bugs"</string>
+    <string name="widget_str_humidity_and_real_feel">湿度 %1$s%% / 体感 %2$s°</string>
+    <string name="widget_str_refresh_time">%1$s 刷新</string>
+    <string name="widget_tip_initializing_widget">正在初始化插件</string>
+    <string name="widget_tip_no_aqi_data">暂无空气质量数据</string>
+    <string name="widget_tip_no_city">暂未添加城市~</string>
+    <string name="widget_tip_no_data">无数据</string>
+    <string name="widget_tip_no_weather_data">暂无数据~</string>
+</resources>

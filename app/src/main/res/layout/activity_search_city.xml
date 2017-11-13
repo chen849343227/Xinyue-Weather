@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:fitsSystemWindows="true"
+        android:minHeight="?actionBarSize"
+        app:navigationIcon="@drawable/ic_nav_back"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/activity_title_choose_city"
+            android:textColor="@android:color/white"
+            android:textSize="16.0sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/iv_locate"
+            android:layout_width="23.0dip"
+            android:layout_height="23.0dip"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="15.0dip"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:onClick="locateCity"
+            android:src="@drawable/ic_location_on_white_24dp"
+            android:tint="@color/white"/>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv_location"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@null"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20.0dip"
+                android:layout_marginLeft="30.0dip"
+                android:layout_marginRight="30.0dip"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/bg_city_search"
+                android:gravity="center_horizontal"
+                android:hint="@string/activity_choose_city_et_hint_search"
+                android:maxLines="1"
+                android:padding="12.0dip"
+                android:singleLine="true"
+                android:textColor="#ff666666"
+                android:textSize="13.0sp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginLeft="25.0dip">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="4.0dip"
+                        android:layout_height="10.0dip"
+                        android:background="?colorPrimary"/>
+
+                    <TextView
+                        android:id="@+id/tv_listState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10.0dip"
+                        android:text="@string/activity_choose_city_hot_cities"
+                        android:textSize="15.0sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_allCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10.0dip"
+                    android:text="@string/activity_choose_city_choose_by_province"
+                    android:textColor="?colorAccent"
+                    android:textSize="14.0sp"
+                    android:textStyle="normal"/>
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lv_location_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
