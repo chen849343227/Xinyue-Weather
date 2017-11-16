@@ -1,15 +1,21 @@
 package com.chen.xinyueweather.module.city;
 
 import com.chen.xinyueweather.AndroidApplication;
+import com.chen.xinyueweather.api.RetrofitService;
 import com.chen.xinyueweather.dao.CityDao;
 import com.chen.xinyueweather.dao.bean.City;
 import com.chen.xinyueweather.dao.bean.CityManage;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Observer;
+import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * author long
@@ -64,5 +70,40 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
         for (int i = 0; i < AndroidApplication.HOT_CITYS.size(); i++) {
             AndroidApplication.sCityList.add(mCityDao.getCityByArea(AndroidApplication.HOT_CITYS.get(i)));
         }
+    }
+
+    @Override
+    public void location(String str) {
+        RetrofitService.getLocationInfo(str, "CN")
+                .subscribeOn(Schedulers.io())
+                .doOnNext(new Action1<ResponseBody>() {
+                    @Override
+                    public void call(ResponseBody responseBody) {
+                        try {
+                            String str = responseBody.string();
+                            com.orhanobut.logger.Logger.e(str);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                })
+                .compose(mView.bindToLife())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+
+                    }
+                });
+
     }
 }

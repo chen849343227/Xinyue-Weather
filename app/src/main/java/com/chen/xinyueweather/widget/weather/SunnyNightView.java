@@ -10,7 +10,9 @@ import android.view.SurfaceHolder;
 import java.util.ArrayList;
 
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class SunnyNightView extends BaseAnimView {
 
     public SunnyNightView(Context context, int backColor) {
@@ -45,7 +47,9 @@ public class SunnyNightView extends BaseAnimView {
 
     @Override
     protected void animLogic() {
-        stars.forEach(Star::shine);
+        for (Star star : stars) {
+            star.shine();
+        }
     }
 
 

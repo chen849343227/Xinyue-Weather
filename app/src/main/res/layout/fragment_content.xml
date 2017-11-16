@@ -49,12 +49,10 @@
                 android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:background="@color/my_gray"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:text="晴"
                         android:id="@+id/tv_real_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,7 +64,6 @@
                         android:textStyle="normal"/>
 
                     <TextView
-                        android:text="20:01 刷新"
                         android:id="@+id/tv_updateTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -90,7 +87,6 @@
                         android:textSize="13.0sp" />-->
 
                     <TextView
-                        android:text="20"
                         android:id="@+id/tv_RTTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,7 +117,6 @@
                         android:layout_alignTop="@+id/tv_RTTemp"
                         android:layout_toRightOf="@+id/tv_RTTemp"
                         android:fontFamily="sans-serif-thin"
-                        android:text="°"
                         android:textColor="@color/home_text_color"
                         android:textSize="60.0sp"
                         android:textStyle="normal"/>
@@ -149,7 +144,6 @@
                         android:textColor="@color/home_text_color_dark"
                         android:textSize="14.0sp" />-->
                     <TextView
-                        android:text="轻度 133"
                         android:id="@+id/tv_aqi"
                         style="@style/HomeCustomButtonStyle"
                         android:layout_below="@+id/tv_RTTemp"
@@ -214,7 +208,7 @@
                 android:overScrollMode="never"
                 android:scrollbars="none">
 
-                <com.chen.xinyueweather.widget.HourForecastView
+                <com.chen.xinyueweather.widget.HourForeCastView
                     android:id="@+id/hourForecast"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

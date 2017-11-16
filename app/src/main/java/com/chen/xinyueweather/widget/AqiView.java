@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+
 public class AqiView extends View {
 
     public AqiView(Context context) {

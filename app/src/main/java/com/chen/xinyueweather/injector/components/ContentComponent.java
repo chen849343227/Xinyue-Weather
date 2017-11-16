@@ -2,6 +2,7 @@ package com.chen.xinyueweather.injector.components;
 
 import android.support.v4.app.Fragment;
 
+import com.chen.xinyueweather.injector.modules.ContentModule;
 import com.chen.xinyueweather.injector.modules.SearchCityModule;
 import com.chen.xinyueweather.injector.scope.ActivityScope;
 import com.chen.xinyueweather.injector.scope.FragmentScope;
@@ -15,7 +16,7 @@ import dagger.Component;
  * @Description
  */
 @FragmentScope
-@Component(dependencies = ApplicationComponent.class, modules = ContentComponent.class)
+@Component(dependencies = ApplicationComponent.class, modules = ContentModule.class)
 public interface ContentComponent {
     void inject(ContentFragment fragment);
 }

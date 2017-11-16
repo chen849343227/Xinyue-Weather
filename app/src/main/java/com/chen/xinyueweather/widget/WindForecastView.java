@@ -24,7 +24,7 @@ public class WindForecastView extends View {
         this.context = context;
     }
 
-    public WindForecastView(Context context, AttributeSet attrs) {
+ /*   public WindForecastView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
     }
@@ -34,7 +34,7 @@ public class WindForecastView extends View {
         this.context = context;
     }
 
-   /* @Override
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         width = ScreenUtil.getScreenWidth(context);
         height = width / 12;
@@ -84,6 +84,6 @@ public class WindForecastView extends View {
     private float height, width;
     private Paint paint = new Paint();*/
     private Context context;
-   /* private List<WeekForeCast> foreCasts = new ArrayList<>();
+  /*  private List<WeekForeCast> foreCasts = new ArrayList<>();
     private float leftRight;*/
 }

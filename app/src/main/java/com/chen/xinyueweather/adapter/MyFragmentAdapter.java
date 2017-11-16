@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.chen.xinyueweather.module.home.ContentFragment;
+
 import java.util.List;
 
 /**
@@ -17,9 +19,9 @@ public class MyFragmentAdapter extends FragmentPagerAdapter  {
 
     private Context mContext;
 
-    private List<Fragment> mFragments;
+    private List<ContentFragment> mFragments;
 
-    public MyFragmentAdapter(FragmentManager fm, List<Fragment> mFragments) {
+    public MyFragmentAdapter(FragmentManager fm, List<ContentFragment> mFragments) {
         super(fm);
         this.mFragments = mFragments;
     }

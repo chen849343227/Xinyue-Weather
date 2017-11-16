@@ -1,7 +1,5 @@
 package com.chen.xinyueweather.module.city;
 
-import android.util.Log;
-
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.dao.greendao.CityManageDao;
@@ -15,7 +13,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 

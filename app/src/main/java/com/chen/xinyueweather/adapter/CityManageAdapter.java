@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.dao.bean.CityManage;
+import com.chen.xinyueweather.module.home.HomeActivity;
 import com.chen.xinyueweather.widget.CircleTextView;
 
 import java.util.List;
@@ -17,11 +18,10 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * author long
- * date 17-10-18
- * desc
+ * @author along
+ * @date Created:17-11-13
+ * @Description
  */
-
 public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.ViewHolder> {
 
 
@@ -49,13 +49,14 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
         if (!"".equals(mList.get(position).getWeather()) && mList.get(position).getWeather() != null) {
             holder.mTvType.setText(mList.get(position).getWeather());
         }
-        if (mList.get(position).getTemperature() != 0) {
-            holder.mTvTemp.setText(mList.get(position).getTemperature() + "");
+        if (!"".equals(mList.get(position).getTemperature()) && mList.get(position).getTemperature() != null) {
+            holder.mTvTemp.setText(mList.get(position).getTemperature());
         }
         holder.mRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String weatherId = mList.get(position).getWeatherId();
+                //String weatherId = mList.get(position).getWeatherId();
+                HomeActivity.launch(mContext,position);
             }
         });
     }
@@ -75,11 +76,11 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mRelativeLayout = itemView.findViewById(R.id.relative_layout);
-            mCircleText = itemView.findViewById(R.id.circle_text);
-            mTvArea = itemView.findViewById(R.id.tv_area);
-            mTvType = itemView.findViewById(R.id.tv_type);
-            mTvTemp = itemView.findViewById(R.id.tv_temp);
+            mRelativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_layout);
+            mCircleText = (CircleTextView) itemView.findViewById(R.id.circle_text);
+            mTvArea = (TextView) itemView.findViewById(R.id.tv_area);
+            mTvType = (TextView) itemView.findViewById(R.id.tv_type);
+            mTvTemp = (TextView) itemView.findViewById(R.id.tv_temp);
         }
     }
 

@@ -27,7 +27,7 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         public final static Property TabId = new Property(0, Long.class, "tabId", true, "_id");
         public final static Property AreaName = new Property(1, String.class, "areaName", false, "AREA_NAME");
         public final static Property Weather = new Property(2, String.class, "weather", false, "WEATHER");
-        public final static Property Temperature = new Property(3, int.class, "temperature", false, "TEMPERATURE");
+        public final static Property Temperature = new Property(3, String.class, "temperature", false, "TEMPERATURE");
         public final static Property WeatherId = new Property(4, String.class, "weatherId", false, "WEATHER_ID");
     }
 
@@ -47,7 +47,7 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: tabId
                 "\"AREA_NAME\" TEXT," + // 1: areaName
                 "\"WEATHER\" TEXT," + // 2: weather
-                "\"TEMPERATURE\" INTEGER NOT NULL ," + // 3: temperature
+                "\"TEMPERATURE\" TEXT," + // 3: temperature
                 "\"WEATHER_ID\" TEXT);"); // 4: weatherId
     }
 
@@ -75,7 +75,11 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         if (weather != null) {
             stmt.bindString(3, weather);
         }
-        stmt.bindLong(4, entity.getTemperature());
+ 
+        String temperature = entity.getTemperature();
+        if (temperature != null) {
+            stmt.bindString(4, temperature);
+        }
  
         String weatherId = entity.getWeatherId();
         if (weatherId != null) {
@@ -101,7 +105,11 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         if (weather != null) {
             stmt.bindString(3, weather);
         }
-        stmt.bindLong(4, entity.getTemperature());
+ 
+        String temperature = entity.getTemperature();
+        if (temperature != null) {
+            stmt.bindString(4, temperature);
+        }
  
         String weatherId = entity.getWeatherId();
         if (weatherId != null) {
@@ -120,7 +128,7 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // tabId
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // areaName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // weather
-            cursor.getInt(offset + 3), // temperature
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // temperature
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // weatherId
         );
         return entity;
@@ -131,7 +139,7 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         entity.setTabId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setAreaName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setWeather(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setTemperature(cursor.getInt(offset + 3));
+        entity.setTemperature(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setWeatherId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     

@@ -17,19 +17,19 @@ import java.util.List;
 
 
 
-public class HourForecastView extends View {
+public class HourForeCastView extends View {
 
-    public HourForecastView(Context context) {
+    public HourForeCastView(Context context) {
         super(context);
         this.context = context;
     }
 
-    public HourForecastView(Context context, AttributeSet attrs) {
+    public HourForeCastView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
     }
 
-    public HourForecastView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public HourForeCastView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
     }
@@ -40,7 +40,7 @@ public class HourForecastView extends View {
         height = width / 2 - getFitSize(20);
         widthAvg = getFitSize(200);
         radius = getFitSize(8);
-        setMeasuredDimension((int) leftRight + (int) widthAvg * 25, (int) height);
+        setMeasuredDimension((int) leftRight + (int) widthAvg * 6, (int) height);
     }
 
     @Override
@@ -94,6 +94,10 @@ public class HourForecastView extends View {
             //文字
             canvas.drawText(foreCast.getWeather(), paddingLeft, height - weatherDetallPadding, paint);
             canvas.drawText(DateTimeUtil.getHourByDate(foreCast.getStartTime()), paddingLeft, height - weatherTimePadding, paint);
+            //这里除掉最后一条数据
+            if (i == 6) {
+                break;
+            }
             i++;
         }
         paint.setStrokeWidth(getFitSize(3));

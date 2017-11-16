@@ -18,6 +18,7 @@ public class IndexesBean {
      * name : 化妆指数
      */
 
+    private String areaId;
     private String abbreviation;
     private String alias;
     private String content;
@@ -27,14 +28,23 @@ public class IndexesBean {
     public IndexesBean() {
     }
 
-    @Generated(hash = 2025095174)
-    public IndexesBean(String abbreviation, String alias, String content,
-            String level, String name) {
+    @Generated(hash = 1254807133)
+    public IndexesBean(String areaId, String abbreviation, String alias,
+            String content, String level, String name) {
+        this.areaId = areaId;
         this.abbreviation = abbreviation;
         this.alias = alias;
         this.content = content;
         this.level = level;
         this.name = name;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getAbbreviation() {

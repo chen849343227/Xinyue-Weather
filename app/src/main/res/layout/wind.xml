@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="horizontal">
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:layout_marginTop="20.0dip"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -13,13 +14,13 @@
         <com.chen.xinyueweather.widget.WindmillView
             android:id="@+id/windViewBig"
             android:layout_width="150dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"/>
 
         <com.chen.xinyueweather.widget.WindmillView
             android:id="@+id/windViewSmall"
             android:layout_width="110dp"
             android:layout_height="100dp"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"/>
 
     </LinearLayout>
 
@@ -45,14 +46,14 @@
                     android:layout_centerInParent="true"
                     android:text="@string/activity_home_str_wind_direction"
                     android:textColor="@color/home_text_color_dark"
-                    android:textSize="13.0sp" />
+                    android:textSize="13.0sp"/>
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1.0px"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20.0dip"
-                    android:background="@color/home_inside_divider_color" />
+                    android:background="@color/home_inside_divider_color"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -67,14 +68,14 @@
                     android:layout_centerInParent="true"
                     android:text="东南风"
                     android:textColor="@color/home_text_color"
-                    android:textSize="13.0sp" />
+                    android:textSize="13.0sp"/>
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1.0px"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="20.0dip"
-                    android:background="@color/home_inside_divider_color" />
+                    android:background="@color/home_inside_divider_color"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -94,14 +95,14 @@
                     android:layout_centerInParent="true"
                     android:text="@string/activity_home_str_wind_speed"
                     android:textColor="@color/home_text_color_dark"
-                    android:textSize="13.0sp" />
+                    android:textSize="13.0sp"/>
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1.0px"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="20.0dip"
-                    android:background="@color/home_inside_divider_color" />
+                    android:background="@color/home_inside_divider_color"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -116,14 +117,14 @@
                     android:layout_centerInParent="true"
                     android:text="2级"
                     android:textColor="@color/home_text_color"
-                    android:textSize="13.0sp" />
+                    android:textSize="13.0sp"/>
 
                 <View
                     android:layout_width="fill_parent"
                     android:layout_height="1.0px"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="20.0dip"
-                    android:background="@color/home_inside_divider_color" />
+                    android:background="@color/home_inside_divider_color"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -139,7 +140,7 @@
                 android:layout_marginLeft="20.0dip"
                 android:text="@string/activity_home_str_humidity"
                 android:textColor="@color/home_text_color_dark"
-                android:textSize="13.0sp" />
+                android:textSize="13.0sp"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -155,7 +156,7 @@
                     android:layout_weight="3.0"
                     android:max="100"
                     android:progress="83"
-                    android:theme="@style/LinearProgress" />
+                    android:theme="@style/LinearProgress"/>
 
                 <TextView
                     android:id="@+id/tv_humidity"
@@ -165,7 +166,7 @@
                     android:layout_weight="1.0"
                     android:text="83"
                     android:textColor="@color/home_text_color"
-                    android:textSize="13.0sp" />
+                    android:textSize="13.0sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

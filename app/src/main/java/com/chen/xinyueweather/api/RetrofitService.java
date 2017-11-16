@@ -40,6 +40,9 @@ public class RetrofitService {
 
     private static IAppAction appAction;
 
+
+    private static IAppAction appAction1;
+
     private RetrofitService() {
         throw new AssertionError();
     }
@@ -62,6 +65,16 @@ public class RetrofitService {
                 .build();
 
         appAction = retrofit.create(IAppAction.class);
+
+        retrofit = new Retrofit.Builder()
+                .client(okHttpClient)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(base)
+                .build();
+
+        appAction1 = retrofit.create(IAppAction.class);
+
     }
 
 
@@ -95,15 +108,17 @@ public class RetrofitService {
 
     /**
      * 获取天气详情
+     *
      * @param cityId 城市ID
      * @return
      */
     public static Observable<BaseResponse> getWeatherFromNet(String cityId) {
-        return appAction.getWeatherFromNet(cityId)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
+        return appAction.getWeatherFromNet(cityId);
+    }
+
+
+    public static Observable<ResponseBody> getLocationInfo(String latlng, String language) {
+        return appAction1.getAreaFronNet(latlng, language);
     }
 
 }

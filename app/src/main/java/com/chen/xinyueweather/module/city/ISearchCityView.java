@@ -1,6 +1,7 @@
 package com.chen.xinyueweather.module.city;
 
 import com.chen.xinyueweather.dao.bean.City;
+import com.chen.xinyueweather.module.base.IBaseView;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author along
  * @Description
  */
-public interface ISearchCityView {
+public interface ISearchCityView extends IBaseView{
     /**
      * 显示所有的数据
      * @param locations

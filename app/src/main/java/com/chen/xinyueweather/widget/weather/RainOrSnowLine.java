@@ -1,6 +1,8 @@
 package com.chen.xinyueweather.widget.weather;
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class RainOrSnowLine extends BaseLine {
 
     public RainOrSnowLine(int maxX, int maxY) {

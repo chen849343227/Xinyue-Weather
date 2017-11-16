@@ -35,6 +35,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -150,6 +151,8 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
             CityManage cityManage = new CityManage();
             cityManage.setAreaName(AndroidApplication.sCityList.get(position).getAreaName());
             cityManage.setWeatherId(AndroidApplication.sCityList.get(position).getWeatherId());
+            cityManage.setTemperature("");
+            cityManage.setWeather("");
             setResultData(cityManage);
         });
         // 通过省市选择列表的点击事件
@@ -167,6 +170,9 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
                 CityManage cityManage = new CityManage();
                 cityManage.setAreaName(city.getAreaName());
                 cityManage.setWeatherId(city.getWeatherId());
+                cityManage.setTemperature("");
+                cityManage.setWeather("");
+                com.orhanobut.logger.Logger.e(city.getWeatherId());
                 CityManageActivity.launch(SearchCityActivity.this, cityManage);
             }
         });
@@ -288,7 +294,11 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
             Toast.makeText(this, " best location is null", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "best location: lat==" + best.getLatitude() + " lng==" + best.getLongitude(), Toast.LENGTH_SHORT).show();
+            String str = "http://maps.google.cn/maps/api/geocode/json?latlng=" + best.getLatitude() + "," + best.getLongitude() + "&language=CN";
+            com.orhanobut.logger.Logger.e(str);
+            mPresenter.location(best.getLatitude() + "," + best.getLongitude());
         }
+
     }
 
     private void getNetworkLocation() {

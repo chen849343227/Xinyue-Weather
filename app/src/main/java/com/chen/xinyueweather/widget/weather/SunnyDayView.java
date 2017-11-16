@@ -8,6 +8,9 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class SunnyDayView extends BaseAnimView {
 
     public SunnyDayView(Context context, int backColor) {

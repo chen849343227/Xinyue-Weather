@@ -85,9 +85,8 @@ public class WindmillView extends View {
         drawFan(canvas);
 
         degree += windSpeedDegree * 1.5f;
-        if (degree >= 360) {
+        if (degree >= 360)
             degree = degree - 360;
-        }
     }
 
     /**
@@ -126,13 +125,16 @@ public class WindmillView extends View {
 
     public void startAnim() {
         if (animThread == null) {
-            animThread = new Thread(() -> {
-                while (true) {
-                    refreshView();
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+            animThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        refreshView();
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
@@ -145,9 +147,8 @@ public class WindmillView extends View {
     }
 
     public void setWindSpeedDegree(float windSpeedDegree) {
-        if (windSpeedDegree == 0) {
+        if (windSpeedDegree == 0)
             windSpeedDegree = 1;
-        }
         this.windSpeedDegree = windSpeedDegree;
     }
 

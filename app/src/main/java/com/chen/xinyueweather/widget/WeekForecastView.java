@@ -123,7 +123,7 @@ public class WeekForecastView extends View {
 
             //星期
             try {
-                canvas.drawText(DateTimeUtil.getWeekOfDate(new SimpleDateFormat().parse(foreCast.getDate())), paddingLeft, height - (weekPaddingBottom), paint);
+                canvas.drawText(DateTimeUtil.getWeekOfDate(new SimpleDateFormat("yyyy-MM-dd").parse(foreCast.getDate())), paddingLeft, height - (weekPaddingBottom), paint);
             } catch (ParseException e) {
                 e.printStackTrace();
             }

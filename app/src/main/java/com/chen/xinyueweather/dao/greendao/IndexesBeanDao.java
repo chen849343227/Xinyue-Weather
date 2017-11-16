@@ -24,11 +24,12 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Abbreviation = new Property(0, String.class, "abbreviation", false, "ABBREVIATION");
-        public final static Property Alias = new Property(1, String.class, "alias", false, "ALIAS");
-        public final static Property Content = new Property(2, String.class, "content", false, "CONTENT");
-        public final static Property Level = new Property(3, String.class, "level", false, "LEVEL");
-        public final static Property Name = new Property(4, String.class, "name", false, "NAME");
+        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property Abbreviation = new Property(1, String.class, "abbreviation", false, "ABBREVIATION");
+        public final static Property Alias = new Property(2, String.class, "alias", false, "ALIAS");
+        public final static Property Content = new Property(3, String.class, "content", false, "CONTENT");
+        public final static Property Level = new Property(4, String.class, "level", false, "LEVEL");
+        public final static Property Name = new Property(5, String.class, "name", false, "NAME");
     }
 
 
@@ -44,11 +45,12 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"INDEXES_BEAN\" (" + //
-                "\"ABBREVIATION\" TEXT," + // 0: abbreviation
-                "\"ALIAS\" TEXT," + // 1: alias
-                "\"CONTENT\" TEXT," + // 2: content
-                "\"LEVEL\" TEXT," + // 3: level
-                "\"NAME\" TEXT);"); // 4: name
+                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"ABBREVIATION\" TEXT," + // 1: abbreviation
+                "\"ALIAS\" TEXT," + // 2: alias
+                "\"CONTENT\" TEXT," + // 3: content
+                "\"LEVEL\" TEXT," + // 4: level
+                "\"NAME\" TEXT);"); // 5: name
     }
 
     /** Drops the underlying database table. */
@@ -61,29 +63,34 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     protected final void bindValues(DatabaseStatement stmt, IndexesBean entity) {
         stmt.clearBindings();
  
+        String areaId = entity.getAreaId();
+        if (areaId != null) {
+            stmt.bindString(1, areaId);
+        }
+ 
         String abbreviation = entity.getAbbreviation();
         if (abbreviation != null) {
-            stmt.bindString(1, abbreviation);
+            stmt.bindString(2, abbreviation);
         }
  
         String alias = entity.getAlias();
         if (alias != null) {
-            stmt.bindString(2, alias);
+            stmt.bindString(3, alias);
         }
  
         String content = entity.getContent();
         if (content != null) {
-            stmt.bindString(3, content);
+            stmt.bindString(4, content);
         }
  
         String level = entity.getLevel();
         if (level != null) {
-            stmt.bindString(4, level);
+            stmt.bindString(5, level);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(5, name);
+            stmt.bindString(6, name);
         }
     }
 
@@ -91,29 +98,34 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     protected final void bindValues(SQLiteStatement stmt, IndexesBean entity) {
         stmt.clearBindings();
  
+        String areaId = entity.getAreaId();
+        if (areaId != null) {
+            stmt.bindString(1, areaId);
+        }
+ 
         String abbreviation = entity.getAbbreviation();
         if (abbreviation != null) {
-            stmt.bindString(1, abbreviation);
+            stmt.bindString(2, abbreviation);
         }
  
         String alias = entity.getAlias();
         if (alias != null) {
-            stmt.bindString(2, alias);
+            stmt.bindString(3, alias);
         }
  
         String content = entity.getContent();
         if (content != null) {
-            stmt.bindString(3, content);
+            stmt.bindString(4, content);
         }
  
         String level = entity.getLevel();
         if (level != null) {
-            stmt.bindString(4, level);
+            stmt.bindString(5, level);
         }
  
         String name = entity.getName();
         if (name != null) {
-            stmt.bindString(5, name);
+            stmt.bindString(6, name);
         }
     }
 
@@ -125,22 +137,24 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     @Override
     public IndexesBean readEntity(Cursor cursor, int offset) {
         IndexesBean entity = new IndexesBean( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // abbreviation
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // alias
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // content
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // level
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // name
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // areaId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // abbreviation
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // alias
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // content
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // level
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // name
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, IndexesBean entity, int offset) {
-        entity.setAbbreviation(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setAlias(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setContent(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setLevel(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setAreaId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setAbbreviation(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setAlias(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setLevel(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

@@ -1,5 +1,7 @@
 package com.chen.xinyueweather.dao.bean;
 
+import org.greenrobot.greendao.annotation.Entity;
+
 import java.util.List;
 
 /**

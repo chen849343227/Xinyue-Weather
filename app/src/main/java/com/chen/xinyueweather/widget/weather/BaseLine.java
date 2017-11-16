@@ -2,7 +2,9 @@ package com.chen.xinyueweather.widget.weather;
 
 import java.util.Random;
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public abstract class BaseLine {
 
     public BaseLine(int maxX, int maxY) {

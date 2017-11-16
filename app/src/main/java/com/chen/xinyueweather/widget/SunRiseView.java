@@ -17,6 +17,8 @@ import com.chen.xinyueweather.utils.ScreenUtil;
 import java.util.Calendar;
 
 
+
+
 public class SunRiseView extends View {
 
     public SunRiseView(Context context) {
@@ -118,6 +120,7 @@ public class SunRiseView extends View {
         if (TextUtils.isEmpty(sunDown) || TextUtils.isEmpty(sunRise)) {
             return;
         }
+
         int sunRiseH = Integer.parseInt(sunRise.split(":")[0]);
         int sunRiseM = Integer.parseInt(sunRise.split(":")[1]);
         int sunDownH = Integer.parseInt(sunDown.split(":")[0]);

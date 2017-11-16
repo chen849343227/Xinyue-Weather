@@ -28,6 +28,7 @@ public class Aqi {
      * upDateTime : 2017-10-13 14:00:00
      */
 
+    private String areaId;
     private String advice;
     private String aqi;
     private int citycount;
@@ -49,11 +50,12 @@ public class Aqi {
 
 
 
-    @Generated(hash = 185551926)
-    public Aqi(String advice, String aqi, int citycount, int cityrank, String co,
-            String color, String level, String no2, String o3, String pm10,
-            String pm25, String quality, String so2, String timestamp,
-            String upDateTime) {
+    @Generated(hash = 5613955)
+    public Aqi(String areaId, String advice, String aqi, int citycount,
+            int cityrank, String co, String color, String level, String no2,
+            String o3, String pm10, String pm25, String quality, String so2,
+            String timestamp, String upDateTime) {
+        this.areaId = areaId;
         this.advice = advice;
         this.aqi = aqi;
         this.citycount = citycount;
@@ -72,6 +74,14 @@ public class Aqi {
     }
 
 
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
 
     public String getAdvice() {
         return advice;

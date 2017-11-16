@@ -1,5 +1,6 @@
 package com.chen.xinyueweather.widget.weather;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,7 +11,9 @@ import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.utils.DateTimeUtil;
 
 
-
+/**
+ * Created by ghbha on 2016/5/15.
+ */
 public class SkyView extends FrameLayout {
 
     public SkyView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -45,6 +48,7 @@ public class SkyView extends FrameLayout {
         refreshView();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void refreshView() {
 
         if (oldWeather.equals(weather)) {
@@ -69,7 +73,7 @@ public class SkyView extends FrameLayout {
 
         boolean isNight = DateTimeUtil.isNight(sunrise, sunset);
 
-        if ("晴".equals(weather)) {
+        if (weather.equals("晴")) {
             backGroundColor = getResources().getColor(!isNight ?
                     R.color.clear_sky_day_start :
                     R.color.clear_sky_night_start);
@@ -82,7 +86,7 @@ public class SkyView extends FrameLayout {
             addView(baseView, layoutParams);
             return;
         }
-        if ("多云".equals(weather)) {
+        if (weather.equals("多云")) {
             backGroundColor = getResources().getColor(!isNight ?
                     R.color.cloudy_sky_day_start :
                     R.color.cloudy_sky_night_start);
@@ -107,7 +111,7 @@ public class SkyView extends FrameLayout {
             addView(baseView, layoutParams);
             return;
         }
-        if ("霾".equals(weather) || "浮尘".equals(weather) || "扬沙".equals(weather)) {
+        if (weather.equals("霾") || weather.equals("浮尘") || weather.equals("扬沙")) {
 
             backGroundColor = getResources().getColor(!isNight ?
                     R.color.haze_sky_day_start :

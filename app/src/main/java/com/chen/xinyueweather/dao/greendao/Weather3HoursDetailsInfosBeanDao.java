@@ -24,16 +24,17 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property EndTime = new Property(0, String.class, "endTime", false, "END_TIME");
-        public final static Property HighestTemperature = new Property(1, String.class, "highestTemperature", false, "HIGHEST_TEMPERATURE");
-        public final static Property Img = new Property(2, String.class, "img", false, "IMG");
-        public final static Property IsRainFall = new Property(3, String.class, "isRainFall", false, "IS_RAIN_FALL");
-        public final static Property LowerestTemperature = new Property(4, String.class, "lowerestTemperature", false, "LOWEREST_TEMPERATURE");
-        public final static Property Precipitation = new Property(5, String.class, "precipitation", false, "PRECIPITATION");
-        public final static Property StartTime = new Property(6, String.class, "startTime", false, "START_TIME");
-        public final static Property Wd = new Property(7, String.class, "wd", false, "WD");
-        public final static Property Weather = new Property(8, String.class, "weather", false, "WEATHER");
-        public final static Property Ws = new Property(9, String.class, "ws", false, "WS");
+        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property EndTime = new Property(1, String.class, "endTime", false, "END_TIME");
+        public final static Property HighestTemperature = new Property(2, String.class, "highestTemperature", false, "HIGHEST_TEMPERATURE");
+        public final static Property Img = new Property(3, String.class, "img", false, "IMG");
+        public final static Property IsRainFall = new Property(4, String.class, "isRainFall", false, "IS_RAIN_FALL");
+        public final static Property LowerestTemperature = new Property(5, String.class, "lowerestTemperature", false, "LOWEREST_TEMPERATURE");
+        public final static Property Precipitation = new Property(6, String.class, "precipitation", false, "PRECIPITATION");
+        public final static Property StartTime = new Property(7, String.class, "startTime", false, "START_TIME");
+        public final static Property Wd = new Property(8, String.class, "wd", false, "WD");
+        public final static Property Weather = new Property(9, String.class, "weather", false, "WEATHER");
+        public final static Property Ws = new Property(10, String.class, "ws", false, "WS");
     }
 
 
@@ -49,16 +50,17 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WEATHER3_HOURS_DETAILS_INFOS_BEAN\" (" + //
-                "\"END_TIME\" TEXT," + // 0: endTime
-                "\"HIGHEST_TEMPERATURE\" TEXT," + // 1: highestTemperature
-                "\"IMG\" TEXT," + // 2: img
-                "\"IS_RAIN_FALL\" TEXT," + // 3: isRainFall
-                "\"LOWEREST_TEMPERATURE\" TEXT," + // 4: lowerestTemperature
-                "\"PRECIPITATION\" TEXT," + // 5: precipitation
-                "\"START_TIME\" TEXT," + // 6: startTime
-                "\"WD\" TEXT," + // 7: wd
-                "\"WEATHER\" TEXT," + // 8: weather
-                "\"WS\" TEXT);"); // 9: ws
+                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"END_TIME\" TEXT," + // 1: endTime
+                "\"HIGHEST_TEMPERATURE\" TEXT," + // 2: highestTemperature
+                "\"IMG\" TEXT," + // 3: img
+                "\"IS_RAIN_FALL\" TEXT," + // 4: isRainFall
+                "\"LOWEREST_TEMPERATURE\" TEXT," + // 5: lowerestTemperature
+                "\"PRECIPITATION\" TEXT," + // 6: precipitation
+                "\"START_TIME\" TEXT," + // 7: startTime
+                "\"WD\" TEXT," + // 8: wd
+                "\"WEATHER\" TEXT," + // 9: weather
+                "\"WS\" TEXT);"); // 10: ws
     }
 
     /** Drops the underlying database table. */
@@ -71,54 +73,59 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     protected final void bindValues(DatabaseStatement stmt, Weather3HoursDetailsInfosBean entity) {
         stmt.clearBindings();
  
+        String areaId = entity.getAreaId();
+        if (areaId != null) {
+            stmt.bindString(1, areaId);
+        }
+ 
         String endTime = entity.getEndTime();
         if (endTime != null) {
-            stmt.bindString(1, endTime);
+            stmt.bindString(2, endTime);
         }
  
         String highestTemperature = entity.getHighestTemperature();
         if (highestTemperature != null) {
-            stmt.bindString(2, highestTemperature);
+            stmt.bindString(3, highestTemperature);
         }
  
         String img = entity.getImg();
         if (img != null) {
-            stmt.bindString(3, img);
+            stmt.bindString(4, img);
         }
  
         String isRainFall = entity.getIsRainFall();
         if (isRainFall != null) {
-            stmt.bindString(4, isRainFall);
+            stmt.bindString(5, isRainFall);
         }
  
         String lowerestTemperature = entity.getLowerestTemperature();
         if (lowerestTemperature != null) {
-            stmt.bindString(5, lowerestTemperature);
+            stmt.bindString(6, lowerestTemperature);
         }
  
         String precipitation = entity.getPrecipitation();
         if (precipitation != null) {
-            stmt.bindString(6, precipitation);
+            stmt.bindString(7, precipitation);
         }
  
         String startTime = entity.getStartTime();
         if (startTime != null) {
-            stmt.bindString(7, startTime);
+            stmt.bindString(8, startTime);
         }
  
         String wd = entity.getWd();
         if (wd != null) {
-            stmt.bindString(8, wd);
+            stmt.bindString(9, wd);
         }
  
         String weather = entity.getWeather();
         if (weather != null) {
-            stmt.bindString(9, weather);
+            stmt.bindString(10, weather);
         }
  
         String ws = entity.getWs();
         if (ws != null) {
-            stmt.bindString(10, ws);
+            stmt.bindString(11, ws);
         }
     }
 
@@ -126,54 +133,59 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     protected final void bindValues(SQLiteStatement stmt, Weather3HoursDetailsInfosBean entity) {
         stmt.clearBindings();
  
+        String areaId = entity.getAreaId();
+        if (areaId != null) {
+            stmt.bindString(1, areaId);
+        }
+ 
         String endTime = entity.getEndTime();
         if (endTime != null) {
-            stmt.bindString(1, endTime);
+            stmt.bindString(2, endTime);
         }
  
         String highestTemperature = entity.getHighestTemperature();
         if (highestTemperature != null) {
-            stmt.bindString(2, highestTemperature);
+            stmt.bindString(3, highestTemperature);
         }
  
         String img = entity.getImg();
         if (img != null) {
-            stmt.bindString(3, img);
+            stmt.bindString(4, img);
         }
  
         String isRainFall = entity.getIsRainFall();
         if (isRainFall != null) {
-            stmt.bindString(4, isRainFall);
+            stmt.bindString(5, isRainFall);
         }
  
         String lowerestTemperature = entity.getLowerestTemperature();
         if (lowerestTemperature != null) {
-            stmt.bindString(5, lowerestTemperature);
+            stmt.bindString(6, lowerestTemperature);
         }
  
         String precipitation = entity.getPrecipitation();
         if (precipitation != null) {
-            stmt.bindString(6, precipitation);
+            stmt.bindString(7, precipitation);
         }
  
         String startTime = entity.getStartTime();
         if (startTime != null) {
-            stmt.bindString(7, startTime);
+            stmt.bindString(8, startTime);
         }
  
         String wd = entity.getWd();
         if (wd != null) {
-            stmt.bindString(8, wd);
+            stmt.bindString(9, wd);
         }
  
         String weather = entity.getWeather();
         if (weather != null) {
-            stmt.bindString(9, weather);
+            stmt.bindString(10, weather);
         }
  
         String ws = entity.getWs();
         if (ws != null) {
-            stmt.bindString(10, ws);
+            stmt.bindString(11, ws);
         }
     }
 
@@ -185,32 +197,34 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     @Override
     public Weather3HoursDetailsInfosBean readEntity(Cursor cursor, int offset) {
         Weather3HoursDetailsInfosBean entity = new Weather3HoursDetailsInfosBean( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // endTime
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // highestTemperature
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // img
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // isRainFall
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // lowerestTemperature
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // precipitation
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // startTime
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // wd
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // weather
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // ws
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // areaId
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // endTime
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // highestTemperature
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // img
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // isRainFall
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // lowerestTemperature
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // precipitation
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // startTime
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // wd
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // weather
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // ws
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Weather3HoursDetailsInfosBean entity, int offset) {
-        entity.setEndTime(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setHighestTemperature(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setImg(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setIsRainFall(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setLowerestTemperature(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setPrecipitation(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setStartTime(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setWd(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setWeather(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setWs(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setAreaId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setEndTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setHighestTemperature(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setImg(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setIsRainFall(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setLowerestTemperature(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPrecipitation(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setStartTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setWd(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setWeather(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setWs(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }
     
     @Override

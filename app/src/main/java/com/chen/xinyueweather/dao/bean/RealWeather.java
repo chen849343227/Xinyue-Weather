@@ -22,6 +22,7 @@ public class RealWeather {
      * ziwaixian : N/A
      */
 
+    private String areaId;
     private String img;
     private String sD;
     private String sendibleTemp;
@@ -35,9 +36,11 @@ public class RealWeather {
     public RealWeather() {
     }
 
-    @Generated(hash = 1561788687)
-    public RealWeather(String img, String sD, String sendibleTemp, String temp,
-            String time, String wD, String wS, String weather, String ziwaixian) {
+    @Generated(hash = 1840501534)
+    public RealWeather(String areaId, String img, String sD, String sendibleTemp,
+            String temp, String time, String wD, String wS, String weather,
+            String ziwaixian) {
+        this.areaId = areaId;
         this.img = img;
         this.sD = sD;
         this.sendibleTemp = sendibleTemp;
@@ -47,6 +50,14 @@ public class RealWeather {
         this.wS = wS;
         this.weather = weather;
         this.ziwaixian = ziwaixian;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getImg() {

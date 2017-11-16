@@ -3,7 +3,11 @@ package com.chen.xinyueweather.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-
+/**
+ * @date Created:17-11-13
+ * @author along
+ * @Description
+ */
 public class ToastUtils {
 
     private static Context sContext;

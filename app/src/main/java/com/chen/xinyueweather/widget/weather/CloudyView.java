@@ -8,7 +8,9 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class CloudyView extends BaseAnimView {
 
     public CloudyView(Context context, int backColor) {

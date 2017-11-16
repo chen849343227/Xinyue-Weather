@@ -23,8 +23,9 @@ public class CityManage implements Parcelable {
     private Long tabId;
     private String areaName;
     private String weather;
-    private int temperature;
+    private String temperature;
     private String weatherId;
+
 
     public CityManage() {
     }
@@ -32,13 +33,13 @@ public class CityManage implements Parcelable {
     protected CityManage(Parcel in) {
         areaName = in.readString();
         weather = in.readString();
-        temperature = in.readInt();
+        temperature = in.readString();
         weatherId = in.readString();
     }
 
-    @Generated(hash = 477472687)
-    public CityManage(Long tabId, String areaName, String weather, int temperature,
-            String weatherId) {
+    @Generated(hash = 1581359051)
+    public CityManage(Long tabId, String areaName, String weather,
+            String temperature, String weatherId) {
         this.tabId = tabId;
         this.areaName = areaName;
         this.weather = weather;
@@ -47,6 +48,8 @@ public class CityManage implements Parcelable {
     }
 
    
+
+  
 
 
     public static final Creator<CityManage> CREATOR = new Creator<CityManage>() {
@@ -85,11 +88,11 @@ public class CityManage implements Parcelable {
         this.weather = weather;
     }
 
-    public int getTemperature() {
+    public String getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(int temperature) {
+    public void setTemperature(String temperature) {
         this.temperature = temperature;
     }
 
@@ -101,6 +104,8 @@ public class CityManage implements Parcelable {
         this.weatherId = weatherId;
     }
 
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -110,7 +115,7 @@ public class CityManage implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(areaName);
         dest.writeString(weather);
-        dest.writeInt(temperature);
+        dest.writeString(temperature);
         dest.writeString(weatherId);
     }
 

@@ -25,6 +25,7 @@ public class WeathersBean {
      * ws :
      */
 
+    private String areaId;
     private String date;
     private String img;
     private String sun_down_time;
@@ -41,11 +42,12 @@ public class WeathersBean {
     public WeathersBean() {
     }
 
-    @Generated(hash = 1956178158)
-    public WeathersBean(String date, String img, String sun_down_time,
-            String sun_rise_time, String temp_day_c, String temp_day_f,
-            String temp_night_c, String temp_night_f, String wd, String weather,
-            String week, String ws) {
+    @Generated(hash = 547938529)
+    public WeathersBean(String areaId, String date, String img,
+            String sun_down_time, String sun_rise_time, String temp_day_c,
+            String temp_day_f, String temp_night_c, String temp_night_f, String wd,
+            String weather, String week, String ws) {
+        this.areaId = areaId;
         this.date = date;
         this.img = img;
         this.sun_down_time = sun_down_time;
@@ -58,6 +60,14 @@ public class WeathersBean {
         this.weather = weather;
         this.week = week;
         this.ws = ws;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getDate() {

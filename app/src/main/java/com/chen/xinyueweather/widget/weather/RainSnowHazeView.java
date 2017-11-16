@@ -10,7 +10,9 @@ import android.view.SurfaceHolder;
 import java.util.ArrayList;
 
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class RainSnowHazeView extends BaseAnimView {
     public RainSnowHazeView(Context context, Type type, int backColor) {
         super(context,backColor);
@@ -75,8 +77,9 @@ public class RainSnowHazeView extends BaseAnimView {
                         rainLine.getStartX() + getFitSize(8), rainLine.getStartY() + getFitSize(8));
                 canvas.drawArc(rect3, 0, 360, false, paint);
             } else {
-                if (type == Type.RAIN_SNOW)
+                if (type == Type.RAIN_SNOW) {
                     rain = !rain;
+                }
                 if (rain) {
                     paint.setShadowLayer(0, 0, 0, Color.WHITE);
                     canvas.drawLine(rainLine.getStartX(), rainLine.getStartY(), rainLine.getStopX(), rainLine.getStopY() + getFitSize(8), paint);

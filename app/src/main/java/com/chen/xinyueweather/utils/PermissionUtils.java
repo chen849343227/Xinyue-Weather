@@ -30,6 +30,9 @@ public class PermissionUtils {
     }
 
     public static void requestPermission(Activity activity) {
+        if (activity == null) {
+            return;
+        }
         if (mRxPermissions == null) {
             mRxPermissions = new RxPermissions(activity);
         } else {

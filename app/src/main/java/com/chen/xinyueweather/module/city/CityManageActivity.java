@@ -67,6 +67,8 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
 
     private Intent mIntent;
 
+    private List<String> delAreaIds = new ArrayList<>();
+
     /**
      * 启动CityManageActivity
      *
@@ -201,12 +203,14 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
     public void onItemSwipe(int position) {
         CityManage cityManage = AndroidApplication.mCityManages.get(position);
         mPresenter.delete(cityManage);
+        if (AndroidApplication.currentCity > AndroidApplication.mCityManages.size()) {
+            AndroidApplication.currentCity = AndroidApplication.mCityManages.size()-1;
+        }
         String temp = getResources().getString(R.string.activity_city_manage_tip_city_delete_success);
+        delAreaIds.add(cityManage.getWeatherId());
         String hint = String.format(temp, cityManage.getAreaName());
         Snackbar.make(mCoordinatorLayout, hint, Snackbar.LENGTH_LONG)
-                .setAction("撤销", v -> {
-                    addCity(cityManage);
-                })
+                .setAction("撤销", v -> addCity(cityManage))
                 .show();
         //通知Adapter更新
         mAdapter.notifyDataSetChanged();
@@ -224,7 +228,9 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
             }
         }
         AndroidApplication.mCityManages.add(cityManage);
+        AndroidApplication.currentCity = AndroidApplication.mCityManages.size()-1;
         mPresenter.insert(cityManage);
+        delAreaIds.remove(cityManage.getWeatherId());
         mAdapter.notifyDataSetChanged();
     }
 

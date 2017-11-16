@@ -8,7 +8,9 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class FogView extends BaseAnimView {
 
     public FogView(Context context, int backColor) {

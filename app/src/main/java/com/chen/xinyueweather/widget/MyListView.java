@@ -4,7 +4,11 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
-
+/**
+ * @date Created:17-11-13
+ * @author along
+ * @Description
+ */
 public class MyListView extends ListView {
     public MyListView(Context context) {
         super(context);

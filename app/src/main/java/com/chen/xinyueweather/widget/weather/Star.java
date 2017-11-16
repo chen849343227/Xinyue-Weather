@@ -2,7 +2,9 @@ package com.chen.xinyueweather.widget.weather;
 
 import java.util.Random;
 
-
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class Star {
 
     public Star(int maxX, int maxY) {
@@ -14,9 +16,8 @@ public class Star {
 
 
     public void shine() {
-        if (outOfBounds()) {
+        if (outOfBounds())
             alphaDelta = -alphaDelta;
-        }
         currentAlpha = currentAlpha + alphaDelta;
     }
 

@@ -1,5 +1,8 @@
 package com.chen.xinyueweather.widget.weather;
 
+/**
+ * Created by ghbha on 2016/5/16.
+ */
 public class HazeLine extends BaseLine {
 
     public HazeLine(int maxX, int maxY) {

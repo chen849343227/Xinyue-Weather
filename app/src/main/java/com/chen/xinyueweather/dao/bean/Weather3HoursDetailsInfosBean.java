@@ -10,6 +10,9 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Weather3HoursDetailsInfosBean {
+
+
+
     /**
      * endTime : 2017-10-13 19:00:00
      * highestTemperature : 19
@@ -23,6 +26,7 @@ public class Weather3HoursDetailsInfosBean {
      * ws :
      */
 
+    private String areaId;
     private String endTime;
     private String highestTemperature;
     private String img;
@@ -38,11 +42,11 @@ public class Weather3HoursDetailsInfosBean {
     public Weather3HoursDetailsInfosBean() {
     }
 
-    @Generated(hash = 1697789044)
-    public Weather3HoursDetailsInfosBean(String endTime, String highestTemperature,
-            String img, String isRainFall, String lowerestTemperature,
-            String precipitation, String startTime, String wd, String weather,
-            String ws) {
+    @Generated(hash = 2004432043)
+    public Weather3HoursDetailsInfosBean(String areaId, String endTime, String highestTemperature, String img,
+            String isRainFall, String lowerestTemperature, String precipitation, String startTime, String wd,
+            String weather, String ws) {
+        this.areaId = areaId;
         this.endTime = endTime;
         this.highestTemperature = highestTemperature;
         this.img = img;
@@ -53,6 +57,14 @@ public class Weather3HoursDetailsInfosBean {
         this.wd = wd;
         this.weather = weather;
         this.ws = ws;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
     }
 
     public String getEndTime() {

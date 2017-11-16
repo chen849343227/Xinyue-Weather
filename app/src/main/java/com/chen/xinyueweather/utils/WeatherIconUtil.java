@@ -3,7 +3,11 @@ package com.chen.xinyueweather.utils;
 
 import com.chen.xinyueweather.R;
 
-
+/**
+ * @date Created:17-11-13
+ * @author along
+ * @Description
+ */
 public class WeatherIconUtil {
 
     public static int getWeatherIconID(String weatherCondition) {
