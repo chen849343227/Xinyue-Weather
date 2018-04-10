@@ -47,11 +47,6 @@ public class CityManage implements Parcelable {
         this.weatherId = weatherId;
     }
 
-   
-
-  
-
-
     public static final Creator<CityManage> CREATOR = new Creator<CityManage>() {
         @Override
         public CityManage createFromParcel(Parcel in) {

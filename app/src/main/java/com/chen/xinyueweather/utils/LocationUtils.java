@@ -93,10 +93,7 @@ public class LocationUtils {
             criteria = new Criteria();
         }
         String provider = manager.getBestProvider(criteria, true);
-        if (TextUtils.isEmpty(provider)) {
-            //如果找不到最适合的定位，使用network定位
-            location = getNetWorkLocation(context);
-        } else {
+        if (!TextUtils.isEmpty(provider)) {
             //高版本的权限检查
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -104,6 +101,9 @@ public class LocationUtils {
             }
             //获取最适合的定位方式的最后的定位权限
             location = manager.getLastKnownLocation(provider);
+        } else {
+            //如果找不到最适合的定位，使用network定位
+            location = getNetWorkLocation(context);
         }
         return location;
     }

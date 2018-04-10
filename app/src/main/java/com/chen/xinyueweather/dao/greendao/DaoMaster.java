@@ -21,22 +21,22 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        RealWeatherDao.createTable(db, ifNotExists);
         AqiDao.createTable(db, ifNotExists);
-        WeathersBeanDao.createTable(db, ifNotExists);
-        IndexesBeanDao.createTable(db, ifNotExists);
-        Weather3HoursDetailsInfosBeanDao.createTable(db, ifNotExists);
         CityManageDao.createTable(db, ifNotExists);
+        IndexesBeanDao.createTable(db, ifNotExists);
+        RealWeatherDao.createTable(db, ifNotExists);
+        Weather3HoursDetailsInfosBeanDao.createTable(db, ifNotExists);
+        WeathersBeanDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        RealWeatherDao.dropTable(db, ifExists);
         AqiDao.dropTable(db, ifExists);
-        WeathersBeanDao.dropTable(db, ifExists);
-        IndexesBeanDao.dropTable(db, ifExists);
-        Weather3HoursDetailsInfosBeanDao.dropTable(db, ifExists);
         CityManageDao.dropTable(db, ifExists);
+        IndexesBeanDao.dropTable(db, ifExists);
+        RealWeatherDao.dropTable(db, ifExists);
+        Weather3HoursDetailsInfosBeanDao.dropTable(db, ifExists);
+        WeathersBeanDao.dropTable(db, ifExists);
     }
 
     /**
@@ -55,12 +55,12 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(RealWeatherDao.class);
         registerDaoClass(AqiDao.class);
-        registerDaoClass(WeathersBeanDao.class);
-        registerDaoClass(IndexesBeanDao.class);
-        registerDaoClass(Weather3HoursDetailsInfosBeanDao.class);
         registerDaoClass(CityManageDao.class);
+        registerDaoClass(IndexesBeanDao.class);
+        registerDaoClass(RealWeatherDao.class);
+        registerDaoClass(Weather3HoursDetailsInfosBeanDao.class);
+        registerDaoClass(WeathersBeanDao.class);
     }
 
     public DaoSession newSession() {

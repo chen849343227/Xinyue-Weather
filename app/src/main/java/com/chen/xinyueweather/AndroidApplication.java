@@ -15,6 +15,7 @@ import com.chen.xinyueweather.injector.components.DaggerApplicationComponent;
 import com.chen.xinyueweather.injector.modules.ApplicationModule;
 import com.chen.xinyueweather.rxbus.RxBus;
 import com.chen.xinyueweather.utils.ToastUtils;
+import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -156,7 +157,7 @@ public class AndroidApplication extends Application {
     private void initConfig() {
         if (BuildConfig.DEBUG) {
             LeakCanary.install(this);
-            Logger.init("LogTAG");
+            Logger.addLogAdapter(new AndroidLogAdapter());
         }
         // 初始化网络配置
         RetrofitService.init();
@@ -178,7 +179,7 @@ public class AndroidApplication extends Application {
 
 
     /**
-     * 使用Tinker生成Application，这里改成静态调用
+     *
      *
      * @return
      */

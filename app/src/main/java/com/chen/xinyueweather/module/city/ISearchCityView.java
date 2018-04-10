@@ -1,6 +1,7 @@
 package com.chen.xinyueweather.module.city;
 
 import com.chen.xinyueweather.dao.bean.City;
+import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.module.base.IBaseView;
 
 import java.util.List;
@@ -16,4 +17,16 @@ public interface ISearchCityView extends IBaseView{
      * @param locations
      */
     void loadData(List<String> locations);
+
+    /**
+     * 显示定位信息
+     * @param str
+     */
+    void showToast(String str);
+
+    /**
+     * 定位成功回调
+     * @param cityManage
+     */
+    void onLocationSuccess(CityManage cityManage);
 }

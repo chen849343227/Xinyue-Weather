@@ -13,6 +13,7 @@ import com.chen.xinyueweather.dao.bean.WeatherDetailsInfoBean;
 import com.chen.xinyueweather.dao.bean.WeathersBean;
 import com.chen.xinyueweather.dao.greendao.AqiDao;
 import com.chen.xinyueweather.dao.greendao.DaoSession;
+import com.chen.xinyueweather.utils.ToastUtils;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -113,6 +114,7 @@ public class ContentPresenterImpl implements IContentPresenter {
                     @Override
                     public void onError(Throwable e) {
                         Logger.e(e.getMessage());
+                        ToastUtils.showToast(e.getMessage());
                     }
 
                     @Override

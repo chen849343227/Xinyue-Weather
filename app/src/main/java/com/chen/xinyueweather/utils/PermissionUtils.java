@@ -71,21 +71,15 @@ public class PermissionUtils {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                                 builder.setTitle("设置")
                                         .setMessage("即将前往设置去打开位置设置")
-                                        .setPositiveButton("设置", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent();
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
-                                                intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
-                                                activity.startActivity(intent);
-                                            }
+                                        .setPositiveButton("设置", (dialog, which) -> {
+                                            Intent intent = new Intent();
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            intent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+                                            intent.setData(Uri.fromParts("package", activity.getPackageName(), null));
+                                            activity.startActivity(intent);
                                         })
-                                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
+                                        .setNegativeButton("取消", (dialog, which) -> {
 
-                                            }
                                         });
                                 builder.setCancelable(true);
                                 AlertDialog dialog = builder.create();

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -31,11 +33,12 @@ import com.chen.xinyueweather.module.base.BaseActivity;
 import com.chen.xinyueweather.utils.LocationUtils;
 import com.chen.xinyueweather.utils.PermissionUtils;
 import com.jakewharton.rxbinding.widget.RxTextView;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
+
 
 import javax.inject.Inject;
 
@@ -179,6 +182,15 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (android.R.id.home == item.getItemId()) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void updateViews(boolean isRefresh) {
         mPresenter.getData(isRefresh);
         subscription = RxTextView.textChanges(mEtSearch)
@@ -195,12 +207,7 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
                     Log.d("RxJava", "filter is main thread : " + (Looper.getMainLooper() == Looper.myLooper()));
                     return charSequence.toString().trim().length() > 0;
                 })
-                .flatMap(new Func1<CharSequence, Observable<List<City>>>() {
-                    @Override
-                    public Observable<List<City>> call(CharSequence charSequence) {
-                        return mPresenter.search(charSequence.toString());
-                    }
-                })
+                .flatMap((Func1<CharSequence, Observable<List<City>>>) charSequence -> mPresenter.search(charSequence.toString()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(cities -> {
@@ -244,6 +251,16 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
         mLocationList.addAll(locations);
         mChooseLocationCityAdapter.notifyDataSetChanged();
         mLvLocation.setSelection(0);
+    }
+
+    @Override
+    public void showToast(String str) {
+
+    }
+
+    @Override
+    public void onLocationSuccess(CityManage cityManage) {
+        CityManageActivity.launch(SearchCityActivity.this, cityManage);
     }
 
     /**
@@ -293,9 +310,8 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
         if (best == null) {
             Toast.makeText(this, " best location is null", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "best location: lat==" + best.getLatitude() + " lng==" + best.getLongitude(), Toast.LENGTH_SHORT).show();
-            String str = "http://maps.google.cn/maps/api/geocode/json?latlng=" + best.getLatitude() + "," + best.getLongitude() + "&language=CN";
-            com.orhanobut.logger.Logger.e(str);
+            String str = "http://maps.google.cn/maps/api/geocode/json?latlng=32.7763644055,100.4338731743&language=ZH";
+            Logger.e("http://maps.google.cn/maps/api/geocode/json?latlng="+best.getLatitude()+"."+ best.getLongitude()+"&language=ZH");
             mPresenter.location(best.getLatitude() + "," + best.getLongitude());
         }
 

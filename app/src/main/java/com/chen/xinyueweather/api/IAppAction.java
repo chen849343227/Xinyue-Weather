@@ -29,5 +29,5 @@ public interface IAppAction {
     Observable<BaseResponse> getWeatherFromNet(@Query("cityIds") String cityId);
 
     @GET(getLocation)
-    Observable<ResponseBody> getAreaFronNet(@Query("latlng") String latlng, @Query("language") String language);
+    Observable<ResponseBody> getAreaFromNet(@Query("latlng") String latlng, @Query("language") String language);
 }

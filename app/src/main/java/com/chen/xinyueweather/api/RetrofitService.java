@@ -1,6 +1,5 @@
 package com.chen.xinyueweather.api;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.chen.xinyueweather.dao.bean.BaseResponse;
@@ -9,26 +8,22 @@ import com.orhanobut.logger.Logger;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.Buffer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static com.chen.xinyueweather.api.Params.base;
+import static com.chen.xinyueweather.api.Params.location;
+
 
 
 /**
@@ -70,7 +65,7 @@ public class RetrofitService {
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(base)
+                .baseUrl(location)
                 .build();
 
         appAction1 = retrofit.create(IAppAction.class);
@@ -118,7 +113,7 @@ public class RetrofitService {
 
 
     public static Observable<ResponseBody> getLocationInfo(String latlng, String language) {
-        return appAction1.getAreaFronNet(latlng, language);
+        return appAction1.getAreaFromNet(latlng, language);
     }
 
 }

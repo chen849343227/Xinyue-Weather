@@ -29,4 +29,5 @@ public interface ISearchCityPresenter extends IBasePresenter {
     void initHotCities();
 
     void location(String str);
+
 }
