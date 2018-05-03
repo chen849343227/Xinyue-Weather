@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.IndexesBean;
 /** 
  * DAO for table "INDEXES_BEAN".
 */
-public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
+public class IndexesBeanDao extends AbstractDao<IndexesBean, String> {
 
     public static final String TABLENAME = "INDEXES_BEAN";
 
@@ -24,7 +24,7 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property Abbreviation = new Property(1, String.class, "abbreviation", false, "ABBREVIATION");
         public final static Property Alias = new Property(2, String.class, "alias", false, "ALIAS");
         public final static Property Content = new Property(3, String.class, "content", false, "CONTENT");
@@ -45,7 +45,7 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"INDEXES_BEAN\" (" + //
-                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"ABBREVIATION\" TEXT," + // 1: abbreviation
                 "\"ALIAS\" TEXT," + // 2: alias
                 "\"CONTENT\" TEXT," + // 3: content
@@ -130,8 +130,8 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
@@ -158,20 +158,22 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(IndexesBean entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(IndexesBean entity, long rowId) {
+        return entity.getAreaId();
     }
     
     @Override
-    public Void getKey(IndexesBean entity) {
-        return null;
+    public String getKey(IndexesBean entity) {
+        if(entity != null) {
+            return entity.getAreaId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(IndexesBean entity) {
-        // TODO
-        return false;
+        return entity.getAreaId() != null;
     }
 
     @Override

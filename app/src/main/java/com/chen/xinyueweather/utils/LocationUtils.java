@@ -101,6 +101,9 @@ public class LocationUtils {
             }
             //获取最适合的定位方式的最后的定位权限
             location = manager.getLastKnownLocation(provider);
+            if(location==null){
+                location = getNetWorkLocation(context);
+            }
         } else {
             //如果找不到最适合的定位，使用network定位
             location = getNetWorkLocation(context);

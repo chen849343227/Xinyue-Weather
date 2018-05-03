@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.WeathersBean;
 /** 
  * DAO for table "WEATHERS_BEAN".
 */
-public class WeathersBeanDao extends AbstractDao<WeathersBean, Void> {
+public class WeathersBeanDao extends AbstractDao<WeathersBean, String> {
 
     public static final String TABLENAME = "WEATHERS_BEAN";
 
@@ -24,7 +24,7 @@ public class WeathersBeanDao extends AbstractDao<WeathersBean, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property Date = new Property(1, String.class, "date", false, "DATE");
         public final static Property Img = new Property(2, String.class, "img", false, "IMG");
         public final static Property Sun_down_time = new Property(3, String.class, "sun_down_time", false, "SUN_DOWN_TIME");
@@ -52,7 +52,7 @@ public class WeathersBeanDao extends AbstractDao<WeathersBean, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WEATHERS_BEAN\" (" + //
-                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"DATE\" TEXT," + // 1: date
                 "\"IMG\" TEXT," + // 2: img
                 "\"SUN_DOWN_TIME\" TEXT," + // 3: sun_down_time
@@ -214,8 +214,8 @@ public class WeathersBeanDao extends AbstractDao<WeathersBean, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
@@ -256,20 +256,22 @@ public class WeathersBeanDao extends AbstractDao<WeathersBean, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(WeathersBean entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(WeathersBean entity, long rowId) {
+        return entity.getAreaId();
     }
     
     @Override
-    public Void getKey(WeathersBean entity) {
-        return null;
+    public String getKey(WeathersBean entity) {
+        if(entity != null) {
+            return entity.getAreaId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(WeathersBean entity) {
-        // TODO
-        return false;
+        return entity.getAreaId() != null;
     }
 
     @Override

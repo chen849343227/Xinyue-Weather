@@ -2,6 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * author long
@@ -10,6 +11,8 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Aqi {
+
+
     /**
      * advice : 0
      * aqi : 72
@@ -28,6 +31,7 @@ public class Aqi {
      * upDateTime : 2017-10-13 14:00:00
      */
 
+    @Id
     private String areaId;
     private String advice;
     private String aqi;
@@ -202,4 +206,6 @@ public class Aqi {
     public void setUpDateTime(String upDateTime) {
         this.upDateTime = upDateTime;
     }
+
+
 }

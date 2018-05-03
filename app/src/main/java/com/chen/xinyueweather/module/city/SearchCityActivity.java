@@ -53,7 +53,7 @@ import rx.schedulers.Schedulers;
 /**
  * @author along
  * @date Created:17-10-18
- * @Description
+ * @Description 搜索城市界面
  */
 public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> implements ISearchCityView {
 
@@ -117,7 +117,6 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
 
     @Inject
     SearchCityAdapter mSearchCityAdapter;
-
     @Inject
     ChooseLocationCityAdapter mChooseLocationCityAdapter;
 
@@ -184,6 +183,7 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (android.R.id.home == item.getItemId()) {
+            //这里是对返回按钮进行处理
             onBackPressed();
             return true;
         }
@@ -227,7 +227,6 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
         switch (view.getId()) {
             case R.id.iv_locate:
                 //定位按钮
-                PermissionUtils.requestPermission(SearchCityActivity.this);
                 getBaseLocation();
                 break;
             case R.id.tv_allCity:
@@ -296,6 +295,8 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     }
 
     private void getBaseLocation() {
+        //request Permission
+        PermissionUtils.requestPermission(SearchCityActivity.this);
         //Criteria类是设置定位的标准信息（系统会根据你的要求，匹配最适合你的定位供应商），一个定位的辅助信息的类
         Criteria c = new Criteria();
         //设置低耗电
@@ -314,7 +315,6 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
             Logger.e("http://maps.google.cn/maps/api/geocode/json?latlng="+best.getLatitude()+"."+ best.getLongitude()+"&language=ZH");
             mPresenter.location(best.getLatitude() + "," + best.getLongitude());
         }
-
     }
 
     private void getNetworkLocation() {

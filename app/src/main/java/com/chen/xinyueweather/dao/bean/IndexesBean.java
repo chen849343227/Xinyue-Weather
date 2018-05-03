@@ -2,6 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * author long
@@ -17,7 +18,7 @@ public class IndexesBean {
      * level : 控油
      * name : 化妆指数
      */
-
+    @Id
     private String areaId;
     private String abbreviation;
     private String alias;
@@ -27,6 +28,8 @@ public class IndexesBean {
 
     public IndexesBean() {
     }
+
+
 
     @Generated(hash = 1254807133)
     public IndexesBean(String areaId, String abbreviation, String alias,
@@ -38,6 +41,8 @@ public class IndexesBean {
         this.level = level;
         this.name = name;
     }
+
+
 
     public String getAreaId() {
         return areaId;

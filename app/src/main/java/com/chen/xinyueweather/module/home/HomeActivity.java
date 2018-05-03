@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +36,7 @@ import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.adapter.MyFragmentAdapter;
 import com.chen.xinyueweather.module.base.BaseActivity;
 import com.chen.xinyueweather.module.city.CityManageActivity;
+import com.chen.xinyueweather.utils.AndroidShare;
 import com.chen.xinyueweather.utils.PermissionUtils;
 import com.chen.xinyueweather.widget.IndicatorView;
 import com.chen.xinyueweather.widget.weather.SkyView;
@@ -129,6 +133,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         initDrawerLayout(mDrawerLayout, mNavigationView);
+        mNavigationView.setItemIconTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green)));
         PermissionUtils.requestPermission(this);
         //  mMyWeatherView.
     }
@@ -142,7 +147,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.e(AndroidApplication.mCityManages.size() + "");
+        if (AndroidApplication.currentCity < 0) {
+            getCityIndex();
+        }
         if (AndroidApplication.mCityManages.size() != 0) {
             try {
                 Logger.e(AndroidApplication.currentCity + "");
@@ -155,7 +162,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         } else {
             mTvTopCity.setText("");
-
         }
         mFragments.clear();
         for (int i = 0; i < AndroidApplication.mCityManages.size(); i++) {
@@ -203,7 +209,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                 break;
             case R.id.action_share:
-
+                AndroidShare share = new AndroidShare(this);
+                share.share();
                 break;
             case R.id.action_preview:
                 showPreview();
@@ -296,6 +303,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("index", AndroidApplication.currentCity);
+        editor.commit();
         android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    private void getCityIndex() {
+        //获取退出时app选中的城市的position
+        SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
+        AndroidApplication.currentCity = sharedPreferences.getInt("index", 0);
     }
 }

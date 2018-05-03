@@ -47,6 +47,7 @@ public class CityManagePresenterImpl implements ILocalRxBusPresenter<CityManage>
 
     @Override
     public void insert(CityManage data) {
+        Logger.e(data.toString());
         mDao.rx().insert(data)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cityManage -> mRxBus.post(AndroidApplication.mCityManages.size()));

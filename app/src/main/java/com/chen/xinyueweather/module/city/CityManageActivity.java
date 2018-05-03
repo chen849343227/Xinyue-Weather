@@ -140,7 +140,11 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null) {
-            addCity(intent.getExtras().getParcelable("CITY"));
+            try {
+                addCity(intent.getExtras().getParcelable("CITY"));
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
         }
     }
 

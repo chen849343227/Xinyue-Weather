@@ -1,6 +1,8 @@
 package com.chen.xinyueweather.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +49,7 @@ public class ChooseLocationCityAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
+        ViewHolder holder ;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_location, parent,false);
             holder = new ViewHolder(convertView);

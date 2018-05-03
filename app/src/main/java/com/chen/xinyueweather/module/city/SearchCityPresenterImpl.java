@@ -81,46 +81,58 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
 
     @Override
     public void location(String str) {
+        //Location, request the server to get the location information and parse.
         RetrofitService.getLocationInfo(str, "CN")
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Func1<ResponseBody, Observable<BaseLocationBean>>() {
-                    @Override
-                    public Observable<BaseLocationBean> call(ResponseBody responseBody) {
-                        String str;
-                        BaseLocationBean baseLocationBean = null;
-                        try {
-                            str = responseBody.string();
-                            baseLocationBean = gson.fromJson(str, BaseLocationBean.class);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        if (baseLocationBean != null) {
-                            if (baseLocationBean.getStatus().equals("OK")) {
-                                return Observable.just(baseLocationBean);
-                            } else {
-                                return Observable.error(new Exception("定位失败,请稍后再试！"));
-                            }
-                        }
-                        return Observable.error(new Exception("网络连接错误,请检查网络连接！"));
+                .flatMap((Func1<ResponseBody, Observable<BaseLocationBean>>) responseBody -> {
+                    String str1;
+                    BaseLocationBean baseLocationBean = null;
+                    try {
+                        str1 = responseBody.string();
+                        baseLocationBean = gson.fromJson(str1, BaseLocationBean.class);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    if (baseLocationBean != null) {
+                        if (baseLocationBean.getStatus().equals("OK")) {
+                            return Observable.just(baseLocationBean);
+                        } else {
+                            return Observable.error(new Exception("定位失败，请稍后再试！"));
+                        }
+                    }
+                    return Observable.error(new Exception("网络连接错误，请检查网络连接！"));
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(new Action1<BaseLocationBean>() {
-                    @Override
-                    public void call(BaseLocationBean baseLocationBean) {
-                        String areaName = baseLocationBean.getResults().get(1).getAddress_components().get(0).getShort_name();
+                .doOnNext(baseLocationBean -> {
+                    List<BaseLocationBean.AddressBean.AddressComponentsBean> addressComponentsBeans = baseLocationBean.getResults().get(1).getAddress_components();
+                    City city;
+                    for (int i = 0; i < addressComponentsBeans.size(); i++) {
+                        String areaName = addressComponentsBeans.get(i).getShort_name();
+                        Logger.e(areaName);
                         //这里获取到的字符可能是两位，也可能是三位的，统一对三位的进行截取。因为数据库里面都是2位的，不然获取不到数据。
-                        if (areaName.length() == 3) {
+                        if (areaName.length() != 2) {
                             areaName = areaName.substring(0, 2);
                         }
-                        City city = queryCityByArea(areaName);
-                        CityManage cityManage = new CityManage();
-                        cityManage.setAreaName(city.getAreaName());
-                        cityManage.setWeatherId(city.getWeatherId());
-                        cityManage.setTemperature("");
-                        cityManage.setWeather("");
-                        mView.onLocationSuccess(cityManage);
+                        city = queryCityByArea(areaName);
+                        if (city.getWeatherId() != null) {
+                            CityManage cityManage = new CityManage();
+                            cityManage.setAreaName(city.getAreaName());
+                            cityManage.setWeatherId(city.getWeatherId());
+                            cityManage.setTemperature("");
+                            cityManage.setWeather("");
+                            mView.onLocationSuccess(cityManage);
+                            break;
+                        }
                     }
+                   /* String areaName =.get(0).getShort_name();
+                    String areaName1 = baseLocationBean.getResults().get(1).getAddress_components().get(1).getShort_name();
+                    String areaName2 = baseLocationBean.getResults().get(1).getAddress_components().get(2).getShort_name();
+                    Logger.e(city.toString());
+                    if () {
+
+                    } else {
+                        ToastUtils.showToast("定位失败，请稍后重试！");
+                    }*/
                 })
                 .compose(mView.bindToLife())
                 .subscribe(new Observer<BaseLocationBean>() {
@@ -140,7 +152,8 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                         String provinceName = baseLocationBean.getResults().get(1).getAddress_components().get(2).getShort_name();
                         String cityName = baseLocationBean.getResults().get(1).getAddress_components().get(1).getShort_name();
                         String areaName = baseLocationBean.getResults().get(1).getAddress_components().get(0).getShort_name();
-                        ToastUtils.showToast("定位成功 " + provinceName + " " + cityName + " " + areaName);
+                        Logger.e("定位成功：" + provinceName + " " + cityName + " " + areaName);
+                        ToastUtils.showToast("定位成功：" + provinceName + " " + cityName + " " + areaName);
                     }
                 });
     }

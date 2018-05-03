@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
 /** 
  * DAO for table "WEATHER3_HOURS_DETAILS_INFOS_BEAN".
 */
-public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursDetailsInfosBean, Void> {
+public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursDetailsInfosBean, String> {
 
     public static final String TABLENAME = "WEATHER3_HOURS_DETAILS_INFOS_BEAN";
 
@@ -24,7 +24,7 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property EndTime = new Property(1, String.class, "endTime", false, "END_TIME");
         public final static Property HighestTemperature = new Property(2, String.class, "highestTemperature", false, "HIGHEST_TEMPERATURE");
         public final static Property Img = new Property(3, String.class, "img", false, "IMG");
@@ -50,7 +50,7 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"WEATHER3_HOURS_DETAILS_INFOS_BEAN\" (" + //
-                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"END_TIME\" TEXT," + // 1: endTime
                 "\"HIGHEST_TEMPERATURE\" TEXT," + // 2: highestTemperature
                 "\"IMG\" TEXT," + // 3: img
@@ -190,8 +190,8 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
@@ -228,20 +228,22 @@ public class Weather3HoursDetailsInfosBeanDao extends AbstractDao<Weather3HoursD
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(Weather3HoursDetailsInfosBean entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(Weather3HoursDetailsInfosBean entity, long rowId) {
+        return entity.getAreaId();
     }
     
     @Override
-    public Void getKey(Weather3HoursDetailsInfosBean entity) {
-        return null;
+    public String getKey(Weather3HoursDetailsInfosBean entity) {
+        if(entity != null) {
+            return entity.getAreaId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(Weather3HoursDetailsInfosBean entity) {
-        // TODO
-        return false;
+        return entity.getAreaId() != null;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * author long
@@ -24,7 +25,7 @@ public class WeathersBean {
      * week : 星期五
      * ws :
      */
-
+    @Id
     private String areaId;
     private String date;
     private String img;
@@ -41,6 +42,8 @@ public class WeathersBean {
 
     public WeathersBean() {
     }
+
+
 
     @Generated(hash = 547938529)
     public WeathersBean(String areaId, String date, String img,
@@ -61,6 +64,8 @@ public class WeathersBean {
         this.week = week;
         this.ws = ws;
     }
+
+
 
     public String getAreaId() {
         return areaId;

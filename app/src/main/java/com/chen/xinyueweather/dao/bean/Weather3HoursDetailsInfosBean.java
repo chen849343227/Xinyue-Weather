@@ -2,6 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * author long
@@ -25,7 +26,7 @@ public class Weather3HoursDetailsInfosBean {
      * weather : 晴
      * ws :
      */
-
+    @Id
     private String areaId;
     private String endTime;
     private String highestTemperature;
@@ -42,10 +43,14 @@ public class Weather3HoursDetailsInfosBean {
     public Weather3HoursDetailsInfosBean() {
     }
 
+
+
+
     @Generated(hash = 2004432043)
-    public Weather3HoursDetailsInfosBean(String areaId, String endTime, String highestTemperature, String img,
-            String isRainFall, String lowerestTemperature, String precipitation, String startTime, String wd,
-            String weather, String ws) {
+    public Weather3HoursDetailsInfosBean(String areaId, String endTime,
+            String highestTemperature, String img, String isRainFall,
+            String lowerestTemperature, String precipitation, String startTime,
+            String wd, String weather, String ws) {
         this.areaId = areaId;
         this.endTime = endTime;
         this.highestTemperature = highestTemperature;
@@ -58,6 +63,9 @@ public class Weather3HoursDetailsInfosBean {
         this.weather = weather;
         this.ws = ws;
     }
+
+
+
 
     public String getAreaId() {
         return areaId;

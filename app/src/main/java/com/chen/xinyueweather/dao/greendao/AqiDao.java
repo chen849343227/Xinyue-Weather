@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.Aqi;
 /** 
  * DAO for table "AQI".
 */
-public class AqiDao extends AbstractDao<Aqi, Void> {
+public class AqiDao extends AbstractDao<Aqi, String> {
 
     public static final String TABLENAME = "AQI";
 
@@ -24,7 +24,7 @@ public class AqiDao extends AbstractDao<Aqi, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property Advice = new Property(1, String.class, "advice", false, "ADVICE");
         public final static Property Aqi = new Property(2, String.class, "aqi", false, "AQI");
         public final static Property Citycount = new Property(3, int.class, "citycount", false, "CITYCOUNT");
@@ -55,7 +55,7 @@ public class AqiDao extends AbstractDao<Aqi, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"AQI\" (" + //
-                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"ADVICE\" TEXT," + // 1: advice
                 "\"AQI\" TEXT," + // 2: aqi
                 "\"CITYCOUNT\" INTEGER NOT NULL ," + // 3: citycount
@@ -234,8 +234,8 @@ public class AqiDao extends AbstractDao<Aqi, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
@@ -282,20 +282,22 @@ public class AqiDao extends AbstractDao<Aqi, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(Aqi entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(Aqi entity, long rowId) {
+        return entity.getAreaId();
     }
     
     @Override
-    public Void getKey(Aqi entity) {
-        return null;
+    public String getKey(Aqi entity) {
+        if(entity != null) {
+            return entity.getAreaId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(Aqi entity) {
-        // TODO
-        return false;
+        return entity.getAreaId() != null;
     }
 
     @Override

@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.RealWeather;
 /** 
  * DAO for table "REAL_WEATHER".
 */
-public class RealWeatherDao extends AbstractDao<RealWeather, Void> {
+public class RealWeatherDao extends AbstractDao<RealWeather, String> {
 
     public static final String TABLENAME = "REAL_WEATHER";
 
@@ -24,7 +24,7 @@ public class RealWeatherDao extends AbstractDao<RealWeather, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property AreaId = new Property(0, String.class, "areaId", false, "AREA_ID");
+        public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property Img = new Property(1, String.class, "img", false, "IMG");
         public final static Property SD = new Property(2, String.class, "sD", false, "S_D");
         public final static Property SendibleTemp = new Property(3, String.class, "sendibleTemp", false, "SENDIBLE_TEMP");
@@ -49,7 +49,7 @@ public class RealWeatherDao extends AbstractDao<RealWeather, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"REAL_WEATHER\" (" + //
-                "\"AREA_ID\" TEXT," + // 0: areaId
+                "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"IMG\" TEXT," + // 1: img
                 "\"S_D\" TEXT," + // 2: sD
                 "\"SENDIBLE_TEMP\" TEXT," + // 3: sendibleTemp
@@ -178,8 +178,8 @@ public class RealWeatherDao extends AbstractDao<RealWeather, Void> {
     }
 
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
@@ -214,20 +214,22 @@ public class RealWeatherDao extends AbstractDao<RealWeather, Void> {
      }
     
     @Override
-    protected final Void updateKeyAfterInsert(RealWeather entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected final String updateKeyAfterInsert(RealWeather entity, long rowId) {
+        return entity.getAreaId();
     }
     
     @Override
-    public Void getKey(RealWeather entity) {
-        return null;
+    public String getKey(RealWeather entity) {
+        if(entity != null) {
+            return entity.getAreaId();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public boolean hasKey(RealWeather entity) {
-        // TODO
-        return false;
+        return entity.getAreaId() != null;
     }
 
     @Override

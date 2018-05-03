@@ -2,6 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * author long
@@ -22,6 +23,7 @@ public class RealWeather {
      * ziwaixian : N/A
      */
 
+    @Id
     private String areaId;
     private String img;
     private String sD;

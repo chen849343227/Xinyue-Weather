@@ -14,10 +14,9 @@ import java.util.List;
  * @Description ViewPager适配器
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
+
     private Context mContext;
-
     private List<Fragment> mFragments;
-
 
     public ViewPagerAdapter(FragmentManager fm, List<Fragment> mFragments) {
         super(fm);

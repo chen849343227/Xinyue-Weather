@@ -1,11 +1,13 @@
 package com.chen.xinyueweather.module.home;
 
+import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -41,6 +43,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +55,7 @@ import butterknife.Unbinder;
  * @date Created:17-11-7
  * @Description
  */
-public class ContentFragment extends BaseFragment<IContentPresenter> implements IContentView {
+public class ContentFragment extends BaseFragment<IContentPresenter> implements IContentView, View.OnTouchListener {
 
     @BindView(R.id.tv_real_type)
     TextView mTvRealType;
@@ -162,11 +166,12 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @Override
     protected void initViews() {
-        /**初始化下拉刷新颜色*/
+        /*初始化下拉刷新颜色*/
         TypedValue typedValue = new TypedValue();
         getActivity().getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         mRefresh.setColorSchemeColors(typedValue.data);
         mRefresh.setRefreshing(true);
+        mContentMain.setOnTouchListener(this);
         mFirstShowRl.setVisibility(View.INVISIBLE);
         mViews = new View[]{livingIndex_0, livingIndex_1, livingIndex_2, livingIndex_3, livingIndex_4, livingIndex_5};
         TypedArray actionbarSizeTypedArray = getActivity().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
@@ -174,17 +179,14 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mFirstShowRl.getLayoutParams().height = ScreenUtil.getScreenHeight(getActivity()) - h - ScreenUtil.getStatusBarHeight(getActivity());
         // mLvLivingIndex.setAdapter(mZhiShuAdapter);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
+        new Thread(() -> {
+            while (true) {
+                try {
                     mWindViewBig.refreshView();
                     mWindViewSmall.refreshView();
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -192,13 +194,8 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @Override
     protected void updateViews(boolean isRefresh) {
-        mPresenter.getData(true);
-        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.getData(true);
-            }
-        });
+        mPresenter.getData(false);
+        mRefresh.setOnRefreshListener(() -> mPresenter.getData(true));
     }
 
     @Override
@@ -216,7 +213,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         Aqi aqi = weathersBean.getPm25();
 
         mTvRealType.setText(realWeather.getWeather());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
         mTvUpdateTime.setText(String.format(getResources().getString(R.string.activity_home_refresh_time), simpleDateFormat.format(new Date(System.currentTimeMillis()))));
         mTvRTTemp.setText(realWeather.getTemp());
         mTvDegree.setText("°");
@@ -241,12 +238,10 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvPm10.setText(aqi.getPm10() + " μg/m³");
         mTvSo2.setText(aqi.getSo2() + " μg/m³");
         mTvNo2.setText(aqi.getNo2() + " μg/m³");
-
         //日出
-        mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
-
-
+/*        mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
         //指数
+        com.orhanobut.logger.Logger.e("指数长度" + weathersBean.getIndexes().size());
         for (int i = 0; i < weathersBean.getIndexes().size(); i++) {
             IndexesBean bean = weathersBean.getIndexes().get(i);
             mIvIcon = (ImageView) mViews[i].findViewById(R.id.iv_icon);
@@ -255,7 +250,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
             mTvNameAndValue.setText(bean.getName() + " " + bean.getLevel());
             mTvDetails = (TextView) mViews[i].findViewById(R.id.tv_details);
             mTvDetails.setText(bean.getContent());
-        }
+        }*/
         mContentMain.smoothScrollTo(0, 0);
     }
 
@@ -267,8 +262,14 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @Override
     public void showNetError() {
+        mRefresh.setRefreshing(false);
         ToastUtils.showToast("天气信息获取失败");
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        return mRefresh.isRefreshing();
+    }
 }
