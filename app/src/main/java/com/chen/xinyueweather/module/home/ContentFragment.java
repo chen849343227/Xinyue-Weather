@@ -239,7 +239,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvSo2.setText(aqi.getSo2() + " μg/m³");
         mTvNo2.setText(aqi.getNo2() + " μg/m³");
         //日出
-/*        mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
+        mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
         //指数
         com.orhanobut.logger.Logger.e("指数长度" + weathersBean.getIndexes().size());
         for (int i = 0; i < weathersBean.getIndexes().size(); i++) {
@@ -250,7 +250,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
             mTvNameAndValue.setText(bean.getName() + " " + bean.getLevel());
             mTvDetails = (TextView) mViews[i].findViewById(R.id.tv_details);
             mTvDetails.setText(bean.getContent());
-        }*/
+        }
         mContentMain.smoothScrollTo(0, 0);
     }
 

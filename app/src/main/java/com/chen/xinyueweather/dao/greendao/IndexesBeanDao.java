@@ -46,7 +46,7 @@ public class IndexesBeanDao extends AbstractDao<IndexesBean, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"INDEXES_BEAN\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"AREA_ID\" TEXT," + // 1: areaId
                 "\"ABBREVIATION\" TEXT," + // 2: abbreviation
                 "\"ALIAS\" TEXT," + // 3: alias

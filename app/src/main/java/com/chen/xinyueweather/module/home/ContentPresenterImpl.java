@@ -173,9 +173,13 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertWeekForecast(List<WeathersBean> bean) {
-        if (queryWeekForecastByAreaId(mWeatherId).size() > 0) {
-            for (WeathersBean weathersBean : bean) {
+        List<WeathersBean> queryWeathersList = queryWeekForecastByAreaId(mWeatherId);
+        if (queryWeathersList.size() > 0) {
+            WeathersBean weathersBean;
+            for (int i = 0; i < bean.size(); i++) {
+                weathersBean = bean.get(i);
                 weathersBean.setAreaId(mWeatherId);
+                weathersBean.setId(queryWeathersList.get(i).getId());
                 mDao.getWeathersBeanDao().update(weathersBean);
             }
         } else {
@@ -198,9 +202,13 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertThreeHourForecast(WeatherDetailsInfoBean bean) {
-        if (queryThreeHourForecastByAreaId(mWeatherId).size() > 0) {
-            for (Weather3HoursDetailsInfosBean weather3HoursDetailsInfosBean : bean.getWeather3HoursDetailsInfos()) {
+        List<Weather3HoursDetailsInfosBean> weather3HoursDetailsInfosBeanList = queryThreeHourForecastByAreaId(mWeatherId);
+        if (weather3HoursDetailsInfosBeanList.size() > 0) {
+            Weather3HoursDetailsInfosBean weather3HoursDetailsInfosBean;
+            for (int i = 0; i < bean.getWeather3HoursDetailsInfos().size(); i++) {
+                weather3HoursDetailsInfosBean = bean.getWeather3HoursDetailsInfos().get(i);
                 weather3HoursDetailsInfosBean.setAreaId(mWeatherId);
+                weather3HoursDetailsInfosBean.setId(weather3HoursDetailsInfosBeanList.get(i).getId());
                 mDao.getWeather3HoursDetailsInfosBeanDao().update(weather3HoursDetailsInfosBean);
             }
         } else {
@@ -244,9 +252,13 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertZhishu(List<IndexesBean> bean) {
-        if (queryZhishuByAreaId(mWeatherId).size() > 0) {
-            for (IndexesBean indexesBean : bean) {
+        List<IndexesBean> indexesBeanList = queryZhishuByAreaId(mWeatherId);
+        if (indexesBeanList.size() > 0) {
+            IndexesBean indexesBean;
+            for (int i = 0; i < bean.size(); i++) {
+                indexesBean = bean.get(i);
                 indexesBean.setAreaId(mWeatherId);
+                indexesBean.setId(indexesBeanList.get(i).getId());
                 mDao.getIndexesBeanDao().update(indexesBean);
             }
         } else {
