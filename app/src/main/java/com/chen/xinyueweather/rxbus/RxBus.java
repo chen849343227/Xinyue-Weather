@@ -12,7 +12,6 @@ import rx.subjects.SerializedSubject;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * http://www.jianshu.com/p/3a3462535b4d
  * RxBus
  */
 public class RxBus {

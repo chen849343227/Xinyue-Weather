@@ -173,7 +173,7 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertWeekForecast(List<WeathersBean> bean) {
-        if (queryWeekForecastByAreaId(mWeatherId) != null) {
+        if (queryWeekForecastByAreaId(mWeatherId).size() > 0) {
             for (WeathersBean weathersBean : bean) {
                 weathersBean.setAreaId(mWeatherId);
                 mDao.getWeathersBeanDao().update(weathersBean);
@@ -198,7 +198,7 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertThreeHourForecast(WeatherDetailsInfoBean bean) {
-        if (queryThreeHourForecastByAreaId(mWeatherId) != null) {
+        if (queryThreeHourForecastByAreaId(mWeatherId).size() > 0) {
             for (Weather3HoursDetailsInfosBean weather3HoursDetailsInfosBean : bean.getWeather3HoursDetailsInfos()) {
                 weather3HoursDetailsInfosBean.setAreaId(mWeatherId);
                 mDao.getWeather3HoursDetailsInfosBeanDao().update(weather3HoursDetailsInfosBean);
@@ -244,7 +244,7 @@ public class ContentPresenterImpl implements IContentPresenter {
 
     @Override
     public void insertZhishu(List<IndexesBean> bean) {
-        if (queryZhishuByAreaId(mWeatherId) != null) {
+        if (queryZhishuByAreaId(mWeatherId).size() > 0) {
             for (IndexesBean indexesBean : bean) {
                 indexesBean.setAreaId(mWeatherId);
                 mDao.getIndexesBeanDao().update(indexesBean);

@@ -18,7 +18,8 @@ public class IndexesBean {
      * level : 控油
      * name : 化妆指数
      */
-    @Id
+    @Id(autoincrement = true)
+    private Long id;
     private String areaId;
     private String abbreviation;
     private String alias;
@@ -30,10 +31,10 @@ public class IndexesBean {
     }
 
 
-
-    @Generated(hash = 1254807133)
-    public IndexesBean(String areaId, String abbreviation, String alias,
+    @Generated(hash = 1761051681)
+    public IndexesBean(Long id, String areaId, String abbreviation, String alias,
             String content, String level, String name) {
+        this.id = id;
         this.areaId = areaId;
         this.abbreviation = abbreviation;
         this.alias = alias;
@@ -43,6 +44,13 @@ public class IndexesBean {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getAreaId() {
         return areaId;
