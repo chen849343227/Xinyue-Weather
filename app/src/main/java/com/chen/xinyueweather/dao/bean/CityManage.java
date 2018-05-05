@@ -19,12 +19,12 @@ import org.greenrobot.greendao.annotation.Id;
 @Entity
 public class CityManage implements Parcelable {
 
-    @Id(autoincrement = true)
-    private Long tabId;
+    @Id
+    private String weatherId;
     private String areaName;
     private String weather;
     private String temperature;
-    private String weatherId;
+
 
 
     public CityManage() {
@@ -37,15 +37,16 @@ public class CityManage implements Parcelable {
         weatherId = in.readString();
     }
 
-    @Generated(hash = 1581359051)
-    public CityManage(Long tabId, String areaName, String weather,
-            String temperature, String weatherId) {
-        this.tabId = tabId;
+    @Generated(hash = 436006638)
+    public CityManage(String weatherId, String areaName, String weather,
+            String temperature) {
+        this.weatherId = weatherId;
         this.areaName = areaName;
         this.weather = weather;
         this.temperature = temperature;
-        this.weatherId = weatherId;
     }
+
+
 
     public static final Creator<CityManage> CREATOR = new Creator<CityManage>() {
         @Override
@@ -59,13 +60,7 @@ public class CityManage implements Parcelable {
         }
     };
 
-    public Long getTabId() {
-        return this.tabId;
-    }
 
-    public void setTabId(Long tabId) {
-        this.tabId = tabId;
-    }
 
     public String getAreaName() {
         return areaName;

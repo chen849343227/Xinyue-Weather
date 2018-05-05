@@ -1,6 +1,5 @@
 package com.chen.xinyueweather;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +15,6 @@ import com.chen.xinyueweather.injector.components.ApplicationComponent;
 import com.chen.xinyueweather.injector.components.DaggerApplicationComponent;
 import com.chen.xinyueweather.injector.modules.ApplicationModule;
 import com.chen.xinyueweather.rxbus.RxBus;
-import com.chen.xinyueweather.utils.PermissionUtils;
 import com.chen.xinyueweather.utils.ToastUtils;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
@@ -32,10 +30,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 
 /**
  * @author along
@@ -56,7 +50,7 @@ public class AndroidApplication extends Application {
     /**
      * 用户当前选中的城市
      */
-    public static int currentCity = 0;
+    public static int sCurrentCity = 0;
     /**
      * 保存用户选择的城市
      */
@@ -169,18 +163,20 @@ public class AndroidApplication extends Application {
     }
 
     private void initData() {
-        mDaoSession.getCityManageDao().queryBuilder().rx().list()
-                .subscribe(cityManageList -> {
-                    mCityManages.clear();
-                    mCityManages.addAll(cityManageList);
-                });
-        //初始化热门城市
-        for (int i = 0; i < AndroidApplication.HOT_CITYS.size(); i++) {
-            AndroidApplication.sCityList.add(cityDao.getCityByArea(AndroidApplication.HOT_CITYS.get(i)));
-        }
-        //获取退出时app选中的城市的position
-        SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
-        AndroidApplication.currentCity = sharedPreferences.getInt("index", 0);
+        new Thread(() -> {
+            mDaoSession.getCityManageDao().queryBuilder().rx().list()
+                    .subscribe(cityManageList -> AndroidApplication.mCityManages.addAll(cityManageList));
+            for (CityManage manage : AndroidApplication.mCityManages) {
+                com.orhanobut.logger.Logger.e(manage.toString());
+            }
+            //初始化热门城市
+            for (int i = 0; i < AndroidApplication.HOT_CITYS.size(); i++) {
+                AndroidApplication.sCityList.add(cityDao.getCityByArea(AndroidApplication.HOT_CITYS.get(i)));
+            }
+            //获取退出时app选中的城市的position
+            SharedPreferences sharedPreferences = getContext().getSharedPreferences("cityIndex", MODE_PRIVATE);
+            AndroidApplication.sCurrentCity = sharedPreferences.getInt("index", 0);
+        }).start();
     }
 
 

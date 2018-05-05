@@ -6,14 +6,11 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,10 +23,7 @@ import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.injector.components.DaggerCityManageComponent;
 import com.chen.xinyueweather.injector.modules.CityManageModule;
 import com.chen.xinyueweather.module.base.BaseActivity;
-import com.chen.xinyueweather.module.base.IBasePresenter;
-import com.chen.xinyueweather.module.base.ILocalPresenter;
 import com.chen.xinyueweather.module.base.ILocalRxBusPresenter;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +32,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.functions.Action1;
 
 /**
  * @author along
@@ -207,8 +200,8 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
     public void onItemSwipe(int position) {
         CityManage cityManage = AndroidApplication.mCityManages.get(position);
         mPresenter.delete(cityManage);
-        if (AndroidApplication.currentCity > AndroidApplication.mCityManages.size()) {
-            AndroidApplication.currentCity = AndroidApplication.mCityManages.size()-1;
+        if (AndroidApplication.sCurrentCity > AndroidApplication.mCityManages.size()) {
+            AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size()-1;
         }
         String temp = getResources().getString(R.string.activity_city_manage_tip_city_delete_success);
         delAreaIds.add(cityManage.getWeatherId());
@@ -232,7 +225,7 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
             }
         }
         AndroidApplication.mCityManages.add(cityManage);
-        AndroidApplication.currentCity = AndroidApplication.mCityManages.size()-1;
+        AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size()-1;
         mPresenter.insert(cityManage);
         delAreaIds.remove(cityManage.getWeatherId());
         mAdapter.notifyDataSetChanged();

@@ -14,7 +14,9 @@ import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.module.home.HomeActivity;
 import com.chen.xinyueweather.widget.CircleTextView;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 
@@ -35,6 +37,9 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
     public CityManageAdapter(Context context, List<CityManage> list) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
+        for (CityManage manage : list) {
+            com.orhanobut.logger.Logger.e(manage.toString());
+        }
         mList = list;
     }
 
@@ -58,7 +63,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
                 //String weatherId = mList.get(position).getWeatherId();
                 HomeActivity.launch(mContext, position);
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.fillInStackTrace();
         }
     }

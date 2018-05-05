@@ -1,10 +1,12 @@
 package com.chen.xinyueweather.module.home;
 
 
+import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.api.RetrofitService;
 import com.chen.xinyueweather.dao.bean.Aqi;
 import com.chen.xinyueweather.dao.bean.BaseResponse;
 import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
+import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.dao.bean.IndexesBean;
 import com.chen.xinyueweather.dao.bean.RealWeather;
 import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
@@ -32,7 +34,7 @@ import rx.schedulers.Schedulers;
  * @date Created:17-11-14
  * @Description
  */
-public class ContentPresenterImpl implements IContentPresenter {
+public class ContentPresenterImpl implements IContentPresenter<CityManage> {
 
     private final IContentView mView;
 
@@ -57,23 +59,24 @@ public class ContentPresenterImpl implements IContentPresenter {
     }
 
     @Override
-    public void insert(Object data) {
-
-    }
-
-    @Override
-    public void delete(Object data) {
-
-    }
-
-    @Override
     public void update(List list) {
+
+    }
+
+    @Override
+    public void insert(CityManage data) {
+        Logger.e(data.toString());
+        mDao.getCityManageDao().update(data);
+    }
+
+    @Override
+    public void delete(CityManage data) {
 
     }
 
 
     private void getDataFromNet() {
-        ToastUtils.showToast("网络获取数据");
+        ToastUtils.showToast("Get Data From NetWork");
         RetrofitService.getWeatherFromNet(mWeatherId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -121,9 +124,14 @@ public class ContentPresenterImpl implements IContentPresenter {
     }
 
     private void getDataFromLocal() {
-        ToastUtils.showToast("数据库获取数据");
+        ToastUtils.showToast("Get Data From Database");
         BaseWeatherBean baseWeatherBean = new BaseWeatherBean();
-        //   baseWeatherBean.setCityid();
+        //数据库里面没有存储城市名称,所以要从全局变量里面拿城市名称（by匹配天气ID）
+        for (CityManage cityManage : AndroidApplication.mCityManages) {
+            if (cityManage.getWeatherId().equals(mWeatherId)) {
+                baseWeatherBean.setCity(cityManage.getAreaName());
+            }
+        }
         if (queryAqiByAreaId(mWeatherId) == null) {
             getDataFromNet();
             return;
@@ -279,4 +287,6 @@ public class ContentPresenterImpl implements IContentPresenter {
     public void deleteZhishuByAreaId(String areaId) {
 
     }
+
+
 }

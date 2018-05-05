@@ -17,7 +17,7 @@ import java.util.List;
  * desc
  */
 
-public interface IContentPresenter extends ILocalPresenter {
+public interface IContentPresenter<T> extends ILocalPresenter<T> {
 
 
     /**

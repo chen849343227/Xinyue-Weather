@@ -127,6 +127,9 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     TextView mTvNameAndValue;
     TextView mTvDetails;
 
+    private String mCityName;
+    private String mWeather;
+    private String mTemperature;
 
     private String weatherId;
 
@@ -202,9 +205,18 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     public void loadWeather(BaseWeatherBean weathersBean) {
         for (int i = 0; i < AndroidApplication.mCityManages.size(); i++) {
             if (AndroidApplication.mCityManages.get(i).getWeatherId().equals(weatherId)) {
-                AndroidApplication.mCityManages.get(i).setAreaName(weathersBean.getCity());
-                AndroidApplication.mCityManages.get(i).setWeather(weathersBean.getRealtime().getWeather());
-                AndroidApplication.mCityManages.get(i).setTemperature(weathersBean.getRealtime().getTemp() + "°");
+                CityManage cityManage = new CityManage();
+                mCityName = weathersBean.getCity();
+                mWeather = weathersBean.getRealtime().getWeather();
+                mTemperature = weathersBean.getRealtime().getTemp() + "°";
+                cityManage.setAreaName(mCityName);
+                cityManage.setTemperature(mTemperature);
+                cityManage.setWeather(mWeather);
+                cityManage.setWeatherId(weatherId);
+                mPresenter.insert(cityManage);
+                AndroidApplication.mCityManages.get(i).setAreaName(mCityName);
+                AndroidApplication.mCityManages.get(i).setWeather(mWeather);
+                AndroidApplication.mCityManages.get(i).setTemperature(mTemperature);
             }
         }
         //设置实时天气

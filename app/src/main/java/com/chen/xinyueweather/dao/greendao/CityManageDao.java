@@ -15,7 +15,7 @@ import com.chen.xinyueweather.dao.bean.CityManage;
 /** 
  * DAO for table "CITY_MANAGE".
 */
-public class CityManageDao extends AbstractDao<CityManage, Long> {
+public class CityManageDao extends AbstractDao<CityManage, String> {
 
     public static final String TABLENAME = "CITY_MANAGE";
 
@@ -24,11 +24,10 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property TabId = new Property(0, Long.class, "tabId", true, "_id");
+        public final static Property WeatherId = new Property(0, String.class, "weatherId", true, "WEATHER_ID");
         public final static Property AreaName = new Property(1, String.class, "areaName", false, "AREA_NAME");
         public final static Property Weather = new Property(2, String.class, "weather", false, "WEATHER");
         public final static Property Temperature = new Property(3, String.class, "temperature", false, "TEMPERATURE");
-        public final static Property WeatherId = new Property(4, String.class, "weatherId", false, "WEATHER_ID");
     }
 
 
@@ -44,11 +43,10 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CITY_MANAGE\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: tabId
+                "\"WEATHER_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: weatherId
                 "\"AREA_NAME\" TEXT," + // 1: areaName
                 "\"WEATHER\" TEXT," + // 2: weather
-                "\"TEMPERATURE\" TEXT," + // 3: temperature
-                "\"WEATHER_ID\" TEXT);"); // 4: weatherId
+                "\"TEMPERATURE\" TEXT);"); // 3: temperature
     }
 
     /** Drops the underlying database table. */
@@ -61,9 +59,9 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
     protected final void bindValues(DatabaseStatement stmt, CityManage entity) {
         stmt.clearBindings();
  
-        Long tabId = entity.getTabId();
-        if (tabId != null) {
-            stmt.bindLong(1, tabId);
+        String weatherId = entity.getWeatherId();
+        if (weatherId != null) {
+            stmt.bindString(1, weatherId);
         }
  
         String areaName = entity.getAreaName();
@@ -79,11 +77,6 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         String temperature = entity.getTemperature();
         if (temperature != null) {
             stmt.bindString(4, temperature);
-        }
- 
-        String weatherId = entity.getWeatherId();
-        if (weatherId != null) {
-            stmt.bindString(5, weatherId);
         }
     }
 
@@ -91,9 +84,9 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
     protected final void bindValues(SQLiteStatement stmt, CityManage entity) {
         stmt.clearBindings();
  
-        Long tabId = entity.getTabId();
-        if (tabId != null) {
-            stmt.bindLong(1, tabId);
+        String weatherId = entity.getWeatherId();
+        if (weatherId != null) {
+            stmt.bindString(1, weatherId);
         }
  
         String areaName = entity.getAreaName();
@@ -110,49 +103,41 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
         if (temperature != null) {
             stmt.bindString(4, temperature);
         }
- 
-        String weatherId = entity.getWeatherId();
-        if (weatherId != null) {
-            stmt.bindString(5, weatherId);
-        }
     }
 
     @Override
-    public Long readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0);
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     @Override
     public CityManage readEntity(Cursor cursor, int offset) {
         CityManage entity = new CityManage( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // tabId
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // weatherId
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // areaName
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // weather
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // temperature
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // weatherId
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // temperature
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, CityManage entity, int offset) {
-        entity.setTabId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
+        entity.setWeatherId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setAreaName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setWeather(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setTemperature(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setWeatherId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override
-    protected final Long updateKeyAfterInsert(CityManage entity, long rowId) {
-        entity.setTabId(rowId);
-        return rowId;
+    protected final String updateKeyAfterInsert(CityManage entity, long rowId) {
+        return entity.getWeatherId();
     }
     
     @Override
-    public Long getKey(CityManage entity) {
+    public String getKey(CityManage entity) {
         if(entity != null) {
-            return entity.getTabId();
+            return entity.getWeatherId();
         } else {
             return null;
         }
@@ -160,7 +145,7 @@ public class CityManageDao extends AbstractDao<CityManage, Long> {
 
     @Override
     public boolean hasKey(CityManage entity) {
-        return entity.getTabId() != null;
+        return entity.getWeatherId() != null;
     }
 
     @Override

@@ -1,19 +1,15 @@
 package com.chen.xinyueweather.module.home;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -25,9 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,7 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @author along
@@ -147,16 +140,20 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        if (AndroidApplication.currentCity < 0) {
+        if (AndroidApplication.sCurrentCity < 0) {
             getCityIndex();
         }
         if (AndroidApplication.mCityManages.size() != 0) {
             try {
-                Logger.e(AndroidApplication.currentCity + "");
-                if (AndroidApplication.currentCity >= AndroidApplication.mCityManages.size()) {
-                    AndroidApplication.currentCity = AndroidApplication.mCityManages.size() - 1;
+                Logger.e(AndroidApplication.sCurrentCity + "");
+                if (AndroidApplication.sCurrentCity >= AndroidApplication.mCityManages.size()) {
+                    AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size() - 1;
                 }
-                mTvTopCity.setText(AndroidApplication.mCityManages.get(AndroidApplication.currentCity).getAreaName());
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+            try {
+                mTvTopCity.setText(AndroidApplication.mCityManages.get(AndroidApplication.sCurrentCity).getAreaName());
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -169,12 +166,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         }
         mPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mPagerAdapter);
-        mViewPager.setCurrentItem(AndroidApplication.currentCity);
+        mViewPager.setCurrentItem(AndroidApplication.sCurrentCity);
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                AndroidApplication.currentCity = position;
+                AndroidApplication.sCurrentCity = position;
                 mTvTopCity.setText(AndroidApplication.mCityManages.get(position).getAreaName());
             }
         });
@@ -188,7 +185,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null) {
-            AndroidApplication.currentCity = intent.getIntExtra("POSITION", -1);
+            AndroidApplication.sCurrentCity = intent.getIntExtra("POSITION", -1);
         }
         Log.e(TAG, "onNewIntent");
     }
@@ -305,7 +302,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         super.onDestroy();
         SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("index", AndroidApplication.currentCity);
+        editor.putInt("index", AndroidApplication.sCurrentCity);
         editor.commit();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
@@ -313,6 +310,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private void getCityIndex() {
         //获取退出时app选中的城市的position
         SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
-        AndroidApplication.currentCity = sharedPreferences.getInt("index", 0);
+        AndroidApplication.sCurrentCity = sharedPreferences.getInt("index", 0);
     }
 }
