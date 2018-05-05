@@ -32,7 +32,6 @@ public class PermissionUtils {
     }
 
     public static void requestPermission(Activity activity) {
-        com.orhanobut.logger.Logger.e(TAG);
         if (activity == null) {
             return;
         }

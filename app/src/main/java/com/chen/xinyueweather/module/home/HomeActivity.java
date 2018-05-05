@@ -145,7 +145,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         }
         if (AndroidApplication.mCityManages.size() != 0) {
             try {
-                Logger.e(AndroidApplication.sCurrentCity + "");
                 if (AndroidApplication.sCurrentCity >= AndroidApplication.mCityManages.size()) {
                     AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size() - 1;
                 }

@@ -92,7 +92,6 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
                     Logger.e(Thread.currentThread().getName());
                     //天气预警
                     insertNewAlarm(baseWeatherBean.getAlarms());
-                    //
                     insertRealWeather(baseWeatherBean.getRealtime());
                     insertWeekForecast(baseWeatherBean.getWeathers());
                     insertThreeHourForecast(baseWeatherBean.getWeatherDetailsInfo());
@@ -132,6 +131,7 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
                 baseWeatherBean.setCity(cityManage.getAreaName());
             }
         }
+        //如果数据库里面没有数据，就从网络去获取
         if (queryAqiByAreaId(mWeatherId) == null) {
             getDataFromNet();
             return;

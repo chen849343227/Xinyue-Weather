@@ -37,9 +37,6 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
     public CityManageAdapter(Context context, List<CityManage> list) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
-        for (CityManage manage : list) {
-            com.orhanobut.logger.Logger.e(manage.toString());
-        }
         mList = list;
     }
 

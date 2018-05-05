@@ -253,7 +253,6 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         //日出
         mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
         //指数
-        com.orhanobut.logger.Logger.e("指数长度" + weathersBean.getIndexes().size());
         for (int i = 0; i < weathersBean.getIndexes().size(); i++) {
             IndexesBean bean = weathersBean.getIndexes().get(i);
             mIvIcon = (ImageView) mViews[i].findViewById(R.id.iv_icon);
