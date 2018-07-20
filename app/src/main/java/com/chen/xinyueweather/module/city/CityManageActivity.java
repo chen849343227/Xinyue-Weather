@@ -62,6 +62,8 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
 
     private List<String> delAreaIds = new ArrayList<>();
 
+    private MyLinearLayoutManager layoutManager;
+
     /**
      * 启动CityManageActivity
      *
@@ -111,7 +113,8 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         mRecyclerViewLocation.setAdapter(mAdapter);
-        mRecyclerViewLocation.setLayoutManager(new MyLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        layoutManager = new MyLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewLocation.setLayoutManager(layoutManager);
         ItemTouchHelper helper = new ItemTouchHelper(new TouchCallback(this));
         helper.attachToRecyclerView(mRecyclerViewLocation);
         mPresenter.registerRxBus(Integer.class, integer -> {
@@ -150,6 +153,9 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (layoutManager != null) {
+            layoutManager = null;
+        }
         mPresenter.unregisterRxBus();
     }
 
@@ -201,7 +207,7 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
         CityManage cityManage = AndroidApplication.mCityManages.get(position);
         mPresenter.delete(cityManage);
         if (AndroidApplication.sCurrentCity > AndroidApplication.mCityManages.size()) {
-            AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size()-1;
+            AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size() - 1;
         }
         String temp = getResources().getString(R.string.activity_city_manage_tip_city_delete_success);
         delAreaIds.add(cityManage.getWeatherId());
@@ -225,7 +231,7 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
             }
         }
         AndroidApplication.mCityManages.add(cityManage);
-        AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size()-1;
+        AndroidApplication.sCurrentCity = AndroidApplication.mCityManages.size() - 1;
         mPresenter.insert(cityManage);
         delAreaIds.remove(cityManage.getWeatherId());
         mAdapter.notifyDataSetChanged();

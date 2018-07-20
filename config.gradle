@@ -16,7 +16,7 @@ ext {
                    butterknifeSdkVersion   : "8.5.1",
                    rxlifecycleSdkVersion   : "1.0",
                    espressoSdkVersion      : "2.2.2",
-                   canarySdkVersion        : "1.5",
+                   canarySdkVersion        : "1.5.4",
         ]
 
     dependencies = [

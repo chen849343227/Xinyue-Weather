@@ -40,7 +40,7 @@ public class HourForeCastView extends View {
         height = width / 2 - getFitSize(20);
         widthAvg = getFitSize(200);
         radius = getFitSize(8);
-        setMeasuredDimension((int) leftRight + (int) widthAvg * 6, (int) height);
+        setMeasuredDimension((int) leftRight + (int) widthAvg * 7, (int) height);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class HourForeCastView extends View {
             canvas.drawText(foreCast.getWeather(), paddingLeft, height - weatherDetallPadding, paint);
             canvas.drawText(DateTimeUtil.getHourByDate(foreCast.getStartTime()), paddingLeft, height - weatherTimePadding, paint);
             //这里除掉最后一条数据
-            if (i == 6) {
+            if (i == 7) {
                 break;
             }
             i++;

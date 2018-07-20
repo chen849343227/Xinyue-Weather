@@ -13,12 +13,12 @@ import org.greenrobot.greendao.annotation.Id;
 public class RealWeather {
     /**
      * img : 0
-     * sD : 46
+     * sd : 46
      * sendibleTemp : 19
      * temp : 19
      * time : 2017-10-13 15:00:00
-     * wD : 西风
-     * wS : 2级
+     * wd : 西风
+     * ws : 2级
      * weather : 晴
      * ziwaixian : N/A
      */
@@ -26,33 +26,37 @@ public class RealWeather {
     @Id
     private String areaId;
     private String img;
-    private String sD;
+    private String sd;
     private String sendibleTemp;
     private String temp;
     private String time;
-    private String wD;
-    private String wS;
+    private String wd;
+    private String ws;
     private String weather;
     private String ziwaixian;
 
     public RealWeather() {
     }
 
-    @Generated(hash = 1840501534)
-    public RealWeather(String areaId, String img, String sD, String sendibleTemp,
-            String temp, String time, String wD, String wS, String weather,
+
+
+    @Generated(hash = 749938091)
+    public RealWeather(String areaId, String img, String sd, String sendibleTemp,
+            String temp, String time, String wd, String ws, String weather,
             String ziwaixian) {
         this.areaId = areaId;
         this.img = img;
-        this.sD = sD;
+        this.sd = sd;
         this.sendibleTemp = sendibleTemp;
         this.temp = temp;
         this.time = time;
-        this.wD = wD;
-        this.wS = wS;
+        this.wd = wd;
+        this.ws = ws;
         this.weather = weather;
         this.ziwaixian = ziwaixian;
     }
+
+ 
 
     public String getAreaId() {
         return areaId;
@@ -71,11 +75,11 @@ public class RealWeather {
     }
 
     public String getSD() {
-        return sD;
+        return sd;
     }
 
     public void setSD(String sD) {
-        this.sD = sD;
+        this.sd = sD;
     }
 
     public String getSendibleTemp() {
@@ -103,19 +107,19 @@ public class RealWeather {
     }
 
     public String getWD() {
-        return wD;
+        return wd;
     }
 
     public void setWD(String wD) {
-        this.wD = wD;
+        this.wd = wD;
     }
 
     public String getWS() {
-        return wS;
+        return ws;
     }
 
     public void setWS(String wS) {
-        this.wS = wS;
+        this.ws = wS;
     }
 
     public String getWeather() {
@@ -132,5 +136,57 @@ public class RealWeather {
 
     public void setZiwaixian(String ziwaixian) {
         this.ziwaixian = ziwaixian;
+    }
+
+    @Override
+    public String toString() {
+        return "RealWeather{" +
+                "areaId='" + areaId + '\'' +
+                ", img='" + img + '\'' +
+                ", sd='" + sd + '\'' +
+                ", sendibleTemp='" + sendibleTemp + '\'' +
+                ", temp='" + temp + '\'' +
+                ", time='" + time + '\'' +
+                ", wd='" + wd + '\'' +
+                ", ws='" + ws + '\'' +
+                ", weather='" + weather + '\'' +
+                ", ziwaixian='" + ziwaixian + '\'' +
+                '}';
+    }
+
+
+
+    public String getWs() {
+        return this.ws;
+    }
+
+
+
+    public void setWs(String ws) {
+        this.ws = ws;
+    }
+
+
+
+    public String getWd() {
+        return this.wd;
+    }
+
+
+
+    public void setWd(String wd) {
+        this.wd = wd;
+    }
+
+
+
+    public String getSd() {
+        return this.sd;
+    }
+
+
+
+    public void setSd(String sd) {
+        this.sd = sd;
     }
 }

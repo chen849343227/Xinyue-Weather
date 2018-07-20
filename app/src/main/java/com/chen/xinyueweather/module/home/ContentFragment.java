@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -24,7 +22,6 @@ import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
 import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.dao.bean.IndexesBean;
 import com.chen.xinyueweather.dao.bean.RealWeather;
-import com.chen.xinyueweather.dao.bean.WeathersBean;
 import com.chen.xinyueweather.injector.components.DaggerContentComponent;
 import com.chen.xinyueweather.injector.modules.ContentModule;
 import com.chen.xinyueweather.module.base.BaseFragment;
@@ -33,22 +30,17 @@ import com.chen.xinyueweather.utils.ScreenUtil;
 import com.chen.xinyueweather.utils.ToastUtils;
 import com.chen.xinyueweather.widget.AqiView;
 import com.chen.xinyueweather.widget.HourForeCastView;
-import com.chen.xinyueweather.widget.MyListView;
 import com.chen.xinyueweather.widget.SunRiseView;
 import com.chen.xinyueweather.widget.WeekForecastView;
 import com.chen.xinyueweather.widget.WindmillView;
 import com.chen.xinyueweather.widget.weather.SkyView;
+import com.orhanobut.logger.Logger;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * @author along
@@ -56,6 +48,7 @@ import butterknife.Unbinder;
  * @Description
  */
 public class ContentFragment extends BaseFragment<IContentPresenter> implements IContentView, View.OnTouchListener {
+    private static final String TAG = "ContentFragment";
 
     @BindView(R.id.tv_real_type)
     TextView mTvRealType;
@@ -122,15 +115,15 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     @BindView(R.id.livingIndex_5)
     View livingIndex_5;
 
-    View[] mViews;
-    ImageView mIvIcon;
-    TextView mTvNameAndValue;
-    TextView mTvDetails;
+    private View[] mViews;
+    private ImageView mIvIcon;
+    private TextView mTvNameAndValue;
+    private TextView mTvDetails;
+    private SkyView mBackgroundView;
 
     private String mCityName;
     private String mWeather;
     private String mTemperature;
-
     private String weatherId;
 
     /**
@@ -217,8 +210,10 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
                 AndroidApplication.mCityManages.get(i).setAreaName(mCityName);
                 AndroidApplication.mCityManages.get(i).setWeather(mWeather);
                 AndroidApplication.mCityManages.get(i).setTemperature(mTemperature);
+                break;
             }
         }
+   //     mBackgroundView.setWeather(mWeather);
         //设置实时天气
         RealWeather realWeather = weathersBean.getRealtime();
         //aqi

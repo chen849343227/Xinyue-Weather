@@ -182,13 +182,32 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
     @Override
     public void insertWeekForecast(List<WeathersBean> bean) {
         List<WeathersBean> queryWeathersList = queryWeekForecastByAreaId(mWeatherId);
+        //   Logger.e("queryWeathersList size: " + queryWeathersList.size());
+        //   Logger.e("bean size: " + bean.size());
         if (queryWeathersList.size() > 0) {
             WeathersBean weathersBean;
-            for (int i = 0; i < bean.size(); i++) {
-                weathersBean = bean.get(i);
-                weathersBean.setAreaId(mWeatherId);
-                weathersBean.setId(queryWeathersList.get(i).getId());
-                mDao.getWeathersBeanDao().update(weathersBean);
+            if (queryWeathersList.size() < bean.size()) {
+                int index = 0;
+                for (int i = 0; i < queryWeathersList.size(); i++) {
+                    weathersBean = bean.get(i);
+                    weathersBean.setAreaId(mWeatherId);
+                    weathersBean.setId(queryWeathersList.get(i).getId());
+                    mDao.getWeathersBeanDao().update(weathersBean);
+                    index = i;
+                }
+                // index == queryWeathersList.size()  sure
+            /*    for (int i = index; i < bean.size(); i++) {
+                    weathersBean = bean.get(i);
+                    weathersBean.setAreaId(mWeatherId);
+                    mDao.getWeathersBeanDao().insert(weathersBean);
+                }*/
+            } else {
+                for (int i = 0; i < bean.size(); i++) {
+                    weathersBean = bean.get(i);
+                    weathersBean.setAreaId(mWeatherId);
+                    weathersBean.setId(queryWeathersList.get(i).getId());
+                    mDao.getWeathersBeanDao().update(weathersBean);
+                }
             }
         } else {
             for (WeathersBean weathersBean : bean) {

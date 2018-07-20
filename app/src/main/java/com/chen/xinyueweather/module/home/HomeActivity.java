@@ -166,17 +166,28 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         mPagerAdapter = new MyFragmentAdapter(getSupportFragmentManager(), mFragments);
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setCurrentItem(AndroidApplication.sCurrentCity);
+        try {
+            if (AndroidApplication.mCityManages.size() > 0) {
+                Logger.e(AndroidApplication.mCityManages.get(AndroidApplication.sCurrentCity).getWeather());
+                mMyWeatherView.setWeather(AndroidApplication.mCityManages.get(AndroidApplication.sCurrentCity).getWeather());
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 AndroidApplication.sCurrentCity = position;
                 mTvTopCity.setText(AndroidApplication.mCityManages.get(position).getAreaName());
+                String weather = AndroidApplication.mCityManages.get(position).getWeather();
+                if (weather != null && !weather.equals("")) {
+                    mMyWeatherView.setWeather(weather);
+                }
             }
         });
         mIndicatorView.setCount(AndroidApplication.mCityManages.size());
         mIndicatorView.addOnPageChangeListener(mViewPager, true);
-
         //mTvCityCount.setText(AndroidApplication.mCityManages.size()+"");
     }
 
@@ -185,6 +196,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         super.onNewIntent(intent);
         if (intent != null) {
             AndroidApplication.sCurrentCity = intent.getIntExtra("POSITION", -1);
+        }
+        try {
+            if (AndroidApplication.mCityManages.size() > 0) {
+                mMyWeatherView.setWeather(AndroidApplication.mCityManages.get(AndroidApplication.sCurrentCity).getWeather());
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         Log.e(TAG, "onNewIntent");
     }
@@ -295,14 +313,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         });
     }
 
-
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         SharedPreferences sharedPreferences = this.getSharedPreferences("cityIndex", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("index", AndroidApplication.sCurrentCity);
         editor.commit();
+        super.onDestroy();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
 
