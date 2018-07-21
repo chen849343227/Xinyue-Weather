@@ -3,6 +3,7 @@ package com.chen.xinyueweather.module.home;
 
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.api.RetrofitService;
+import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
 import com.chen.xinyueweather.dao.bean.BaseResponse;
 import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
@@ -12,6 +13,7 @@ import com.chen.xinyueweather.dao.bean.RealWeather;
 import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
 import com.chen.xinyueweather.dao.bean.WeatherDetailsInfoBean;
 import com.chen.xinyueweather.dao.bean.WeathersBean;
+import com.chen.xinyueweather.dao.greendao.AlarmDao;
 import com.chen.xinyueweather.dao.greendao.AqiDao;
 import com.chen.xinyueweather.dao.greendao.DaoSession;
 import com.chen.xinyueweather.dao.greendao.IndexesBeanDao;
@@ -150,11 +152,24 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
 
     @Override
     public void insertNewAlarm(List<?> alarms) {
+        deleteAlarmsByAreaId(mWeatherId);
+        if (alarms.size() > 0) {
+            Alarm alarm;
+            for (int i = 0; i < alarms.size(); i++) {
+                alarm = (Alarm) alarms.get(i);
+                mDao.getAlarmDao().insert(alarm);
+            }
+        }
     }
 
     @Override
-    public void getAlarmByAreaId(String areaId) {
+    public List<Alarm> queryAlarmsByAreaId(String areaId) {
+        return mDao.getAlarmDao().queryBuilder().where(AlarmDao.Properties.AreaId.eq(areaId)).list();
+    }
 
+    @Override
+    public void deleteAlarmsByAreaId(String areaId) {
+        mDao.getAlarmDao().deleteAll();
     }
 
     @Override

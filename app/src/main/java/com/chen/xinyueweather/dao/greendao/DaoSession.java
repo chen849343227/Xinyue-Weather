@@ -8,6 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
 import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.dao.bean.IndexesBean;
@@ -15,6 +16,7 @@ import com.chen.xinyueweather.dao.bean.RealWeather;
 import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
 import com.chen.xinyueweather.dao.bean.WeathersBean;
 
+import com.chen.xinyueweather.dao.greendao.AlarmDao;
 import com.chen.xinyueweather.dao.greendao.AqiDao;
 import com.chen.xinyueweather.dao.greendao.CityManageDao;
 import com.chen.xinyueweather.dao.greendao.IndexesBeanDao;
@@ -31,6 +33,7 @@ import com.chen.xinyueweather.dao.greendao.WeathersBeanDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig alarmDaoConfig;
     private final DaoConfig aqiDaoConfig;
     private final DaoConfig cityManageDaoConfig;
     private final DaoConfig indexesBeanDaoConfig;
@@ -38,6 +41,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig weather3HoursDetailsInfosBeanDaoConfig;
     private final DaoConfig weathersBeanDaoConfig;
 
+    private final AlarmDao alarmDao;
     private final AqiDao aqiDao;
     private final CityManageDao cityManageDao;
     private final IndexesBeanDao indexesBeanDao;
@@ -48,6 +52,9 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        alarmDaoConfig = daoConfigMap.get(AlarmDao.class).clone();
+        alarmDaoConfig.initIdentityScope(type);
 
         aqiDaoConfig = daoConfigMap.get(AqiDao.class).clone();
         aqiDaoConfig.initIdentityScope(type);
@@ -67,6 +74,7 @@ public class DaoSession extends AbstractDaoSession {
         weathersBeanDaoConfig = daoConfigMap.get(WeathersBeanDao.class).clone();
         weathersBeanDaoConfig.initIdentityScope(type);
 
+        alarmDao = new AlarmDao(alarmDaoConfig, this);
         aqiDao = new AqiDao(aqiDaoConfig, this);
         cityManageDao = new CityManageDao(cityManageDaoConfig, this);
         indexesBeanDao = new IndexesBeanDao(indexesBeanDaoConfig, this);
@@ -74,6 +82,7 @@ public class DaoSession extends AbstractDaoSession {
         weather3HoursDetailsInfosBeanDao = new Weather3HoursDetailsInfosBeanDao(weather3HoursDetailsInfosBeanDaoConfig, this);
         weathersBeanDao = new WeathersBeanDao(weathersBeanDaoConfig, this);
 
+        registerDao(Alarm.class, alarmDao);
         registerDao(Aqi.class, aqiDao);
         registerDao(CityManage.class, cityManageDao);
         registerDao(IndexesBean.class, indexesBeanDao);
@@ -83,12 +92,17 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
+        alarmDaoConfig.clearIdentityScope();
         aqiDaoConfig.clearIdentityScope();
         cityManageDaoConfig.clearIdentityScope();
         indexesBeanDaoConfig.clearIdentityScope();
         realWeatherDaoConfig.clearIdentityScope();
         weather3HoursDetailsInfosBeanDaoConfig.clearIdentityScope();
         weathersBeanDaoConfig.clearIdentityScope();
+    }
+
+    public AlarmDao getAlarmDao() {
+        return alarmDao;
     }
 
     public AqiDao getAqiDao() {

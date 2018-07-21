@@ -1,5 +1,6 @@
 package com.chen.xinyueweather.module.home;
 
+import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
 import com.chen.xinyueweather.dao.bean.IndexesBean;
 import com.chen.xinyueweather.dao.bean.RealWeather;
@@ -26,8 +27,9 @@ public interface IContentPresenter<T> extends ILocalPresenter<T> {
 
     void insertNewAlarm(List<?> alarms);
 
-    void getAlarmByAreaId(String areaId);
+    List<Alarm> queryAlarmsByAreaId(String areaId);
 
+    void deleteAlarmsByAreaId(String areaId);
 
     /**
      * 实时天气
