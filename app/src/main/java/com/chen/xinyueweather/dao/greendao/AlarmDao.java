@@ -32,7 +32,7 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
         public final static Property AlarmLevelNo = new Property(5, String.class, "alarmLevelNo", false, "ALARM_LEVEL_NO");
         public final static Property AlarmLevelNoDesc = new Property(6, String.class, "alarmLevelNoDesc", false, "ALARM_LEVEL_NO_DESC");
         public final static Property AlarmContent = new Property(7, String.class, "alarmContent", false, "ALARM_CONTENT");
-        public final static Property PublishTime = new Property(8, java.util.Date.class, "publishTime", false, "PUBLISH_TIME");
+        public final static Property PublishTime = new Property(8, String.class, "publishTime", false, "PUBLISH_TIME");
         public final static Property AlarmDesc = new Property(9, String.class, "alarmDesc", false, "ALARM_DESC");
         public final static Property Precaution = new Property(10, String.class, "precaution", false, "PRECAUTION");
     }
@@ -58,7 +58,7 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
                 "\"ALARM_LEVEL_NO\" TEXT," + // 5: alarmLevelNo
                 "\"ALARM_LEVEL_NO_DESC\" TEXT," + // 6: alarmLevelNoDesc
                 "\"ALARM_CONTENT\" TEXT," + // 7: alarmContent
-                "\"PUBLISH_TIME\" INTEGER," + // 8: publishTime
+                "\"PUBLISH_TIME\" TEXT," + // 8: publishTime
                 "\"ALARM_DESC\" TEXT," + // 9: alarmDesc
                 "\"PRECAUTION\" TEXT);"); // 10: precaution
     }
@@ -113,9 +113,9 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
             stmt.bindString(8, alarmContent);
         }
  
-        java.util.Date publishTime = entity.getPublishTime();
+        String publishTime = entity.getPublishTime();
         if (publishTime != null) {
-            stmt.bindLong(9, publishTime.getTime());
+            stmt.bindString(9, publishTime);
         }
  
         String alarmDesc = entity.getAlarmDesc();
@@ -173,9 +173,9 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
             stmt.bindString(8, alarmContent);
         }
  
-        java.util.Date publishTime = entity.getPublishTime();
+        String publishTime = entity.getPublishTime();
         if (publishTime != null) {
-            stmt.bindLong(9, publishTime.getTime());
+            stmt.bindString(9, publishTime);
         }
  
         String alarmDesc = entity.getAlarmDesc();
@@ -205,7 +205,7 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // alarmLevelNo
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // alarmLevelNoDesc
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // alarmContent
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // publishTime
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // publishTime
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // alarmDesc
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10) // precaution
         );
@@ -222,7 +222,7 @@ public class AlarmDao extends AbstractDao<Alarm, Long> {
         entity.setAlarmLevelNo(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setAlarmLevelNoDesc(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setAlarmContent(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setPublishTime(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setPublishTime(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setAlarmDesc(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setPrecaution(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
      }

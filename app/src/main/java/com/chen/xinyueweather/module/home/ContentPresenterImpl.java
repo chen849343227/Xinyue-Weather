@@ -140,6 +140,7 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
             getDataFromNet();
             return;
         }
+        Log.d("long", "queryAlarmsByAreaId size " + String.valueOf(queryAlarmsByAreaId(mWeatherId).size()));
         baseWeatherBean.setAlarms(queryAlarmsByAreaId(mWeatherId));
         baseWeatherBean.setPm25(queryAqiByAreaId(mWeatherId));
         baseWeatherBean.setRealtime(queryRealWeatherByAreaId(mWeatherId));
@@ -155,13 +156,13 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
 
     @Override
     public void insertNewAlarm(List<Alarm> alarms) {
-        Log.e("long",alarms.size()+"alarms size");
+        Log.e("long", alarms.size() + "alarms size");
         //deleteAlarmsByAreaId(mWeatherId);
         if (alarms.size() > 0) {
-            Alarm alarm = null;
+            Alarm alarm;
             for (int i = 0; i < alarms.size(); i++) {
-                Logger.e(alarm.toString());
                 alarm = alarms.get(i);
+                alarm.setAreaId(mWeatherId);
                 mDao.getAlarmDao().insert(alarm);
             }
         }
@@ -193,7 +194,6 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
             realWeather.setAreaId(mWeatherId);
             mDao.getRealWeatherDao().insert(realWeather);
         }
-
     }
 
     @Override

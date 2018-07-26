@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -233,30 +234,29 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvRTTemp.setText(realWeather.getTemp());
         mTvDegree.setText("°");
         //Alarm
-//        List<Alarm> alarm = weathersBean.getAlarms();
-//        Logger.e("alarm == null ?" + (alarm == null));
-//        if (alarm.size() > 0) {
-//            List<String> alarmName = new ArrayList<>();
-//            for (int i = 0; i < alarm.size(); i++) {
-//                alarmName.add(i, alarm.get(i).getAlarmTypeDesc());
-//            }
-//            //  mTvRTTemp
-//            mTvAqi.setTextContent(alarmName);
-//            mTvAqi.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
-//                @Override
-//                public void showNext(int index) {
-//                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
-//                }
-//
-//                @Override
-//                public void onClick(int index) {
-//                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        } else {
-//            mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
-//        }
-        mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
+        List<Alarm> alarm = weathersBean.getAlarms();
+        Log.d("long", "alarm size = ?" + alarm.size());
+        if (alarm.size() > 0) {
+            List<String> alarmName = new ArrayList<>();
+            for (int i = 0; i < alarm.size(); i++) {
+                alarmName.add(i, alarm.get(i).getAlarmTypeDesc() + "预警");
+            }
+            //  mTvRTTemp
+            mTvAqi.setTextContent(alarmName);
+            mTvAqi.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
+                @Override
+                public void showNext(int index) {
+                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onClick(int index) {
+                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
+        }
         //周报&&时报
         mWeekForecast.setForeCasts(weathersBean.getWeathers());
         mHourForecast.setHourForeCasts(weathersBean.getWeatherDetailsInfo().getWeather3HoursDetailsInfos());

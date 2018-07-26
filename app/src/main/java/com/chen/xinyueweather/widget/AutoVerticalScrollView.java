@@ -29,6 +29,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     private final static int DEFAULT_SWITCH_DURATION = 500; //默认切换时间
     private final static int DEFAULT_INTERVAL_DURATION = 2000; //间隔时间
     private final static int DEFAULT_TEXT_SIZE = 12; //默认文字大小
+    private final static int DEFAULT_VIEW_WIDTH = 1000; //默认宽度
 
     private Context mContext;
     private List<String> mTextList; //要显示的文字
@@ -143,14 +144,10 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         float fontHeight = fontMetrics.bottom - fontMetrics.top;
         //计算文字的baseline
         textBaseY = mHeight - (mHeight - fontHeight) / 2 - fontMetrics.bottom;
-        if (widthSpecMode == MeasureSpec.AT_MOST) {
-            TextPaint textPaint = getPaint();
-            Logger.e(textPaint.getTextSize() + "");
-            float textPaintWidth = textPaint.measureText(text);
-            setMeasuredDimension((int) textPaintWidth + paddingLeft + paddingRight, mHeight);
-        } else {
-            setMeasuredDimension(mWidth, mHeight);
-        }
+        Log.d("long", "mWidth" + String.valueOf(mWidth));
+        Log.d("long", "mHeight" + String.valueOf(mHeight));
+        Log.d("long", "width" + getPaint().measureText(text));
+        setMeasuredDimension((int) (getPaint().measureText(text) + paddingLeft + paddingRight), mHeight);
     }
 
     @Override
@@ -164,7 +161,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         verticalOffset = Math.round(2 * textBaseY * (0.5f - currentAnimatedValue));
         Log.d("viclee", "verticalOffset is " + verticalOffset);
         if (contentSize <= 1) {
-            if(curSlideOutStr != null){
+            if (curSlideOutStr != null) {
                 Logger.e("curSlideOutStr:" + curSlideOutStr);
                 canvas.drawText(curSlideOutStr, paddingLeft, verticalOffset, mPaint);
             }

@@ -30,13 +30,16 @@ public class Alarm {
     private String alarmLevelNo;
     private String alarmLevelNoDesc;
     private String alarmContent;
-    private Date publishTime;
+    private String publishTime;
     private String alarmDesc;
     private String precaution;
 
-    @Generated(hash = 1162518465)
+    public Alarm() {
+    }
+
+    @Generated(hash = 2082224478)
     public Alarm(Long id, String areaId, String alarmId, String alarmType, String alarmTypeDesc, String alarmLevelNo, String alarmLevelNoDesc,
-            String alarmContent, Date publishTime, String alarmDesc, String precaution) {
+            String alarmContent, String publishTime, String alarmDesc, String precaution) {
         this.id = id;
         this.areaId = areaId;
         this.alarmId = alarmId;
@@ -48,10 +51,6 @@ public class Alarm {
         this.publishTime = publishTime;
         this.alarmDesc = alarmDesc;
         this.precaution = precaution;
-    }
-
-    @Generated(hash = 1972324134)
-    public Alarm() {
     }
 
     public Long getId() {
@@ -118,11 +117,11 @@ public class Alarm {
         return alarmContent;
     }
 
-    public void setPublishTime(Date publishTime) {
+    public void setPublishTime(String publishTime) {
         this.publishTime = publishTime;
     }
 
-    public Date getPublishTime() {
+    public String getPublishTime() {
         return publishTime;
     }
 
