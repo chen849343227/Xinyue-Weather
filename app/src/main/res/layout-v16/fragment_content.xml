@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -24,8 +23,8 @@
         android:layout_centerVertical="true"/>
 
 </LinearLayout>-->
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -61,7 +60,7 @@
                         android:layout_marginTop="15.0dip"
                         android:textColor="@color/home_text_color_dark"
                         android:textSize="15.0sp"
-                        android:textStyle="normal"/>
+                        android:textStyle="normal" />
 
                     <TextView
                         android:id="@+id/tv_updateTime"
@@ -72,7 +71,7 @@
                         android:layout_marginRight="20.0dip"
                         android:textColor="@color/home_text_color_dark"
                         android:textSize="13.0sp"
-                        android:textStyle="normal"/>
+                        android:textStyle="normal" />
 
                     <!-- <TextView
                          android:id="@+id/tv_updateTime"
@@ -86,6 +85,7 @@
                          android:textColor="@color/home_text_color_dark"
                          android:textSize="13.0sp" />-->
 
+
                     <TextView
                         android:id="@+id/tv_RTTemp"
                         android:layout_width="wrap_content"
@@ -96,19 +96,8 @@
                         android:fontFamily="sans-serif-thin"
                         android:textColor="@color/home_text_color"
                         android:textSize="90.0sp"
-                        android:textStyle="normal"/>
+                        android:textStyle="normal" />
 
-                    <!--<TextView
-                        android:id="@+id/tv_RTTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_updateTime"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
-                        android:text="20"
-                        android:textColor="@color/home_text_color"
-                        android:textSize="90.0sp"
-                        android:textStyle="normal" />-->
 
                     <TextView
                         android:id="@+id/tv_degree"
@@ -119,7 +108,7 @@
                         android:fontFamily="sans-serif-thin"
                         android:textColor="@color/home_text_color"
                         android:textSize="60.0sp"
-                        android:textStyle="normal"/>
+                        android:textStyle="normal" />
 
                     <!-- <TextView
                          android:id="@+id/tv_degree"
@@ -143,11 +132,21 @@
                                             android:text="晴 | 体感 21°"
                                             android:textColor="@color/home_text_color_dark"
                                             android:textSize="14.0sp" />-->
-                    <TextView
+                    <!--<TextView-->
+                    <!--android:id="@+id/tv_aqi"-->
+                    <!--style="@style/HomeCustomButtonStyle"-->
+                    <!--android:layout_below="@+id/tv_RTTemp"-->
+                    <!--android:clickable="true" />-->
+
+                    <com.chen.xinyueweather.widget.AutoVerticalScrollView
                         android:id="@+id/tv_aqi"
                         style="@style/HomeCustomButtonStyle"
                         android:layout_below="@+id/tv_RTTemp"
-                        android:clickable="true"/>
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:interval_duration="2000"
+                        app:switch_duration="500"
+                        app:switch_orientation="down" />
 
                     <!--  <TextView
                           android:id="@+id/tv_aqi"
@@ -160,30 +159,30 @@
 
                 <com.chen.xinyueweather.widget.WeekForecastView
                     android:id="@+id/weekForecast"
-                    android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" />
             </RelativeLayout>
 
-       <!--     <View
-                android:layout_width="fill_parent"
-                android:layout_height="1.0px"
-                android:layout_marginBottom="8.0dip"
-                android:background="@color/home_item_divider_color" />
+            <!--     <View
+                     android:layout_width="fill_parent"
+                     android:layout_height="1.0px"
+                     android:layout_marginBottom="8.0dip"
+                     android:background="@color/home_item_divider_color" />
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="20.0dip"
-                android:layout_marginBottom="8.0dip"
-                android:gravity="center"
-                android:text="@string/activity_home_class_title_wind_speed_forecast"
-                android:textColor="@color/home_text_color_dark"
-                android:textSize="12.0sp" />
+                 <TextView
+                     android:layout_width="fill_parent"
+                     android:layout_height="20.0dip"
+                     android:layout_marginBottom="8.0dip"
+                     android:gravity="center"
+                     android:text="@string/activity_home_class_title_wind_speed_forecast"
+                     android:textColor="@color/home_text_color_dark"
+                     android:textSize="12.0sp" />
 
-            <com.chen.xinyueweather.widget.WindForecastView
-                android:id="@+id/wind_forecast"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />-->
+                 <com.chen.xinyueweather.widget.WindForecastView
+                     android:id="@+id/wind_forecast"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content" />-->
 
             <View
                 android:layout_width="fill_parent"

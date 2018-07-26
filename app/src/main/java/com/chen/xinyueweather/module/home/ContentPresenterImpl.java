@@ -1,6 +1,8 @@
 package com.chen.xinyueweather.module.home;
 
 
+import android.util.Log;
+
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.api.RetrofitService;
 import com.chen.xinyueweather.dao.bean.Alarm;
@@ -138,6 +140,7 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
             getDataFromNet();
             return;
         }
+        baseWeatherBean.setAlarms(queryAlarmsByAreaId(mWeatherId));
         baseWeatherBean.setPm25(queryAqiByAreaId(mWeatherId));
         baseWeatherBean.setRealtime(queryRealWeatherByAreaId(mWeatherId));
         baseWeatherBean.setWeathers(queryWeekForecastByAreaId(mWeatherId));
@@ -151,12 +154,14 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
 
 
     @Override
-    public void insertNewAlarm(List<?> alarms) {
-        deleteAlarmsByAreaId(mWeatherId);
+    public void insertNewAlarm(List<Alarm> alarms) {
+        Log.e("long",alarms.size()+"alarms size");
+        //deleteAlarmsByAreaId(mWeatherId);
         if (alarms.size() > 0) {
-            Alarm alarm;
+            Alarm alarm = null;
             for (int i = 0; i < alarms.size(); i++) {
-                alarm = (Alarm) alarms.get(i);
+                Logger.e(alarm.toString());
+                alarm = alarms.get(i);
                 mDao.getAlarmDao().insert(alarm);
             }
         }

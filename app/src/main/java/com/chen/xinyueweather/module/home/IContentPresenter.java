@@ -25,7 +25,7 @@ public interface IContentPresenter<T> extends ILocalPresenter<T> {
      * 天气预警
      */
 
-    void insertNewAlarm(List<?> alarms);
+    void insertNewAlarm(List<Alarm> alarms);
 
     List<Alarm> queryAlarmsByAreaId(String areaId);
 

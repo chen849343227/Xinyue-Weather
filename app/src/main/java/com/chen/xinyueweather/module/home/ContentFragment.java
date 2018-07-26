@@ -39,6 +39,8 @@ import com.chen.xinyueweather.widget.WindmillView;
 import com.chen.xinyueweather.widget.weather.SkyView;
 import com.orhanobut.logger.Logger;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,13 +61,12 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     TextView mTvRealType;
     @BindView(R.id.tv_updateTime)
     TextView mTvUpdateTime;
-    AutoVerticalScrollView mTvRTTemp;
-//    @BindView(R.id.tv_RTTemp)
-//    AutoVerticalScrollView mTvRTTemp;
+    @BindView(R.id.tv_RTTemp)
+    TextView mTvRTTemp;
     @BindView(R.id.tv_degree)
     TextView mTvDegree;
     @BindView(R.id.tv_aqi)
-    TextView mTvAqi;
+    AutoVerticalScrollView mTvAqi;
     @BindView(R.id.weekForecast)
     WeekForecastView mWeekForecast;
     @BindView(R.id.first_show_rl)
@@ -168,7 +169,6 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @Override
     protected void initViews() {
-         mTvRTTemp = (AutoVerticalScrollView) getActivity().findViewById(R.id.tv_RTTemp);
         /*初始化下拉刷新颜色*/
         TypedValue typedValue = new TypedValue();
         getActivity().getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
@@ -224,37 +224,39 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         //     mBackgroundView.setWeather(mWeather);
         //设置实时天气
         RealWeather realWeather = weathersBean.getRealtime();
-        //Alarm
-        List<?> alarm = weathersBean.getAlarms();
-        if (alarm.size() > 0) {
-            List<String> alarmName = new ArrayList<>();
-            for (int i = 0; i < alarm.size(); i++) {
-                alarmName.add(i, ((Alarm) alarm.get(i)).getAlarmTypeDesc());
-            }
-            //  mTvRTTemp
-            mTvRTTemp.setTextContent(alarmName);
-            mTvRTTemp.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
-                @Override
-                public void showNext(int index) {
-                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onClick(int index) {
-                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
         //aqi
         Aqi aqi = weathersBean.getPm25();
 
         mTvRealType.setText(realWeather.getWeather());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
         mTvUpdateTime.setText(String.format(getResources().getString(R.string.activity_home_refresh_time), simpleDateFormat.format(new Date(System.currentTimeMillis()))));
-        mTvRTTemp.setTextContent(realWeather.getTemp());
+        mTvRTTemp.setText(realWeather.getTemp());
         mTvDegree.setText("°");
-        mTvAqi.setText(aqi.getQuality() + " " + aqi.getAqi());
-
+        //Alarm
+//        List<Alarm> alarm = weathersBean.getAlarms();
+//        Logger.e("alarm == null ?" + (alarm == null));
+//        if (alarm.size() > 0) {
+//            List<String> alarmName = new ArrayList<>();
+//            for (int i = 0; i < alarm.size(); i++) {
+//                alarmName.add(i, alarm.get(i).getAlarmTypeDesc());
+//            }
+//            //  mTvRTTemp
+//            mTvAqi.setTextContent(alarmName);
+//            mTvAqi.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
+//                @Override
+//                public void showNext(int index) {
+//                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onClick(int index) {
+//                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        } else {
+//            mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
+//        }
+        mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
         //周报&&时报
         mWeekForecast.setForeCasts(weathersBean.getWeathers());
         mHourForecast.setHourForeCasts(weathersBean.getWeatherDetailsInfo().getWeather3HoursDetailsInfos());

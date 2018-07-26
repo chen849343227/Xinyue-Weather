@@ -12,6 +12,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -19,14 +20,16 @@ import android.view.View;
 import com.chen.xinyueweather.R;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class AutoVerticalScrollView extends AppCompatTextView implements View.OnClickListener {
 
     private final static int DEFAULT_SWITCH_DURATION = 500; //默认切换时间
     private final static int DEFAULT_INTERVAL_DURATION = 2000; //间隔时间
+    private final static int DEFAULT_TEXT_SIZE = 12; //默认文字大小
+
     private Context mContext;
     private List<String> mTextList; //要显示的文字
 
@@ -46,9 +49,10 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     private int verticalOffset = 0;
     private int mWidth;
     private int mHeight;
-    private int paddingLeft = 0;
-    private int paddingBottom = 0;
     private int paddingTop = 0;
+    private int paddingBottom = 0;
+    private int paddingLeft = 0;
+    private int paddingRight = 0;
 
     private Paint mPaint;
 
@@ -80,8 +84,9 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     }
 
     private void init() {
-        mPaint = new Paint();
-       mPaint.setColor(getCurrentTextColor());
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint.setColor(getCurrentTextColor());
+        mPaint.setTextSize(36.0f);
         setOnClickListener(this);
 
         mAnimator = ObjectAnimator.ofFloat(0.0f, 1.0f)
@@ -114,6 +119,8 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+
 
         @SuppressLint("DrawAllocation")
         Rect bounds = new Rect();
@@ -128,6 +135,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         paddingLeft = getPaddingLeft();
         paddingBottom = getPaddingBottom();
         paddingTop = getPaddingTop();
+        paddingRight = getPaddingRight();
         mHeight = textHeight + paddingBottom + paddingTop;
 
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
@@ -135,9 +143,14 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         float fontHeight = fontMetrics.bottom - fontMetrics.top;
         //计算文字的baseline
         textBaseY = mHeight - (mHeight - fontHeight) / 2 - fontMetrics.bottom;
-
-        setMeasuredDimension(mWidth, mHeight);
-
+        if (widthSpecMode == MeasureSpec.AT_MOST) {
+            TextPaint textPaint = getPaint();
+            Logger.e(textPaint.getTextSize() + "");
+            float textPaintWidth = textPaint.measureText(text);
+            setMeasuredDimension((int) textPaintWidth + paddingLeft + paddingRight, mHeight);
+        } else {
+            setMeasuredDimension(mWidth, mHeight);
+        }
     }
 
     @Override
@@ -150,17 +163,24 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         //直接使用mHeight控制文本绘制，会因为text的baseline的问题不能居中显示
         verticalOffset = Math.round(2 * textBaseY * (0.5f - currentAnimatedValue));
         Log.d("viclee", "verticalOffset is " + verticalOffset);
-        if (mSwitchOrientation == 0) {//向上滚动切换
-            if (verticalOffset > 0) {
+        if (contentSize <= 1) {
+            if(curSlideOutStr != null){
+                Logger.e("curSlideOutStr:" + curSlideOutStr);
                 canvas.drawText(curSlideOutStr, paddingLeft, verticalOffset, mPaint);
-            } else {
-                canvas.drawText(curSlideInStr, paddingLeft, 2 * textBaseY + verticalOffset, mPaint);
             }
         } else {
-            if (verticalOffset > 0) {//向下滚动切换
-                canvas.drawText(curSlideOutStr, paddingLeft, 2 * textBaseY - verticalOffset, mPaint);
+            if (mSwitchOrientation == 0) {//向上滚动切换
+                if (verticalOffset > 0) {
+                    canvas.drawText(curSlideOutStr, paddingLeft, verticalOffset, mPaint);
+                } else {
+                    canvas.drawText(curSlideInStr, paddingLeft, 2 * textBaseY + verticalOffset, mPaint);
+                }
             } else {
-                canvas.drawText(curSlideInStr, paddingLeft, -verticalOffset, mPaint);
+                if (verticalOffset > 0) {//向下滚动切换
+                    canvas.drawText(curSlideOutStr, paddingLeft, 2 * textBaseY - verticalOffset, mPaint);
+                } else {
+                    canvas.drawText(curSlideInStr, paddingLeft, -verticalOffset, mPaint);
+                }
             }
         }
     }
@@ -176,6 +196,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         }
         mTextList = content;
         contentSize = mTextList.size();
+        Log.e("long", "size" + String.valueOf(contentSize));
         curSlideOutStr = mTextList.get(0);
         if (contentSize > 1) {
             curSlideInStr = mTextList.get(1);
@@ -188,9 +209,10 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     }
 
     public void setTextContent(String content) {
-        if (content != null || !content.equals("")) {
+        if (content == null || content.equals("")) {
             return;
         }
+        mTextList = new ArrayList<>();
         mTextList.add(0, content);
         contentSize = mTextList.size();
         curSlideOutStr = mTextList.get(0);

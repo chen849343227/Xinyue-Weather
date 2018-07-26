@@ -85,21 +85,7 @@
                          android:textColor="@color/home_text_color_dark"
                          android:textSize="13.0sp" />-->
 
-                    <com.chen.xinyueweather.widget.AutoVerticalScrollView
-                        android:id="@+id/tv_RTTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_real_type"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10.0dip"
-                        android:fontFamily="sans-serif-thin"
-                        android:textColor="@color/home_text_color"
-                        android:textSize="90.0sp"
-                        android:textStyle="normal"
-                        app:interval_duration="2000"
-                        app:switch_duration="500"
-                        app:switch_orientation="down" />
-                    <!--<TextView-->
+                    <!--<com.chen.xinyueweather.widget.AutoVerticalScrollView-->
                     <!--android:id="@+id/tv_RTTemp"-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
@@ -109,7 +95,21 @@
                     <!--android:fontFamily="sans-serif-thin"-->
                     <!--android:textColor="@color/home_text_color"-->
                     <!--android:textSize="90.0sp"-->
-                    <!--android:textStyle="normal"/>-->
+                    <!--android:textStyle="normal"-->
+                    <!--app:interval_duration="2000"-->
+                    <!--app:switch_duration="500"-->
+                    <!--app:switch_orientation="down" />-->
+                    <TextView
+                        android:id="@+id/tv_RTTemp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_real_type"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10.0dip"
+                        android:fontFamily="sans-serif-thin"
+                        android:textColor="@color/home_text_color"
+                        android:textSize="90.0sp"
+                        android:textStyle="normal" />
 
                     <!--<TextView
                         android:id="@+id/tv_RTTemp"
@@ -156,11 +156,15 @@
                                             android:text="晴 | 体感 21°"
                                             android:textColor="@color/home_text_color_dark"
                                             android:textSize="14.0sp" />-->
-                    <TextView
+                    <com.chen.xinyueweather.widget.AutoVerticalScrollView
                         android:id="@+id/tv_aqi"
                         style="@style/HomeCustomButtonStyle"
                         android:layout_below="@+id/tv_RTTemp"
-                        android:clickable="true" />
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:interval_duration="2000"
+                        app:switch_duration="500"
+                        app:switch_orientation="down" />
 
                     <!--  <TextView
                           android:id="@+id/tv_aqi"

@@ -29,7 +29,7 @@ public class BaseWeatherBean {
     private String provinceName;
     private RealWeather realtime;
     private WeatherDetailsInfoBean weatherDetailsInfo;
-    private List<?> alarms;
+    private List<Alarm> alarms;
     private List<IndexesBean> indexes;
     private List<WeathersBean> weathers;
 
@@ -81,11 +81,11 @@ public class BaseWeatherBean {
         this.weatherDetailsInfo = weatherDetailsInfo;
     }
 
-    public List<?> getAlarms() {
+    public List<Alarm> getAlarms() {
         return alarms;
     }
 
-    public void setAlarms(List<?> alarms) {
+    public void setAlarms(List<Alarm> alarms) {
         this.alarms = alarms;
     }
 
