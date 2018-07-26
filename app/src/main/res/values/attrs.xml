@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoVerticalScrollView">
+        <!--切换时间-->
+        <attr name="switch_duration" format="integer"/>
+        <!--切换之后等待的时间-->
+        <attr name="interval_duration" format="integer"/>
+        <!--切换方向-->
+        <attr name="switch_orientation">
+            <enum name="up" value="0"/>
+            <enum name="down" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

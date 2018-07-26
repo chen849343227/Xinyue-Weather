@@ -14,9 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.R;
+import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
 import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
 import com.chen.xinyueweather.dao.bean.CityManage;
@@ -29,6 +31,7 @@ import com.chen.xinyueweather.utils.Constant;
 import com.chen.xinyueweather.utils.ScreenUtil;
 import com.chen.xinyueweather.utils.ToastUtils;
 import com.chen.xinyueweather.widget.AqiView;
+import com.chen.xinyueweather.widget.AutoVerticalScrollView;
 import com.chen.xinyueweather.widget.HourForeCastView;
 import com.chen.xinyueweather.widget.SunRiseView;
 import com.chen.xinyueweather.widget.WeekForecastView;
@@ -37,7 +40,9 @@ import com.chen.xinyueweather.widget.weather.SkyView;
 import com.orhanobut.logger.Logger;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -54,8 +59,9 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     TextView mTvRealType;
     @BindView(R.id.tv_updateTime)
     TextView mTvUpdateTime;
-    @BindView(R.id.tv_RTTemp)
-    TextView mTvRTTemp;
+    AutoVerticalScrollView mTvRTTemp;
+//    @BindView(R.id.tv_RTTemp)
+//    AutoVerticalScrollView mTvRTTemp;
     @BindView(R.id.tv_degree)
     TextView mTvDegree;
     @BindView(R.id.tv_aqi)
@@ -162,6 +168,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @Override
     protected void initViews() {
+         mTvRTTemp = (AutoVerticalScrollView) getActivity().findViewById(R.id.tv_RTTemp);
         /*初始化下拉刷新颜色*/
         TypedValue typedValue = new TypedValue();
         getActivity().getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
@@ -194,6 +201,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mRefresh.setOnRefreshListener(() -> mPresenter.getData(true));
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void loadWeather(BaseWeatherBean weathersBean) {
         for (int i = 0; i < AndroidApplication.mCityManages.size(); i++) {
@@ -213,16 +221,37 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
                 break;
             }
         }
-   //     mBackgroundView.setWeather(mWeather);
+        //     mBackgroundView.setWeather(mWeather);
         //设置实时天气
         RealWeather realWeather = weathersBean.getRealtime();
+        //Alarm
+        List<?> alarm = weathersBean.getAlarms();
+        if (alarm.size() > 0) {
+            List<String> alarmName = new ArrayList<>();
+            for (int i = 0; i < alarm.size(); i++) {
+                alarmName.add(i, ((Alarm) alarm.get(i)).getAlarmTypeDesc());
+            }
+            //  mTvRTTemp
+            mTvRTTemp.setTextContent(alarmName);
+            mTvRTTemp.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
+                @Override
+                public void showNext(int index) {
+                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onClick(int index) {
+                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         //aqi
         Aqi aqi = weathersBean.getPm25();
 
         mTvRealType.setText(realWeather.getWeather());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
         mTvUpdateTime.setText(String.format(getResources().getString(R.string.activity_home_refresh_time), simpleDateFormat.format(new Date(System.currentTimeMillis()))));
-        mTvRTTemp.setText(realWeather.getTemp());
+        mTvRTTemp.setTextContent(realWeather.getTemp());
         mTvDegree.setText("°");
         mTvAqi.setText(aqi.getQuality() + " " + aqi.getAqi());
 

@@ -169,7 +169,14 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
 
     @Override
     public void deleteAlarmsByAreaId(String areaId) {
-        mDao.getAlarmDao().deleteAll();
+        List<Alarm> alarmList = queryAlarmsByAreaId(areaId);
+        if (alarmList.size() > 0) {
+            Alarm alarm;
+            for (int i = 0; i < alarmList.size(); i++) {
+                alarm = alarmList.get(i);
+                mDao.getAlarmDao().delete(alarm);
+            }
+        }
     }
 
     @Override
