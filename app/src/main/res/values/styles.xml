@@ -16,7 +16,6 @@
 
     <style name="HomeCustomButtonStyle">
         <item name="android:gravity">center</item>
-        <item name="android:textSize">12.0sp</item>
         <item name="android:textColor">@color/home_text_color_dark</item>
         <item name="android:background">@drawable/line_button_bg</item>
         <item name="android:paddingLeft">15.0dip</item>

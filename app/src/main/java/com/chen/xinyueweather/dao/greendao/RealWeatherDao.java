@@ -26,12 +26,12 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
     public static class Properties {
         public final static Property AreaId = new Property(0, String.class, "areaId", true, "AREA_ID");
         public final static Property Img = new Property(1, String.class, "img", false, "IMG");
-        public final static Property Sd = new Property(2, String.class, "sd", false, "SD");
+        public final static Property SD = new Property(2, String.class, "sD", false, "S_D");
         public final static Property SendibleTemp = new Property(3, String.class, "sendibleTemp", false, "SENDIBLE_TEMP");
         public final static Property Temp = new Property(4, String.class, "temp", false, "TEMP");
         public final static Property Time = new Property(5, String.class, "time", false, "TIME");
-        public final static Property Wd = new Property(6, String.class, "wd", false, "WD");
-        public final static Property Ws = new Property(7, String.class, "ws", false, "WS");
+        public final static Property WD = new Property(6, String.class, "wD", false, "W_D");
+        public final static Property WS = new Property(7, String.class, "wS", false, "W_S");
         public final static Property Weather = new Property(8, String.class, "weather", false, "WEATHER");
         public final static Property Ziwaixian = new Property(9, String.class, "ziwaixian", false, "ZIWAIXIAN");
     }
@@ -51,12 +51,12 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
         db.execSQL("CREATE TABLE " + constraint + "\"REAL_WEATHER\" (" + //
                 "\"AREA_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: areaId
                 "\"IMG\" TEXT," + // 1: img
-                "\"SD\" TEXT," + // 2: sd
+                "\"S_D\" TEXT," + // 2: sD
                 "\"SENDIBLE_TEMP\" TEXT," + // 3: sendibleTemp
                 "\"TEMP\" TEXT," + // 4: temp
                 "\"TIME\" TEXT," + // 5: time
-                "\"WD\" TEXT," + // 6: wd
-                "\"WS\" TEXT," + // 7: ws
+                "\"W_D\" TEXT," + // 6: wD
+                "\"W_S\" TEXT," + // 7: wS
                 "\"WEATHER\" TEXT," + // 8: weather
                 "\"ZIWAIXIAN\" TEXT);"); // 9: ziwaixian
     }
@@ -81,9 +81,9 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
             stmt.bindString(2, img);
         }
  
-        String sd = entity.getSd();
-        if (sd != null) {
-            stmt.bindString(3, sd);
+        String sD = entity.getSD();
+        if (sD != null) {
+            stmt.bindString(3, sD);
         }
  
         String sendibleTemp = entity.getSendibleTemp();
@@ -101,14 +101,14 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
             stmt.bindString(6, time);
         }
  
-        String wd = entity.getWd();
-        if (wd != null) {
-            stmt.bindString(7, wd);
+        String wD = entity.getWD();
+        if (wD != null) {
+            stmt.bindString(7, wD);
         }
  
-        String ws = entity.getWs();
-        if (ws != null) {
-            stmt.bindString(8, ws);
+        String wS = entity.getWS();
+        if (wS != null) {
+            stmt.bindString(8, wS);
         }
  
         String weather = entity.getWeather();
@@ -136,9 +136,9 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
             stmt.bindString(2, img);
         }
  
-        String sd = entity.getSd();
-        if (sd != null) {
-            stmt.bindString(3, sd);
+        String sD = entity.getSD();
+        if (sD != null) {
+            stmt.bindString(3, sD);
         }
  
         String sendibleTemp = entity.getSendibleTemp();
@@ -156,14 +156,14 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
             stmt.bindString(6, time);
         }
  
-        String wd = entity.getWd();
-        if (wd != null) {
-            stmt.bindString(7, wd);
+        String wD = entity.getWD();
+        if (wD != null) {
+            stmt.bindString(7, wD);
         }
  
-        String ws = entity.getWs();
-        if (ws != null) {
-            stmt.bindString(8, ws);
+        String wS = entity.getWS();
+        if (wS != null) {
+            stmt.bindString(8, wS);
         }
  
         String weather = entity.getWeather();
@@ -187,12 +187,12 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
         RealWeather entity = new RealWeather( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // areaId
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // img
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // sd
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // sD
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // sendibleTemp
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // temp
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // time
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // wd
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // ws
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // wD
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // wS
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // weather
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // ziwaixian
         );
@@ -203,12 +203,12 @@ public class RealWeatherDao extends AbstractDao<RealWeather, String> {
     public void readEntity(Cursor cursor, RealWeather entity, int offset) {
         entity.setAreaId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setImg(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setSd(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setSD(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setSendibleTemp(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTemp(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setWd(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setWs(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setWD(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setWS(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setWeather(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setZiwaixian(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }

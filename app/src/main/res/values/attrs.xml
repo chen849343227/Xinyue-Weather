@@ -5,6 +5,8 @@
         <attr name="switch_duration" format="integer"/>
         <!--切换之后等待的时间-->
         <attr name="interval_duration" format="integer"/>
+        <!--文字大小-->
+        <attr name="text_size" format="dimension"/>
         <!--切换方向-->
         <attr name="switch_orientation">
             <enum name="up" value="0"/>

@@ -164,7 +164,8 @@
                         android:focusable="true"
                         app:interval_duration="2000"
                         app:switch_duration="500"
-                        app:switch_orientation="down" />
+                        app:switch_orientation="down"
+                        app:text_size="13sp" />
 
                     <!--  <TextView
                           android:id="@+id/tv_aqi"

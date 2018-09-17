@@ -26,37 +26,33 @@ public class RealWeather {
     @Id
     private String areaId;
     private String img;
-    private String sd;
+    private String sD;
     private String sendibleTemp;
     private String temp;
     private String time;
-    private String wd;
-    private String ws;
+    private String wD;
+    private String wS;
     private String weather;
     private String ziwaixian;
 
     public RealWeather() {
     }
 
-
-
-    @Generated(hash = 749938091)
-    public RealWeather(String areaId, String img, String sd, String sendibleTemp,
-            String temp, String time, String wd, String ws, String weather,
+    @Generated(hash = 1840501534)
+    public RealWeather(String areaId, String img, String sD, String sendibleTemp,
+            String temp, String time, String wD, String wS, String weather,
             String ziwaixian) {
         this.areaId = areaId;
         this.img = img;
-        this.sd = sd;
+        this.sD = sD;
         this.sendibleTemp = sendibleTemp;
         this.temp = temp;
         this.time = time;
-        this.wd = wd;
-        this.ws = ws;
+        this.wD = wD;
+        this.wS = wS;
         this.weather = weather;
         this.ziwaixian = ziwaixian;
     }
-
- 
 
     public String getAreaId() {
         return areaId;
@@ -74,12 +70,12 @@ public class RealWeather {
         this.img = img;
     }
 
-    public String getSD() {
-        return sd;
+    public String getsD() {
+        return sD;
     }
 
-    public void setSD(String sD) {
-        this.sd = sD;
+    public void setsD(String sD) {
+        this.sD = sD;
     }
 
     public String getSendibleTemp() {
@@ -106,20 +102,20 @@ public class RealWeather {
         this.time = time;
     }
 
-    public String getWD() {
-        return wd;
+    public String getwD() {
+        return wD;
     }
 
-    public void setWD(String wD) {
-        this.wd = wD;
+    public void setwD(String wD) {
+        this.wD = wD;
     }
 
-    public String getWS() {
-        return ws;
+    public String getwS() {
+        return wS;
     }
 
-    public void setWS(String wS) {
-        this.ws = wS;
+    public void setwS(String wS) {
+        this.wS = wS;
     }
 
     public String getWeather() {
@@ -143,50 +139,38 @@ public class RealWeather {
         return "RealWeather{" +
                 "areaId='" + areaId + '\'' +
                 ", img='" + img + '\'' +
-                ", sd='" + sd + '\'' +
+                ", sD='" + sD + '\'' +
                 ", sendibleTemp='" + sendibleTemp + '\'' +
                 ", temp='" + temp + '\'' +
                 ", time='" + time + '\'' +
-                ", wd='" + wd + '\'' +
-                ", ws='" + ws + '\'' +
+                ", wD='" + wD + '\'' +
+                ", wS='" + wS + '\'' +
                 ", weather='" + weather + '\'' +
                 ", ziwaixian='" + ziwaixian + '\'' +
                 '}';
     }
 
-
-
-    public String getWs() {
-        return this.ws;
+    public String getWS() {
+        return this.wS;
     }
 
-
-
-    public void setWs(String ws) {
-        this.ws = ws;
+    public void setWS(String wS) {
+        this.wS = wS;
     }
 
-
-
-    public String getWd() {
-        return this.wd;
+    public String getWD() {
+        return this.wD;
     }
 
-
-
-    public void setWd(String wd) {
-        this.wd = wd;
+    public void setWD(String wD) {
+        this.wD = wD;
     }
 
-
-
-    public String getSd() {
-        return this.sd;
+    public String getSD() {
+        return this.sD;
     }
 
-
-
-    public void setSd(String sd) {
-        this.sd = sd;
+    public void setSD(String sD) {
+        this.sD = sD;
     }
 }

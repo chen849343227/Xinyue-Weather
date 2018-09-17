@@ -246,7 +246,6 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
             mTvAqi.setOnCallbackListener(new AutoVerticalScrollView.CallbackListener() {
                 @Override
                 public void showNext(int index) {
-                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -263,13 +262,13 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         //windForecastView.setForeCasts(weatherInfo.getWeekForeCasts());
 
         //风速湿度
-        mWindViewBig.setWindSpeedDegree(Integer.parseInt(realWeather.getWS().replace("级", "")));
-        mWindViewSmall.setWindSpeedDegree(Integer.parseInt(realWeather.getWS().replace("级", "")));
+        mWindViewBig.setWindSpeedDegree(Integer.parseInt(realWeather.getwS().replace("级", "")));
+        mWindViewSmall.setWindSpeedDegree(Integer.parseInt(realWeather.getwS().replace("级", "")));
 
-        mTvWindDire.setText(realWeather.getWD());
-        mTvWindSpeed.setText(realWeather.getWS());
-        mPbHumidity.setProgress(Integer.parseInt(realWeather.getSD()));
-        mTvHumidity.setText(realWeather.getSD());
+        mTvWindDire.setText(realWeather.getwD());
+        mTvWindSpeed.setText(realWeather.getwS());
+        mPbHumidity.setProgress(Integer.parseInt(realWeather.getsD()));
+        mTvHumidity.setText(realWeather.getsD());
         //空气
         mViewAqi.setProgressAndLabel(Integer.parseInt(aqi.getAqi()), "空气" + aqi.getQuality());
         mTvPm25.setText(aqi.getPm25() + " μg/m³");
