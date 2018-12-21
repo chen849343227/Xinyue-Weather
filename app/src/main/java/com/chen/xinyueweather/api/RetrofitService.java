@@ -35,7 +35,6 @@ public class RetrofitService {
 
     private static IAppAction appAction;
 
-
     private static IAppAction appAction1;
 
     private RetrofitService() {

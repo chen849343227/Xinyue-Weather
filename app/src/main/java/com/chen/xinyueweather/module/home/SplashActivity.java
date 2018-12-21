@@ -2,7 +2,9 @@ package com.chen.xinyueweather.module.home;
 
 import android.os.Bundle;
 
+import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.module.base.BaseActivity;
+import com.chen.xinyueweather.utils.RxHelper;
 
 /**
  * author long
@@ -15,7 +17,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected int attachLayoutRes() {
-        return 0;
+        return R.layout.splash_activity;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+        //RxHelper.countdown(5).doOnNext()
 
     }
 

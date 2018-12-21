@@ -96,6 +96,8 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                     if (baseLocationBean != null) {
                         if (baseLocationBean.getStatus().equals("OK")) {
                             return Observable.just(baseLocationBean);
+                        }else if (baseLocationBean.getStatus().equals("OVER_QUERY_LIMIT")){
+
                         } else {
                             return Observable.error(new Exception("定位失败，请稍后再试！"));
                         }

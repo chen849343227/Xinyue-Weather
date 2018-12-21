@@ -26,14 +26,18 @@ import java.util.List;
 
 public class AutoVerticalScrollView extends AppCompatTextView implements View.OnClickListener {
 
+    private static final String TAG = "AutoVerticalScrollView";
+
     //默认切换时间
     private final static int DEFAULT_SWITCH_DURATION = 500;
     //间隔时间
     private final static int DEFAULT_INTERVAL_DURATION = 2000;
     //默认文字大小
-    private final static int DEFAULT_TEXT_SIZE = 13;
+    private final static int DEFAULT_TEXT_SIZE = 12;
     //默认宽度
-    private final static int DEFAULT_VIEW_WIDTH = 1000;
+    private final static int DEFAULT_VIEW_WIDTH = 200;
+    //默认高度
+    private final static int DEFAULT_VIEW_HIGH = 200;
 
     private Context mContext;
     //文字集合
@@ -46,7 +50,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     private String mCurSlideOutStr; //当前滑出的文本
     private String mCurSlideInStr;  //当前滑进的文本
     private float textBaseY;
-    private int mCurrentIndex;  //当前文本的索引
+    private int mCurrentIndex = 0;  //当前文本的索引
 
     private int mSwitchDuration = DEFAULT_SWITCH_DURATION;
     private int mIntervalDuration = DEFAULT_INTERVAL_DURATION;
@@ -54,6 +58,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
 
     private ValueAnimator mAnimator;
     private float currentAnimatedValue = 0.0f;
+    private boolean isShowAnimation = false;
 
     private int verticalOffset = 0;
     private int mHeight;
@@ -64,7 +69,6 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     private int paddingRight = 0;
 
     private Paint mPaint;
-
 
     public AutoVerticalScrollView(Context context) {
         this(context, null);
@@ -99,26 +103,29 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         mPaint.setColor(getCurrentTextColor());
         mPaint.setTextSize(mTextSize);
         setOnClickListener(this);
-        startAnimation();
+        mAnimator = ObjectAnimator.ofFloat(0.0f, 1.0f).setDuration(mSwitchDuration);
+        if (mTextListSize > 1) {
+            startAnimation();
+        }
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int widthSpecMode=MeasureSpec.getMode(widthMeasureSpec);
-        int widthSpecSize=MeasureSpec.getSize(widthMeasureSpec);
+        int widthSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
 
-        int heightSpecMode=MeasureSpec.getMode(heightMeasureSpec);
-        int heightSpecSize=MeasureSpec.getSize(heightMeasureSpec);
-
+        int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
 
         @SuppressLint("DrawAllocation")
         Rect bounds = new Rect();
         if (mTextListSize <= 0) {
             return;
         }
-        String text = mTextList.get(0);
+        String text = mTextList.get(mCurrentIndex);
+        Log.e(TAG, text);
         mPaint.getTextBounds(text, 0, text.length(), bounds);
         int textHeight = bounds.height();
 
@@ -126,14 +133,28 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         paddingBottom = getPaddingBottom();
         paddingTop = getPaddingTop();
         paddingRight = getPaddingRight();
-        mHeight = textHeight + paddingBottom + paddingTop;
 
+        mHeight = textHeight + paddingBottom + paddingTop;
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        //计算文字高度
-        float fontHeight = fontMetrics.bottom - fontMetrics.top;
+
+        //计算文字宽度
+        float fontWidth = mPaint.measureText(text);
         //计算文字的baseline
-        textBaseY = mHeight - (mHeight - fontHeight) / 2 - fontMetrics.bottom;
-        setMeasuredDimension((int) (getPaint().measureText(text) + paddingLeft + paddingRight), mHeight);
+        textBaseY = mHeight / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
+
+        if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
+            widthSpecSize = (int) (fontWidth + paddingLeft + paddingRight);
+            heightSpecSize = mHeight;
+            setMeasuredDimension(widthSpecSize, heightSpecSize);
+        } else if (widthSpecMode == MeasureSpec.AT_MOST) {
+            widthSpecSize = (int) (fontWidth + paddingLeft + paddingRight);
+            setMeasuredDimension(widthSpecSize, heightSpecSize);
+        } else if (heightSpecMode == MeasureSpec.AT_MOST) {
+            heightSpecSize = mHeight;
+            setMeasuredDimension(widthSpecSize, heightSpecSize);
+        }
+
+        // setMeasuredDimension((int) (getPaint().measureText(text) + paddingLeft + paddingRight), mHeight);
     }
 
     @Override
@@ -143,26 +164,37 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
             return;
         }
 
+    /*    paddingLeft = getPaddingLeft();
+        paddingBottom = getPaddingBottom();
+        paddingTop = getPaddingTop();
+        paddingRight = getPaddingRight();
+
+        float fontWidth = mPaint.measureText(mTextList.get(0));
+
+        float x = (getWidth() - fontWidth) / 2;
+        //文字的y轴坐标
+        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+        textBaseY = getHeight() / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;*/
+
         //直接使用mHeight控制文本绘制，会因为text的baseline的问题不能居中显示
         verticalOffset = Math.round(2 * textBaseY * (0.5f - currentAnimatedValue));
-        Log.d("viclee", "verticalOffset is " + verticalOffset);
+        //Logger.e("mTextListSize = " + mTextListSize);
         if (mTextListSize <= 1) {
             if (mCurSlideOutStr != null) {
-                Logger.e("mCurSlideOutStr:" + mCurSlideOutStr);
-                canvas.drawText(mCurSlideOutStr, getWidth()/2, verticalOffset, mPaint);
+                canvas.drawText(mCurSlideOutStr, getWidth() / 2, verticalOffset, mPaint);
             }
         } else {
             if (mSwitchOrientation == 0) {//向上滚动切换
                 if (verticalOffset > 0) {
-                    canvas.drawText(mCurSlideOutStr, getWidth()/2, verticalOffset, mPaint);
+                    canvas.drawText(mCurSlideOutStr, getWidth() / 2, verticalOffset, mPaint);
                 } else {
-                    canvas.drawText(mCurSlideInStr, getWidth()/2, 2 * textBaseY + verticalOffset, mPaint);
+                    canvas.drawText(mCurSlideInStr, getWidth() / 2, 2 * textBaseY + verticalOffset, mPaint);
                 }
             } else {
                 if (verticalOffset > 0) {//向下滚动切换
-                    canvas.drawText(mCurSlideOutStr, getWidth()/2, 2 * textBaseY - verticalOffset, mPaint);
+                    canvas.drawText(mCurSlideOutStr, getWidth() / 2, 2 * textBaseY - verticalOffset, mPaint);
                 } else {
-                    canvas.drawText(mCurSlideInStr, getWidth()/2, -verticalOffset, mPaint);
+                    canvas.drawText(mCurSlideInStr, getWidth() / 2, -verticalOffset, mPaint);
                 }
             }
         }
@@ -179,7 +211,6 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         }
         mTextList = content;
         mTextListSize = mTextList.size();
-        Log.e("long", "size" + String.valueOf(mTextListSize));
         mCurSlideOutStr = mTextList.get(0);
         if (mTextListSize > 1) {
             mCurSlideInStr = mTextList.get(1);
@@ -206,11 +237,15 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         }
         if (mTextListSize > 1) {
             mAnimator.start();
+            isShowAnimation = true;
         }
     }
 
     @Override
     public void onClick(View view) {
+        if (isShowAnimation) {
+            return;
+        }
         if (callbackListener != null) {
             callbackListener.onClick(mCurrentIndex);
         }
@@ -231,11 +266,8 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     /**
      * 开始动画
      */
-    private void startAnimation(){
-        if(mAnimator == null){
-            mAnimator = ObjectAnimator.ofFloat(0.0f, 1.0f)
-                    .setDuration(mSwitchDuration);
-        }
+    private void startAnimation() {
+        isShowAnimation = true;
         mAnimator.setStartDelay(mIntervalDuration); //间隔时间
         mAnimator.addUpdateListener(valueAnimator -> {
             currentAnimatedValue = (float) valueAnimator.getAnimatedValue();
@@ -247,6 +279,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         mAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
+                isShowAnimation = false;
                 mCurrentIndex = (++mCurrentIndex) % mTextListSize;
                 if (callbackListener != null) {
                     callbackListener.showNext(mCurrentIndex);

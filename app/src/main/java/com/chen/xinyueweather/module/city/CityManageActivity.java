@@ -2,7 +2,9 @@ package com.chen.xinyueweather.module.city;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +29,7 @@ import com.chen.xinyueweather.module.base.ILocalRxBusPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -132,12 +135,13 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
         mPresenter.getData(false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null) {
             try {
-                addCity(intent.getExtras().getParcelable("CITY"));
+                addCity(Objects.requireNonNull(intent.getExtras()).getParcelable("CITY"));
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -171,6 +175,7 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -178,7 +183,7 @@ public class CityManageActivity extends BaseActivity<ILocalRxBusPresenter> imple
             case SearchCityActivity.REQUEST_CODE:
                 switch (resultCode) {
                     case 1:
-                        addCity(data.getExtras().getParcelable("CITY_DATA"));
+                        addCity(Objects.requireNonNull(data.getExtras()).getParcelable("CITY_DATA"));
                         break;
                     default:
                         break;

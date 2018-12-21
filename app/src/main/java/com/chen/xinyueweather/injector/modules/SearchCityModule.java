@@ -24,6 +24,7 @@ import dagger.Provides;
  */
 @Module
 public class SearchCityModule {
+
     private SearchCityActivity mView;
 
     private List<String> mList;

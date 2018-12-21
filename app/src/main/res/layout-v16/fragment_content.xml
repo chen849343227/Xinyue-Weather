@@ -146,7 +146,7 @@
                         android:focusable="true"
                         app:interval_duration="2000"
                         app:switch_duration="500"
-                        app:text_size="13sp"
+                        app:text_size="12sp"
                         app:switch_orientation="up" />
 
                     <!--  <TextView

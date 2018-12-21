@@ -19,7 +19,6 @@ public class ContentModule {
 
     private final ContentFragment mView;
 
-
     private final String mWeatherId;
 
     public ContentModule(ContentFragment view ,String weatherId) {

@@ -28,7 +28,6 @@ public class CityDao {
         dbOpenHelper = new DBOpenHelper(context);
     }
 
-
     /**
      * 得到所有省的名称
      *

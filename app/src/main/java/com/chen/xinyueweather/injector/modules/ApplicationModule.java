@@ -19,6 +19,7 @@ import dagger.Provides;
  */
 @Module
 public class ApplicationModule {
+
     private final AndroidApplication mApplication;
     private final DaoSession mDaoSession;
     private final RxBus mRxBus;

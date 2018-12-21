@@ -20,6 +20,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.greenrobot.greendao.database.Database;
 
 import java.io.File;
@@ -30,6 +31,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * @author along

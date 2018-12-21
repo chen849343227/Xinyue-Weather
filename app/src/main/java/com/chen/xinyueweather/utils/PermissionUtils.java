@@ -9,6 +9,7 @@ import android.media.audiofx.BassBoost;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.tbruyelle.rxpermissions.RxPermissions;
@@ -31,6 +32,7 @@ public class PermissionUtils {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public static void requestPermission(Activity activity) {
         if (activity == null) {
             return;

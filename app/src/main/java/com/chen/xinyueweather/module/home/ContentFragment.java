@@ -2,8 +2,10 @@ package com.chen.xinyueweather.module.home;
 
 import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
@@ -47,6 +49,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -168,11 +171,13 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
                 .inject(ContentFragment.this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initViews() {
         /*初始化下拉刷新颜色*/
         TypedValue typedValue = new TypedValue();
-        getActivity().getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        Objects.requireNonNull(getActivity()).getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         mRefresh.setColorSchemeColors(typedValue.data);
         mRefresh.setRefreshing(true);
         mContentMain.setOnTouchListener(this);
@@ -182,7 +187,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         int h = (int) actionbarSizeTypedArray.getDimension(0, 0);
         mFirstShowRl.getLayoutParams().height = ScreenUtil.getScreenHeight(getActivity()) - h - ScreenUtil.getStatusBarHeight(getActivity());
         // mLvLivingIndex.setAdapter(mZhiShuAdapter);
-
+        actionbarSizeTypedArray.recycle();
         new Thread(() -> {
             while (true) {
                 try {
@@ -200,6 +205,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
     protected void updateViews(boolean isRefresh) {
         mPresenter.getData(false);
         mRefresh.setOnRefreshListener(() -> mPresenter.getData(true));
+        mTvAqi.requestLayout();
     }
 
     @SuppressLint("SetTextI18n")
@@ -235,7 +241,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvDegree.setText("°");
         //Alarm
         List<Alarm> alarm = weathersBean.getAlarms();
-        Log.d("long", "alarm size = ?" + alarm.size());
+        Log.d("long", "alarm size = " + alarm.size());
         if (alarm.size() > 0) {
             List<String> alarmName = new ArrayList<>();
             for (int i = 0; i < alarm.size(); i++) {
@@ -250,7 +256,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
                 @Override
                 public void onClick(int index) {
-                    Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -280,11 +286,11 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         //指数
         for (int i = 0; i < weathersBean.getIndexes().size(); i++) {
             IndexesBean bean = weathersBean.getIndexes().get(i);
-            mIvIcon = (ImageView) mViews[i].findViewById(R.id.iv_icon);
+            mIvIcon = mViews[i].findViewById(R.id.iv_icon);
             mIvIcon.setImageResource(Constant.ZHISHU.get(bean.getName()));
-            mTvNameAndValue = (TextView) mViews[i].findViewById(R.id.tv_nameAndValue);
+            mTvNameAndValue = mViews[i].findViewById(R.id.tv_nameAndValue);
             mTvNameAndValue.setText(bean.getName() + " " + bean.getLevel());
-            mTvDetails = (TextView) mViews[i].findViewById(R.id.tv_details);
+            mTvDetails = mViews[i].findViewById(R.id.tv_details);
             mTvDetails.setText(bean.getContent());
         }
         mContentMain.smoothScrollTo(0, 0);
