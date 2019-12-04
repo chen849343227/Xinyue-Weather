@@ -52,7 +52,9 @@ public class SkyView extends FrameLayout {
     private void refreshView() {
 
         if (oldWeather.equals(weather)) {
-            baseView.reset();
+            if (baseView != null) {
+                baseView.reset();
+            }
             return;
         }
         oldWeather = weather;

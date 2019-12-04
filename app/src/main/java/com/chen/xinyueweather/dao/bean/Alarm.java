@@ -1,5 +1,8 @@
 package com.chen.xinyueweather.dao.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 
@@ -7,7 +10,7 @@ import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class Alarm {
+public class Alarm implements Parcelable{
 
     /**
      * alarmId : "10a5660a3fdebfd6f436ad0ede74fdeb"
@@ -52,6 +55,36 @@ public class Alarm {
         this.alarmDesc = alarmDesc;
         this.precaution = precaution;
     }
+
+    protected Alarm(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readLong();
+        }
+        areaId = in.readString();
+        alarmId = in.readString();
+        alarmType = in.readString();
+        alarmTypeDesc = in.readString();
+        alarmLevelNo = in.readString();
+        alarmLevelNoDesc = in.readString();
+        alarmContent = in.readString();
+        publishTime = in.readString();
+        alarmDesc = in.readString();
+        precaution = in.readString();
+    }
+
+    public static final Creator<Alarm> CREATOR = new Creator<Alarm>() {
+        @Override
+        public Alarm createFromParcel(Parcel in) {
+            return new Alarm(in);
+        }
+
+        @Override
+        public Alarm[] newArray(int size) {
+            return new Alarm[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -154,5 +187,30 @@ public class Alarm {
                 ", alarmDesc='" + alarmDesc + '\'' +
                 ", precaution='" + precaution + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(id);
+        }
+        dest.writeString(areaId);
+        dest.writeString(alarmId);
+        dest.writeString(alarmType);
+        dest.writeString(alarmTypeDesc);
+        dest.writeString(alarmLevelNo);
+        dest.writeString(alarmLevelNoDesc);
+        dest.writeString(alarmContent);
+        dest.writeString(publishTime);
+        dest.writeString(alarmDesc);
+        dest.writeString(precaution);
     }
 }

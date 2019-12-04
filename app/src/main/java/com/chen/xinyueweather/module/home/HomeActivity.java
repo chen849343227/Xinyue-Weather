@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
@@ -52,9 +53,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @BindView(R.id.myWeatherView)
     SkyView mMyWeatherView;
-    @BindView(R.id.tv_topTemp)
+    @BindView(R.id.tv_top_temp)
     TextView mTvTopTemp;
-    @BindView(R.id.tv_topType)
+    @BindView(R.id.tv_top_type)
     TextView mTvTopType;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -62,7 +63,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout mDrawerLayout;
     @BindView(R.id.navigationView)
     NavigationView mNavigationView;
-    @BindView(R.id.tv_topCity)
+    @BindView(R.id.tv_top_city)
     TextView mTvTopCity;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
@@ -118,6 +119,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void initViews() {
         mToolbar.setTitle("");

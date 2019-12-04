@@ -159,6 +159,7 @@ public class ContentPresenterImpl implements IContentPresenter<CityManage> {
         Log.e("long", alarms.size() + "alarms size");
         //deleteAlarmsByAreaId(mWeatherId);
         if (alarms.size() > 0) {
+            mDao.getAlarmDao().deleteAll();
             Alarm alarm;
             for (int i = 0; i < alarms.size(); i++) {
                 alarm = alarms.get(i);

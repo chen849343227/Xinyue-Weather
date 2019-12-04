@@ -104,9 +104,8 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         mPaint.setTextSize(mTextSize);
         setOnClickListener(this);
         mAnimator = ObjectAnimator.ofFloat(0.0f, 1.0f).setDuration(mSwitchDuration);
-        if (mTextListSize > 1) {
-            startAnimation();
-        }
+        startAnimation();
+
     }
 
     @Override
@@ -206,6 +205,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
      * @param content 数据源
      */
     public void setTextContent(List<String> content) {
+        Logger.e("content size = " + content.size());
         if (content == null || content.size() == 0) {
             return;
         }

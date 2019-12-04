@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.R;
@@ -40,9 +39,6 @@ import com.chen.xinyueweather.widget.SunRiseView;
 import com.chen.xinyueweather.widget.WeekForecastView;
 import com.chen.xinyueweather.widget.WindmillView;
 import com.chen.xinyueweather.widget.weather.SkyView;
-import com.orhanobut.logger.Logger;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -256,6 +252,9 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
                 @Override
                 public void onClick(int index) {
+                    /*Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("ALARM_INFO", new ArrayList<>(alarm));*/
+                    AlarmInfoActivity.launch(mContext, alarm);
                     //  Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
                 }
             });

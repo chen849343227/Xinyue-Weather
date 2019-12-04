@@ -1,6 +1,7 @@
 package com.chen.xinyueweather.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class CityManageAdapter extends RecyclerView.Adapter<CityManageAdapter.Vi
         mList = list;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(mInflater.inflate(R.layout.item_location_manage, parent, false));
