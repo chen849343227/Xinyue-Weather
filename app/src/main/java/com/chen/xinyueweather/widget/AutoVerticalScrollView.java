@@ -10,8 +10,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -28,29 +28,29 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
 
     private static final String TAG = "AutoVerticalScrollView";
 
-    //默认切换时间
+    // 默认切换时间
     private final static int DEFAULT_SWITCH_DURATION = 500;
-    //间隔时间
+    // 间隔时间
     private final static int DEFAULT_INTERVAL_DURATION = 2000;
-    //默认文字大小
+    // 默认文字大小
     private final static int DEFAULT_TEXT_SIZE = 12;
-    //默认宽度
+    // 默认宽度
     private final static int DEFAULT_VIEW_WIDTH = 200;
-    //默认高度
+    // 默认高度
     private final static int DEFAULT_VIEW_HIGH = 200;
 
     private Context mContext;
-    //文字集合
+    // 文字集合
     private List<String> mTextList;
-    //列表的数量
+    // 列表的数量
     private int mTextListSize;
-    //文字大小
+    // 文字大小
     private float mTextSize;
 
-    private String mCurSlideOutStr; //当前滑出的文本
-    private String mCurSlideInStr;  //当前滑进的文本
+    private String mCurSlideOutStr; // 当前滑出的文本
+    private String mCurSlideInStr;  // 当前滑进的文本
     private float textBaseY;
-    private int mCurrentIndex = 0;  //当前文本的索引
+    private int mCurrentIndex = 0;  // 当前文本的索引
 
     private int mSwitchDuration = DEFAULT_SWITCH_DURATION;
     private int mIntervalDuration = DEFAULT_INTERVAL_DURATION;
@@ -104,8 +104,6 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         mPaint.setTextSize(mTextSize);
         setOnClickListener(this);
         mAnimator = ObjectAnimator.ofFloat(0.0f, 1.0f).setDuration(mSwitchDuration);
-        startAnimation();
-
     }
 
     @Override
@@ -136,10 +134,10 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
         mHeight = textHeight + paddingBottom + paddingTop;
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
 
-        //计算文字宽度
+        // 计算文字宽度
         float fontWidth = mPaint.measureText(text);
-        //计算文字的baseline
-        textBaseY = mHeight / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
+        // 计算文字的baseline
+        textBaseY = (mHeight >> 1) + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
 
         if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
             widthSpecSize = (int) (fontWidth + paddingLeft + paddingRight);
@@ -163,34 +161,34 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
             return;
         }
 
-    /*    paddingLeft = getPaddingLeft();
-        paddingBottom = getPaddingBottom();
-        paddingTop = getPaddingTop();
-        paddingRight = getPaddingRight();
+        // paddingLeft = getPaddingLeft();
+        // paddingBottom = getPaddingBottom();
+        // paddingTop = getPaddingTop();
+        // paddingRight = getPaddingRight();
+        //
+        // float fontWidth = mPaint.measureText(mTextList.get(0));
+        //
+        // float x = (getWidth() - fontWidth) / 2;
+        // //文字的y轴坐标
+        // Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+        // textBaseY = getHeight() / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
 
-        float fontWidth = mPaint.measureText(mTextList.get(0));
-
-        float x = (getWidth() - fontWidth) / 2;
-        //文字的y轴坐标
-        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        textBaseY = getHeight() / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;*/
-
-        //直接使用mHeight控制文本绘制，会因为text的baseline的问题不能居中显示
+        // 直接使用mHeight控制文本绘制，会因为text的baseline的问题不能居中显示
         verticalOffset = Math.round(2 * textBaseY * (0.5f - currentAnimatedValue));
-        //Logger.e("mTextListSize = " + mTextListSize);
+        // Logger.e("mTextListSize = " + mTextListSize);
         if (mTextListSize <= 1) {
             if (mCurSlideOutStr != null) {
                 canvas.drawText(mCurSlideOutStr, getWidth() / 2, verticalOffset, mPaint);
             }
         } else {
-            if (mSwitchOrientation == 0) {//向上滚动切换
+            if (mSwitchOrientation == 0) { // 向上滚动切换
                 if (verticalOffset > 0) {
                     canvas.drawText(mCurSlideOutStr, getWidth() / 2, verticalOffset, mPaint);
                 } else {
                     canvas.drawText(mCurSlideInStr, getWidth() / 2, 2 * textBaseY + verticalOffset, mPaint);
                 }
             } else {
-                if (verticalOffset > 0) {//向下滚动切换
+                if (verticalOffset > 0) { // 向下滚动切换
                     canvas.drawText(mCurSlideOutStr, getWidth() / 2, 2 * textBaseY - verticalOffset, mPaint);
                 } else {
                     canvas.drawText(mCurSlideInStr, getWidth() / 2, -verticalOffset, mPaint);
@@ -205,10 +203,10 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
      * @param content 数据源
      */
     public void setTextContent(List<String> content) {
-        Logger.e("content size = " + content.size());
         if (content == null || content.size() == 0) {
             return;
         }
+        Logger.e("content size = " + content.size());
         mTextList = content;
         mTextListSize = mTextList.size();
         mCurSlideOutStr = mTextList.get(0);
@@ -244,6 +242,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
     @Override
     public void onClick(View view) {
         if (isShowAnimation) {
+            Logger.d("isShowAnimation == true");
             return;
         }
         if (callbackListener != null) {
@@ -268,7 +267,7 @@ public class AutoVerticalScrollView extends AppCompatTextView implements View.On
      */
     private void startAnimation() {
         isShowAnimation = true;
-        mAnimator.setStartDelay(mIntervalDuration); //间隔时间
+        mAnimator.setStartDelay(mIntervalDuration); // 间隔时间
         mAnimator.addUpdateListener(valueAnimator -> {
             currentAnimatedValue = (float) valueAnimator.getAnimatedValue();
             if (currentAnimatedValue < 1.0f) {

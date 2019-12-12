@@ -1,6 +1,6 @@
 package com.chen.xinyueweather.api;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.chen.xinyueweather.dao.bean.BaseResponse;
 import com.orhanobut.logger.Logger;

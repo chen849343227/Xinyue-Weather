@@ -1,9 +1,15 @@
 package com.chen.xinyueweather;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
+import org.greenrobot.greendao.database.Database;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.chen.xinyueweather.api.RetrofitService;
 import com.chen.xinyueweather.dao.CityDao;
@@ -20,16 +26,10 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
-import org.greenrobot.greendao.database.Database;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 
 /**
@@ -168,7 +168,7 @@ public class AndroidApplication extends Application {
             mDaoSession.getCityManageDao().queryBuilder().rx().list()
                     .subscribe(cityManageList -> AndroidApplication.mCityManages.addAll(cityManageList));
             for (CityManage manage : AndroidApplication.mCityManages) {
-                com.orhanobut.logger.Logger.e(manage.toString());
+                Logger.e(manage.toString());
             }
             //初始化热门城市
             for (int i = 0; i < AndroidApplication.HOT_CITYS.size(); i++) {
@@ -180,7 +180,6 @@ public class AndroidApplication extends Application {
         }).start();
     }
 
-
     /**
      * @return
      */
@@ -191,7 +190,6 @@ public class AndroidApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-
     }
 
 }

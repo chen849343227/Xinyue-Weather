@@ -1,7 +1,6 @@
 package com.chen.xinyueweather.module.home;
 
-import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
-import com.chen.xinyueweather.dao.bean.WeathersBean;
+import com.chen.xinyueweather.dao.bean.BaseWeather;
 import com.chen.xinyueweather.module.base.IBaseView;
 
 /**
@@ -12,7 +11,7 @@ import com.chen.xinyueweather.module.base.IBaseView;
 
 public interface IContentView extends IBaseView {
 
-    void loadWeather(BaseWeatherBean weathersBean);
+    void loadWeather(BaseWeather weathersBean);
 
     void setRefresh(boolean isRefresh);
 }

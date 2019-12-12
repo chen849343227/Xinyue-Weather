@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                  android:id="@+id/coordinator_Layout"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
@@ -23,7 +23,7 @@
                 android:text="@string/activity_city_manage_tip_list_empty"
                 android:visibility="invisible"/>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         </FrameLayout>
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_city_fab"
         android:layout_width="56.0dip"
         android:layout_height="56.0dip"
@@ -40,4 +40,4 @@
         android:layout_margin="25.0dip"
         android:clickable="true"
         android:src="@drawable/ic_add_white"/>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

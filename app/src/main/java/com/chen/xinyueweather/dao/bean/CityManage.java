@@ -25,8 +25,6 @@ public class CityManage implements Parcelable {
     private String weather;
     private String temperature;
 
-
-
     public CityManage() {
     }
 

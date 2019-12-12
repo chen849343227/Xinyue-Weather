@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
  * desc
  */
 @Entity
-public class IndexesBean {
+public class Index {
     /**
      * abbreviation : pp
      * alias :
@@ -27,12 +27,11 @@ public class IndexesBean {
     private String level;
     private String name;
 
-    public IndexesBean() {
+    public Index() {
     }
 
-
-    @Generated(hash = 1761051681)
-    public IndexesBean(Long id, String areaId, String abbreviation, String alias,
+    @Generated(hash = 581075171)
+    public Index(Long id, String areaId, String abbreviation, String alias,
             String content, String level, String name) {
         this.id = id;
         this.areaId = areaId;
@@ -42,7 +41,6 @@ public class IndexesBean {
         this.level = level;
         this.name = name;
     }
-
 
     public Long getId() {
         return id;

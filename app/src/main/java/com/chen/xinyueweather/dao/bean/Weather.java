@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
  * desc  单个天气实体
  */
 @Entity
-public class WeathersBean {
+public class Weather {
     /**
      * date : 2017-10-13
      * img : 0
@@ -41,12 +41,14 @@ public class WeathersBean {
     private String week;
     private String ws;
 
-    public WeathersBean() {
+    public Weather() {
     }
 
 
-    @Generated(hash = 280767434)
-    public WeathersBean(Long id, String areaId, String date, String img,
+
+
+    @Generated(hash = 1506615716)
+    public Weather(Long id, String areaId, String date, String img,
             String sun_down_time, String sun_rise_time, String temp_day_c,
             String temp_day_f, String temp_night_c, String temp_night_f, String wd,
             String weather, String week, String ws) {
@@ -65,6 +67,8 @@ public class WeathersBean {
         this.week = week;
         this.ws = ws;
     }
+
+
 
 
     public Long getId() {

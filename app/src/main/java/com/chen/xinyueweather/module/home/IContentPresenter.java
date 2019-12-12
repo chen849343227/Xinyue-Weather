@@ -2,12 +2,11 @@ package com.chen.xinyueweather.module.home;
 
 import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
-import com.chen.xinyueweather.dao.bean.IndexesBean;
+import com.chen.xinyueweather.dao.bean.Index;
 import com.chen.xinyueweather.dao.bean.RealWeather;
-import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
-import com.chen.xinyueweather.dao.bean.WeatherDetailsInfoBean;
-import com.chen.xinyueweather.dao.bean.WeathersBean;
-import com.chen.xinyueweather.module.base.IBasePresenter;
+import com.chen.xinyueweather.dao.bean.Weather;
+import com.chen.xinyueweather.dao.bean.Weather3HourDetailInfo;
+import com.chen.xinyueweather.dao.bean.WeatherDetailInfo;
 import com.chen.xinyueweather.module.base.ILocalPresenter;
 
 import java.util.List;
@@ -45,9 +44,9 @@ public interface IContentPresenter<T> extends ILocalPresenter<T> {
      * 一周预报
      */
 
-    void insertWeekForecast(List<WeathersBean> bean);
+    void insertWeekForecast(List<Weather> bean);
 
-    List<WeathersBean> queryWeekForecastByAreaId(String areaId);
+    List<Weather> queryWeekForecastByAreaId(String areaId);
 
     void deleteWeekForecastByAreaId(String areaId);
 
@@ -55,9 +54,9 @@ public interface IContentPresenter<T> extends ILocalPresenter<T> {
     /**
      * 三小时预报
      */
-    void insertThreeHourForecast(WeatherDetailsInfoBean bean);
+    void insertThreeHourForecast(WeatherDetailInfo bean);
 
-    List<Weather3HoursDetailsInfosBean> queryThreeHourForecastByAreaId(String areaId);
+    List<Weather3HourDetailInfo> queryThreeHourForecastByAreaId(String areaId);
 
     void deleteThreeHourForecastByAreaId(String areaId);
 
@@ -75,9 +74,9 @@ public interface IContentPresenter<T> extends ILocalPresenter<T> {
      * 生活指数
      */
 
-    void insertZhishu(List<IndexesBean> bean);
+    void insertZhishu(List<Index> bean);
 
-    List<IndexesBean> queryZhishuByAreaId(String areaId);
+    List<Index> queryZhishuByAreaId(String areaId);
 
     void deleteZhishuByAreaId(String areaId);
 

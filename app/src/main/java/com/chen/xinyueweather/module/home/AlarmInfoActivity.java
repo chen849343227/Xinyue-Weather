@@ -3,10 +3,9 @@ package com.chen.xinyueweather.module.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
 import com.chen.xinyueweather.R;
@@ -16,11 +15,11 @@ import com.chen.xinyueweather.injector.components.DaggerAlarmInfoComponent;
 import com.chen.xinyueweather.injector.modules.AlarmInfoModule;
 import com.chen.xinyueweather.module.base.BaseActivity;
 import com.chen.xinyueweather.module.base.IBasePresenter;
-import com.chen.xinyueweather.module.city.CityManageActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -75,11 +74,13 @@ public class AlarmInfoActivity extends BaseActivity<IBasePresenter> implements I
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mAlarmView.setLayoutManager(layoutManager);
 
-        ArrayList<Alarm> alarm = getIntent().getExtras().getParcelableArrayList("ALARM_INFO");
-        Logger.e("size = " + alarm.size());
-        mList.clear();
-        mList.addAll(alarm);
-        mAdapter.notifyDataSetChanged();
+        ArrayList<Alarm> alarm = Objects.requireNonNull(getIntent().getExtras()).getParcelableArrayList("ALARM_INFO");
+        if (alarm != null && !alarm.isEmpty()) {
+            Logger.e("size = " + alarm.size());
+            mList.clear();
+            mList.addAll(alarm);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.chen.xinyueweather.module.city;
 import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.api.RetrofitService;
 import com.chen.xinyueweather.dao.CityDao;
-import com.chen.xinyueweather.dao.bean.BaseLocationBean;
+import com.chen.xinyueweather.dao.bean.BaseLocation;
 import com.chen.xinyueweather.dao.bean.City;
 import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.utils.ToastUtils;
@@ -16,9 +16,7 @@ import java.util.List;
 import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.Observer;
-import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -44,7 +42,6 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
     public void getData(boolean isRefresh) {
         mView.loadData(mCityDao.getAllProvinceName());
     }
-
 
     @Override
     public void queryProvinces() {
@@ -81,22 +78,22 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
 
     @Override
     public void location(String str) {
-        //Location, request the server to get the location information and parse.
+        // Location, request the server to get the location information and parse.
         RetrofitService.getLocationInfo(str, "CN")
                 .subscribeOn(Schedulers.io())
-                .flatMap((Func1<ResponseBody, Observable<BaseLocationBean>>) responseBody -> {
+                .flatMap((Func1<ResponseBody, Observable<BaseLocation>>) responseBody -> {
                     String str1;
-                    BaseLocationBean baseLocationBean = null;
+                    BaseLocation baseLocation = null;
                     try {
                         str1 = responseBody.string();
-                        baseLocationBean = gson.fromJson(str1, BaseLocationBean.class);
+                        baseLocation = gson.fromJson(str1, BaseLocation.class);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if (baseLocationBean != null) {
-                        if (baseLocationBean.getStatus().equals("OK")) {
-                            return Observable.just(baseLocationBean);
-                        }else if (baseLocationBean.getStatus().equals("OVER_QUERY_LIMIT")){
+                    if (baseLocation != null) {
+                        if (baseLocation.getStatus().equals("OK")) {
+                            return Observable.just(baseLocation);
+                        }else if (baseLocation.getStatus().equals("OVER_QUERY_LIMIT")){
 
                         } else {
                             return Observable.error(new Exception("定位失败，请稍后再试！"));
@@ -105,13 +102,13 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                     return Observable.error(new Exception("网络连接错误，请检查网络连接！"));
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(baseLocationBean -> {
-                    List<BaseLocationBean.AddressBean.AddressComponentsBean> addressComponentsBeans = baseLocationBean.getResults().get(1).getAddress_components();
+                .doOnNext(baseLocation -> {
+                    List<BaseLocation.AddressBean.AddressComponentsBean> addressComponentsBeans = baseLocation.getResults().get(1).getAddress_components();
                     City city;
                     for (int i = 0; i < addressComponentsBeans.size(); i++) {
                         String areaName = addressComponentsBeans.get(i).getShort_name();
                         Logger.e(areaName);
-                        //这里获取到的字符可能是两位，也可能是三位的，统一对三位的进行截取。因为数据库里面都是2位的，不然获取不到数据。
+                        // 这里获取到的字符可能是两位，也可能是三位的，统一对三位的进行截取。因为数据库里面都是2位的，不然获取不到数据。
                         if (areaName.length() != 2) {
                             areaName = areaName.substring(0, 2);
                         }
@@ -127,8 +124,8 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                         }
                     }
                    /* String areaName =.get(0).getShort_name();
-                    String areaName1 = baseLocationBean.getResults().get(1).getAddress_components().get(1).getShort_name();
-                    String areaName2 = baseLocationBean.getResults().get(1).getAddress_components().get(2).getShort_name();
+                    String areaName1 = baseLocation.getResults().get(1).getAddress_components().get(1).getShort_name();
+                    String areaName2 = baseLocation.getResults().get(1).getAddress_components().get(2).getShort_name();
                     Logger.e(city.toString());
                     if () {
 
@@ -137,7 +134,7 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                     }*/
                 })
                 .compose(mView.bindToLife())
-                .subscribe(new Observer<BaseLocationBean>() {
+                .subscribe(new Observer<BaseLocation>() {
                     @Override
                     public void onCompleted() {
 
@@ -150,10 +147,10 @@ public class SearchCityPresenterImpl implements ISearchCityPresenter {
                     }
 
                     @Override
-                    public void onNext(BaseLocationBean baseLocationBean) {
-                        String provinceName = baseLocationBean.getResults().get(1).getAddress_components().get(2).getShort_name();
-                        String cityName = baseLocationBean.getResults().get(1).getAddress_components().get(1).getShort_name();
-                        String areaName = baseLocationBean.getResults().get(1).getAddress_components().get(0).getShort_name();
+                    public void onNext(BaseLocation baseLocation) {
+                        String provinceName = baseLocation.getResults().get(1).getAddress_components().get(2).getShort_name();
+                        String cityName = baseLocation.getResults().get(1).getAddress_components().get(1).getShort_name();
+                        String areaName = baseLocation.getResults().get(1).getAddress_components().get(0).getShort_name();
                         Logger.e("定位成功：" + provinceName + " " + cityName + " " + areaName);
                         ToastUtils.showToast("定位成功：" + provinceName + " " + cityName + " " + areaName);
                     }

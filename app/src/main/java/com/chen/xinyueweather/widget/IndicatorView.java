@@ -5,8 +5,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -143,7 +143,7 @@ public class IndicatorView extends View {
             if ((mHideViewAnimator != null) && (mHideViewAnimator.isStarted())) {
                 mHideViewAnimator.cancel();
             }
-            mShowViewAnimator = ValueAnimator.ofFloat(new float[]{mViewAlpha, 1.0F});
+            mShowViewAnimator = ValueAnimator.ofFloat(mViewAlpha, 1.0F);
             mShowViewAnimator.setDuration((long) (500.0F * (1.0F - mViewAlpha)));
             mShowViewAnimator.addUpdateListener(animation -> {
                 mViewAlpha = (Float) animation.getAnimatedValue();
@@ -158,7 +158,7 @@ public class IndicatorView extends View {
         if ((mShowViewAnimator != null) && (mShowViewAnimator.isStarted())) {
             mShowViewAnimator.cancel();
         }
-        mHideViewAnimator = ValueAnimator.ofFloat(new float[]{1.0F, 0.0F});
+        mHideViewAnimator = ValueAnimator.ofFloat(1.0F, 0.0F);
         mHideViewAnimator.setDuration(2000L);
         mHideViewAnimator.addUpdateListener(animation -> {
             mViewAlpha = (Float) animation.getAnimatedValue();

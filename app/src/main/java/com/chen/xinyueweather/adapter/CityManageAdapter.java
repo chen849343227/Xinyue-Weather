@@ -1,9 +1,8 @@
 package com.chen.xinyueweather.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,7 @@ import com.chen.xinyueweather.dao.bean.CityManage;
 import com.chen.xinyueweather.module.home.HomeActivity;
 import com.chen.xinyueweather.widget.CircleTextView;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
-
-import butterknife.BindView;
 
 /**
  * @author along

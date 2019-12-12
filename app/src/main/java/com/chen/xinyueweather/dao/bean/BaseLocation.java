@@ -2,7 +2,7 @@ package com.chen.xinyueweather.dao.bean;
 
 import java.util.List;
 
-public class BaseLocationBean {
+public class BaseLocation {
 
 
     /**

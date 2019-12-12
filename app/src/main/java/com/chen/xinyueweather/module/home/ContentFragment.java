@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -22,9 +22,9 @@ import com.chen.xinyueweather.AndroidApplication;
 import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.dao.bean.Alarm;
 import com.chen.xinyueweather.dao.bean.Aqi;
-import com.chen.xinyueweather.dao.bean.BaseWeatherBean;
+import com.chen.xinyueweather.dao.bean.BaseWeather;
 import com.chen.xinyueweather.dao.bean.CityManage;
-import com.chen.xinyueweather.dao.bean.IndexesBean;
+import com.chen.xinyueweather.dao.bean.Index;
 import com.chen.xinyueweather.dao.bean.RealWeather;
 import com.chen.xinyueweather.injector.components.DaggerContentComponent;
 import com.chen.xinyueweather.injector.modules.ContentModule;
@@ -206,7 +206,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void loadWeather(BaseWeatherBean weathersBean) {
+    public void loadWeather(BaseWeather weathersBean) {
         for (int i = 0; i < AndroidApplication.mCityManages.size(); i++) {
             if (AndroidApplication.mCityManages.get(i).getWeatherId().equals(weatherId)) {
                 CityManage cityManage = new CityManage();
@@ -237,7 +237,7 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvDegree.setText("°");
         //Alarm
         List<Alarm> alarm = weathersBean.getAlarms();
-        Log.d("long", "alarm size = " + alarm.size());
+        Log.d(TAG, "alarm size = " + alarm.size());
         if (alarm.size() > 0) {
             List<String> alarmName = new ArrayList<>();
             for (int i = 0; i < alarm.size(); i++) {
@@ -254,19 +254,30 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
                 public void onClick(int index) {
                     /*Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("ALARM_INFO", new ArrayList<>(alarm));*/
-                    AlarmInfoActivity.launch(mContext, alarm);
+
+                    // for test
+                    List<Alarm> tmpLst = new ArrayList<>();
+                    for (int i = 0; i < 5; i++) {
+                        if (!alarm.isEmpty()) {
+                            tmpLst.add(alarm.get(0));
+                        }
+                    }
+                    AlarmInfoActivity.launch(mContext, tmpLst);
+                    // test end
+
+                    // AlarmInfoActivity.launch(mContext, alarm);
                     //  Toast.makeText(mContext, alarmName.get(index), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
             mTvAqi.setTextContent(aqi.getQuality() + " " + aqi.getAqi());
         }
-        //周报&&时报
+        // 周报&&时报
         mWeekForecast.setForeCasts(weathersBean.getWeathers());
-        mHourForecast.setHourForeCasts(weathersBean.getWeatherDetailsInfo().getWeather3HoursDetailsInfos());
+        mHourForecast.setHourForeCasts(weathersBean.getWeatherDetailsInfo().getWeather3HourDetailInfo());
         //windForecastView.setForeCasts(weatherInfo.getWeekForeCasts());
 
-        //风速湿度
+        // 风速湿度
         mWindViewBig.setWindSpeedDegree(Integer.parseInt(realWeather.getwS().replace("级", "")));
         mWindViewSmall.setWindSpeedDegree(Integer.parseInt(realWeather.getwS().replace("级", "")));
 
@@ -274,17 +285,17 @@ public class ContentFragment extends BaseFragment<IContentPresenter> implements 
         mTvWindSpeed.setText(realWeather.getwS());
         mPbHumidity.setProgress(Integer.parseInt(realWeather.getsD()));
         mTvHumidity.setText(realWeather.getsD());
-        //空气
+        // 空气
         mViewAqi.setProgressAndLabel(Integer.parseInt(aqi.getAqi()), "空气" + aqi.getQuality());
         mTvPm25.setText(aqi.getPm25() + " μg/m³");
         mTvPm10.setText(aqi.getPm10() + " μg/m³");
         mTvSo2.setText(aqi.getSo2() + " μg/m³");
         mTvNo2.setText(aqi.getNo2() + " μg/m³");
-        //日出
+        // 日出
         mViewSun.setSunRiseDownTime(weathersBean.getWeathers().get(0).getSun_rise_time(), weathersBean.getWeathers().get(0).getSun_down_time());
-        //指数
+        // 指数
         for (int i = 0; i < weathersBean.getIndexes().size(); i++) {
-            IndexesBean bean = weathersBean.getIndexes().get(i);
+            Index bean = weathersBean.getIndexes().get(i);
             mIvIcon = mViews[i].findViewById(R.id.iv_icon);
             mIvIcon.setImageResource(Constant.ZHISHU.get(bean.getName()));
             mTvNameAndValue = mViews[i].findViewById(R.id.tv_nameAndValue);

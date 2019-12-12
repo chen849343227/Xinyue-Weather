@@ -1,10 +1,6 @@
 package com.chen.xinyueweather.injector.components;
 
-import android.support.v4.app.Fragment;
-
 import com.chen.xinyueweather.injector.modules.ContentModule;
-import com.chen.xinyueweather.injector.modules.SearchCityModule;
-import com.chen.xinyueweather.injector.scope.ActivityScope;
 import com.chen.xinyueweather.injector.scope.FragmentScope;
 import com.chen.xinyueweather.module.home.ContentFragment;
 

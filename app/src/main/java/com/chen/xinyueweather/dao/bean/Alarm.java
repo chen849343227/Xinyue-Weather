@@ -40,21 +40,6 @@ public class Alarm implements Parcelable{
     public Alarm() {
     }
 
-    @Generated(hash = 2082224478)
-    public Alarm(Long id, String areaId, String alarmId, String alarmType, String alarmTypeDesc, String alarmLevelNo, String alarmLevelNoDesc,
-            String alarmContent, String publishTime, String alarmDesc, String precaution) {
-        this.id = id;
-        this.areaId = areaId;
-        this.alarmId = alarmId;
-        this.alarmType = alarmType;
-        this.alarmTypeDesc = alarmTypeDesc;
-        this.alarmLevelNo = alarmLevelNo;
-        this.alarmLevelNoDesc = alarmLevelNoDesc;
-        this.alarmContent = alarmContent;
-        this.publishTime = publishTime;
-        this.alarmDesc = alarmDesc;
-        this.precaution = precaution;
-    }
 
     protected Alarm(Parcel in) {
         if (in.readByte() == 0) {
@@ -72,6 +57,23 @@ public class Alarm implements Parcelable{
         publishTime = in.readString();
         alarmDesc = in.readString();
         precaution = in.readString();
+    }
+
+
+    @Generated(hash = 2082224478)
+    public Alarm(Long id, String areaId, String alarmId, String alarmType, String alarmTypeDesc, String alarmLevelNo, String alarmLevelNoDesc,
+            String alarmContent, String publishTime, String alarmDesc, String precaution) {
+        this.id = id;
+        this.areaId = areaId;
+        this.alarmId = alarmId;
+        this.alarmType = alarmType;
+        this.alarmTypeDesc = alarmTypeDesc;
+        this.alarmLevelNo = alarmLevelNo;
+        this.alarmLevelNoDesc = alarmLevelNoDesc;
+        this.alarmContent = alarmContent;
+        this.publishTime = publishTime;
+        this.alarmDesc = alarmDesc;
+        this.precaution = precaution;
     }
 
     public static final Creator<Alarm> CREATOR = new Creator<Alarm>() {

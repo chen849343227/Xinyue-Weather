@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -55,7 +55,7 @@ public class CircleTextView extends View {
         int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
 
         if (widthSpecMode == MeasureSpec.AT_MOST && heightSpecMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(convert(30),convert(30));
+            setMeasuredDimension(convert(30), convert(30));
         } else if (widthSpecMode == MeasureSpec.AT_MOST) {
             setMeasuredDimension(convert(30), heightSpecSize);
         } else if (heightSpecMode == MeasureSpec.AT_MOST) {
@@ -71,9 +71,9 @@ public class CircleTextView extends View {
         mPaint.setColor(Color.WHITE);
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setTextSize(convert(17));
-        //文字的y轴坐标
+        // 文字的y轴坐标
         Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
-        float y = getHeight() / 2 + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
+        float y = (getHeight() >> 1) + (Math.abs(fontMetrics.ascent) - fontMetrics.descent) / 2;
         canvas.drawText(mText, getWidth() / 2, y, mPaint);
     }
 
@@ -89,10 +89,10 @@ public class CircleTextView extends View {
 
     /**
      * 设置文字
+     *
      * @param mText
      */
-    public void setText(String mText)
-    {
+    public void setText(String mText) {
         this.mText = mText;
         invalidate();
     }

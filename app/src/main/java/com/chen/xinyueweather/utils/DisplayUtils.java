@@ -1,6 +1,7 @@
 package com.chen.xinyueweather.utils;
 
 import android.content.Context;
+import android.util.TypedValue;
 
 /**
  * author long
@@ -9,6 +10,7 @@ import android.content.Context;
  */
 
 public class DisplayUtils {
+
     /**
      * convert px to its equivalent dp
      * <p>
@@ -19,7 +21,6 @@ public class DisplayUtils {
         return (int) (pxValue / scale + 0.5f);
     }
 
-
     /**
      * convert dp to its equivalent px
      * <p>
@@ -29,7 +30,6 @@ public class DisplayUtils {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
-
 
     /**
      * convert px to its equivalent sp
@@ -50,5 +50,10 @@ public class DisplayUtils {
     public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
+    }
+
+    public static float applyDimension(Context context, float value) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                value, context.getResources().getDisplayMetrics());
     }
 }

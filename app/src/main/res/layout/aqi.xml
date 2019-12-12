@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20.0dip"
-        android:text="@string/activity_home_class_title_air_quality_index"
+        android:text="@string/activity_home_class_title_air_quality"
         android:textColor="@color/home_text_color_dark"
         android:textSize="14.0sp" />
 

@@ -13,7 +13,7 @@ import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.chen.xinyueweather.dao.bean.WeathersBean;
+import com.chen.xinyueweather.dao.bean.Weather;
 import com.chen.xinyueweather.utils.DateTimeUtil;
 import com.chen.xinyueweather.utils.ScreenUtil;
 import com.chen.xinyueweather.utils.WeatherIconUtil;
@@ -95,7 +95,7 @@ public class WeekForecastView extends View {
         int i = 1;
         List<PointF> mPointHs = new ArrayList<>();
         List<PointF> mPointLs = new ArrayList<>();
-        for (WeathersBean foreCast : foreCasts) {
+        for (Weather foreCast : foreCasts) {
             paddingLeft = leftRight / 2 + (i - 1 + 0.5f) * widthAvg;
             if (type == TYPE_LINE) {
                 if (i == 1) {
@@ -176,7 +176,7 @@ public class WeekForecastView extends View {
         if (foreCasts.size() > 0) {
             tempH = Integer.parseInt(foreCasts.get(0).getTemp_day_c());
             tempL = Integer.parseInt(foreCasts.get(0).getTemp_night_c());
-            for (WeathersBean weekForeCast : foreCasts) {
+            for (Weather weekForeCast : foreCasts) {
                 if (Integer.parseInt(foreCasts.get(0).getTemp_day_c()) > tempH) {
                     tempH = Integer.parseInt(weekForeCast.getTemp_day_c());
                 }
@@ -190,7 +190,7 @@ public class WeekForecastView extends View {
     }
 
 
-    public void setForeCasts(List<WeathersBean> foreCasts) {
+    public void setForeCasts(List<Weather> foreCasts) {
         this.foreCasts.clear();
         this.foreCasts.addAll(foreCasts);
         maxMinDelta = getMaxMinDelta();
@@ -206,7 +206,7 @@ public class WeekForecastView extends View {
     private float height, width;
     private Paint paint = new Paint();
     private Context context;
-    private List<WeathersBean> foreCasts = new ArrayList<>();
+    private List<Weather> foreCasts = new ArrayList<>();
     private float maxMinDelta;
     private int tempH, tempL;
     private float radius = 0;

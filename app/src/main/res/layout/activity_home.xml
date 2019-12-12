@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include layout="@layout/content_main"/>
 
-        <android.support.design.widget.NavigationView
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigationView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -27,6 +27,6 @@
             app:headerLayout="@layout/head_navigation"
             app:itemIconTint="?colorAccent"
             app:menu="@menu/menu_navigation_main"/>
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </FrameLayout>

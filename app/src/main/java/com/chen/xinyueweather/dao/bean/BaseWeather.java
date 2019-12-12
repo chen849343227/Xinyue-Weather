@@ -1,6 +1,5 @@
 package com.chen.xinyueweather.dao.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +7,7 @@ import java.util.List;
  * date 17-10-13
  * desc  天气详细信息实体类
  */
-public class BaseWeatherBean {
+public class BaseWeather {
     /**
      * alarms : []
      * city : 北京
@@ -26,10 +25,10 @@ public class BaseWeatherBean {
     private Aqi pm25;
     private String provinceName;
     private RealWeather realtime;
-    private WeatherDetailsInfoBean weatherDetailsInfo;
+    private WeatherDetailInfo weatherDetailsInfo;
     private List<Alarm> alarms;
-    private List<IndexesBean> indexes;
-    private List<WeathersBean> weathers;
+    private List<Index> indexes;
+    private List<Weather> weathers;
 
     public String getCity() {
         return city;
@@ -71,11 +70,11 @@ public class BaseWeatherBean {
         this.realtime = realtime;
     }
 
-    public WeatherDetailsInfoBean getWeatherDetailsInfo() {
+    public WeatherDetailInfo getWeatherDetailsInfo() {
         return weatherDetailsInfo;
     }
 
-    public void setWeatherDetailsInfo(WeatherDetailsInfoBean weatherDetailsInfo) {
+    public void setWeatherDetailsInfo(WeatherDetailInfo weatherDetailsInfo) {
         this.weatherDetailsInfo = weatherDetailsInfo;
     }
 
@@ -87,19 +86,19 @@ public class BaseWeatherBean {
         this.alarms = alarms;
     }
 
-    public List<IndexesBean> getIndexes() {
+    public List<Index> getIndexes() {
         return indexes;
     }
 
-    public void setIndexes(List<IndexesBean> indexes) {
+    public void setIndexes(List<Index> indexes) {
         this.indexes = indexes;
     }
 
-    public List<WeathersBean> getWeathers() {
+    public List<Weather> getWeathers() {
         return weathers;
     }
 
-    public void setWeathers(List<WeathersBean> weathers) {
+    public void setWeathers(List<Weather> weathers) {
         this.weathers = weathers;
     }
 

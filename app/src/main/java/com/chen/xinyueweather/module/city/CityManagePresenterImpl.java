@@ -37,7 +37,9 @@ public class CityManagePresenterImpl implements ILocalRxBusPresenter<CityManage>
 
     @Override
     public void getData(boolean isRefresh) {
-        mDao.queryBuilder().rx().list()
+        mDao.queryBuilder()
+                .rx()
+                .list()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(cityManageList -> {
                     mView.showData(cityManageList);
@@ -48,14 +50,16 @@ public class CityManagePresenterImpl implements ILocalRxBusPresenter<CityManage>
     @Override
     public void insert(CityManage data) {
         Logger.e(data.toString());
-        mDao.rx().insert(data)
+        mDao.rx()
+                .insert(data)
                 .subscribeOn(Schedulers.io())
                 .subscribe(cityManage -> mRxBus.post(AndroidApplication.mCityManages.size()));
     }
 
     @Override
     public void delete(CityManage data) {
-        mDao.rx().delete(data)
+        mDao.rx()
+                .delete(data)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Void>() {
                     @Override

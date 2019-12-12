@@ -70,12 +70,12 @@
     <string name="activity_city_manage_tip_city_delete_success">%1$s 已成功移除</string>
     <string name="activity_city_manage_tip_list_empty">空空如也~点击右下角按钮添加城市</string>
     <string name="activity_home_action_locate_now">立即定位</string>
-    <string name="activity_home_class_title_air_quality_index">空气质量指数</string>
+    <string name="activity_home_class_title_air_quality">空气质量</string>
     <string name="activity_home_class_title_data_source">数据来源 中国天气网</string>
-    <string name="activity_home_class_title_hour_forecast">逐三小时预报</string>
+    <string name="activity_home_class_title_hour_forecast">每小时预报</string>
     <string name="activity_home_class_title_living_index">生活指数</string>
     <string name="activity_home_class_title_precipitation_probability">降水概率</string>
-    <string name="activity_home_class_title_sun">日出和日落</string>
+    <string name="activity_home_class_title_sun">日出与日落</string>
     <string name="activity_home_class_title_wind_and_humidity">风和湿度</string>
     <string name="activity_home_class_title_wind_speed_forecast">风速预报</string>
     <string name="activity_home_drawer_list_item_city_manage">城市管理</string>
@@ -85,12 +85,14 @@
     <string name="activity_home_menu_action_weather_preview">动态背景预览</string>
     <string name="activity_home_refresh_time">%1$s 刷新</string>
     <string name="activity_home_str_humidity">湿度</string>
+    <string name="activity_home_str_visibility">能见度</string>
     <string name="activity_home_str_no2">NO2[二氧化氮]</string>
     <string name="activity_home_str_pm10">PM10[可吸入颗粒物]</string>
     <string name="activity_home_str_pm25">PM2.5[细颗粒物]</string>
     <string name="activity_home_str_so2">SO2[二氧化硫]</string>
     <string name="activity_home_str_wind_direction">风向</string>
-    <string name="activity_home_str_wind_speed">风力</string>
+    <string name="activity_home_str_wind">风力</string>
+    <string name="activity_home_str_wind_speed">风速</string>
     <string name="activity_home_tip_locate_success">定位成功：%1$s</string>
     <string name="activity_home_tip_no_city">请添加一个城市</string>
     <string name="activity_home_tip_no_city_sprout">一个城市也木有~</string>
@@ -280,4 +282,5 @@
     <string name="widget_tip_no_city">暂未添加城市~</string>
     <string name="widget_tip_no_data">无数据</string>
     <string name="widget_tip_no_weather_data">暂无数据~</string>
+    <string name="str_temperature" translatable="false">°</string>
 </resources>

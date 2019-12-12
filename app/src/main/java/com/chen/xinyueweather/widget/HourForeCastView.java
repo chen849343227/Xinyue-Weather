@@ -8,7 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.chen.xinyueweather.dao.bean.Weather3HoursDetailsInfosBean;
+import com.chen.xinyueweather.dao.bean.Weather3HourDetailInfo;
 import com.chen.xinyueweather.utils.DateTimeUtil;
 import com.chen.xinyueweather.utils.ScreenUtil;
 
@@ -64,13 +64,13 @@ public class HourForeCastView extends View {
 
         float paddingLeft = 0;
 
-        //解决path过大无法绘制，分成三段
+        // 解决path过大无法绘制，分成三段
         Path tempPath = new Path();
         Path tempPath2 = new Path();
         Path tempPath3 = new Path();
 
         int i = 1;
-        for (Weather3HoursDetailsInfosBean foreCast : hourForeCasts) {
+        for (Weather3HourDetailInfo foreCast : hourForeCasts) {
             paddingLeft = leftRight / 2 + (i - 1 + 0.5f) * widthAvg;
             if (i == 1) {
                 tempPath.moveTo(paddingLeft, height - (linePaddingBottom + (Integer.parseInt(foreCast.getHighestTemperature()) - tempL) * lineAvg));
@@ -112,7 +112,7 @@ public class HourForeCastView extends View {
         if (hourForeCasts.size() > 0) {
             tempL = Integer.parseInt(hourForeCasts.get(0).getHighestTemperature());
             tempH = Integer.parseInt(hourForeCasts.get(0).getHighestTemperature());
-            for (Weather3HoursDetailsInfosBean hourForeCast : hourForeCasts) {
+            for (Weather3HourDetailInfo hourForeCast : hourForeCasts) {
                 if (Integer.parseInt(hourForeCast.getHighestTemperature()) > tempH) {
                     tempH = Integer.parseInt(hourForeCast.getHighestTemperature());
                 }
@@ -125,7 +125,7 @@ public class HourForeCastView extends View {
         return 0;
     }
 
-    public void setHourForeCasts(List<Weather3HoursDetailsInfosBean> hourForeCasts) {
+    public void setHourForeCasts(List<Weather3HourDetailInfo> hourForeCasts) {
         this.hourForeCasts.clear();
         this.hourForeCasts.addAll(hourForeCasts);
         this.invalidate();
@@ -140,7 +140,7 @@ public class HourForeCastView extends View {
     Paint paint = new Paint();
     float widthAvg;
     private float height, width;
-    private List<Weather3HoursDetailsInfosBean> hourForeCasts = new ArrayList<>();
+    private List<Weather3HourDetailInfo> hourForeCasts = new ArrayList<>();
     private int tempH, tempL;
     private Context context;
     private float radius = 0;

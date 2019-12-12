@@ -38,6 +38,7 @@ public class RealWeather {
     public RealWeather() {
     }
 
+
     @Generated(hash = 1840501534)
     public RealWeather(String areaId, String img, String sD, String sendibleTemp,
             String temp, String time, String wD, String wS, String weather,
@@ -53,6 +54,7 @@ public class RealWeather {
         this.weather = weather;
         this.ziwaixian = ziwaixian;
     }
+
 
     public String getAreaId() {
         return areaId;

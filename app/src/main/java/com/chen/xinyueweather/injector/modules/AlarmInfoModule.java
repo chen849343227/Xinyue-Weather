@@ -1,18 +1,11 @@
 package com.chen.xinyueweather.injector.modules;
 
 import com.chen.xinyueweather.adapter.AlarmInfoAdapter;
-import com.chen.xinyueweather.adapter.CityManageAdapter;
 import com.chen.xinyueweather.dao.bean.Alarm;
-import com.chen.xinyueweather.dao.bean.CityManage;
-import com.chen.xinyueweather.dao.greendao.DaoSession;
 import com.chen.xinyueweather.injector.scope.ActivityScope;
 import com.chen.xinyueweather.module.base.IBasePresenter;
-import com.chen.xinyueweather.module.base.ILocalRxBusPresenter;
-import com.chen.xinyueweather.module.city.CityManageActivity;
-import com.chen.xinyueweather.module.city.CityManagePresenterImpl;
 import com.chen.xinyueweather.module.home.AlarmInfoActivity;
 import com.chen.xinyueweather.module.home.AlarmInfoPresenterImpl;
-import com.chen.xinyueweather.rxbus.RxBus;
 
 import java.util.List;
 

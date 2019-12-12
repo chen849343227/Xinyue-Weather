@@ -20,7 +20,7 @@ public class BaseResponse<T> {
     private String code;
     private String message;
     private String redirect;
-    private List<BaseWeatherBean> value;
+    private List<BaseWeather> value;
 
     public String getCode() {
         return code;
@@ -46,11 +46,11 @@ public class BaseResponse<T> {
         this.redirect = redirect;
     }
 
-    public List<BaseWeatherBean> getValue() {
+    public List<BaseWeather> getValue() {
         return value;
     }
 
-    public void setValue(List<BaseWeatherBean> value) {
+    public void setValue(List<BaseWeather> value) {
         this.value = value;
     }
 

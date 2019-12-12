@@ -1,19 +1,15 @@
 package com.chen.xinyueweather.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chen.xinyueweather.R;
 import com.chen.xinyueweather.dao.bean.Alarm;
-import com.chen.xinyueweather.module.home.AlarmInfoActivity;
-import com.chen.xinyueweather.widget.CircleTextView;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;

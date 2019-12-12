@@ -8,9 +8,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -183,7 +182,7 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (android.R.id.home == item.getItemId()) {
-            //这里是对返回按钮进行处理
+            // 这里是对返回按钮进行处理
             onBackPressed();
             return true;
         }
@@ -196,7 +195,7 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
         subscription = RxTextView.textChanges(mEtSearch)
                 .debounce(400, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
                 .subscribeOn(AndroidSchedulers.mainThread())// 对[EditText]的监听操作 需要在主线程操作
-                //对用户输入的关键字进行过滤
+                // 对用户输入的关键字进行过滤
                 .filter(charSequence -> {
                     if (charSequence.toString().trim().length() == 0) {
                         mTvListState.setText("热门城市");
@@ -226,16 +225,16 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_locate:
-                //定位按钮
+                // 定位按钮
                 getBaseLocation();
                 break;
             case R.id.tv_allCity:
-                //点击之后默认
+                // 点击之后默认
                 currentLevel = LEVEL_PROVINCE;
-                //试图的切换
+                // 试图的切换
                 mLlSearch.setVisibility(View.INVISIBLE);
                 mLvLocation.setVisibility(View.VISIBLE);
-                //隐藏输入法
+                // 隐藏输入法
                 ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(SearchCityActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             default:
@@ -245,7 +244,7 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
 
     @Override
     public void loadData(List<String> locations) {
-        //更换数据
+        // 更换数据
         mLocationList.clear();
         mLocationList.addAll(locations);
         mChooseLocationCityAdapter.notifyDataSetChanged();
@@ -295,17 +294,17 @@ public class SearchCityActivity extends BaseActivity<ISearchCityPresenter> imple
     }
 
     private void getBaseLocation() {
-        //request Permission
+        // request Permission
         PermissionUtils.requestPermission(SearchCityActivity.this);
-        //Criteria类是设置定位的标准信息（系统会根据你的要求，匹配最适合你的定位供应商），一个定位的辅助信息的类
+        // Criteria类是设置定位的标准信息（系统会根据你的要求，匹配最适合你的定位供应商），一个定位的辅助信息的类
         Criteria c = new Criteria();
-        //设置低耗电
+        // 设置低耗电
         c.setPowerRequirement(Criteria.POWER_LOW);
-        //设置需要海拔
+        // 设置需要海拔
         c.setAltitudeRequired(true);
-        //设置COARSE精度标准
+        // 设置COARSE精度标准
         c.setBearingAccuracy(Criteria.ACCURACY_COARSE);
-        //设置低精度
+        // 设置低精度
         c.setAccuracy(Criteria.ACCURACY_LOW);
         Location best = LocationUtils.getBestLocation(SearchCityActivity.this, c);
         if (best == null) {

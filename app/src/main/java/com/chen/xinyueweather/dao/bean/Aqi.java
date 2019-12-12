@@ -54,6 +54,8 @@ public class Aqi {
 
 
 
+
+
     @Generated(hash = 5613955)
     public Aqi(String areaId, String advice, String aqi, int citycount,
             int cityrank, String co, String color, String level, String no2,
@@ -76,6 +78,8 @@ public class Aqi {
         this.timestamp = timestamp;
         this.upDateTime = upDateTime;
     }
+
+
 
 
 

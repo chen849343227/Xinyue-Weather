@@ -10,7 +10,7 @@ import org.greenrobot.greendao.annotation.Id;
  * desc 三小时预报
  */
 @Entity
-public class Weather3HoursDetailsInfosBean {
+public class Weather3HourDetailInfo {
 
 
     /**
@@ -40,12 +40,14 @@ public class Weather3HoursDetailsInfosBean {
     private String ws;
 
 
-    public Weather3HoursDetailsInfosBean() {
+    public Weather3HourDetailInfo() {
     }
 
 
-    @Generated(hash = 1870468718)
-    public Weather3HoursDetailsInfosBean(Long id, String areaId, String endTime,
+
+
+    @Generated(hash = 1373767997)
+    public Weather3HourDetailInfo(Long id, String areaId, String endTime,
             String highestTemperature, String img, String isRainFall,
             String lowerestTemperature, String precipitation, String startTime,
             String wd, String weather, String ws) {
@@ -62,6 +64,8 @@ public class Weather3HoursDetailsInfosBean {
         this.weather = weather;
         this.ws = ws;
     }
+
+
 
 
     public Long getId() {
